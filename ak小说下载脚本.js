@@ -18,6 +18,7 @@
 
 
 
+    // 获取小说章节内容
     async function getContent(url) {
         let content = await fetch(url).then(res => res.text())
         let parser = new DOMParser()
@@ -26,6 +27,7 @@
         return contents
     }
 
+    // 下载
     function downloadTextAsFile(text, filename) {
         // 创建一个 Blob 实例
         var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
@@ -46,6 +48,7 @@
         }, 0);
     }
 
+    // 获取所有章节内容并下载
     async function download() {
         console.log("执行下载函数")
         const article = $('body > div.container > section > div.novel_info_main > div > h1')[0].textContent
