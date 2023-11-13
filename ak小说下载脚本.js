@@ -63,7 +63,7 @@
             let content1 = await getContent(a.href)
             let content2 = await getContent(page2)
             contents.push(...content1, ...content2)
-            console.log(`正在处理 ${a, textContent}`)
+            console.log(`正在处理 ${a.textContent}`)
         }
         contents[0] = article
 
