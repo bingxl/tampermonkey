@@ -2,9 +2,10 @@
 // @name         06ak
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  ak小说 下载, 使用油猴子添加本脚本文件后打开小说目录页, 点击下载后等待下载
+// @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
 // @author       You
 // @match        https://www.06ak.com/book/*
+// @match        https://www.langrenxiaoshuo.com/html/*/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
 // ==/UserScript==
@@ -13,21 +14,48 @@
 (async function () {
     'use strict';
 
+    const selectors = {
+        'www.langrenxiaoshuo.com': {
+            'titles': 'body > div.container > div.row.row-section > div > div:nth-child(4) > ul > li > a',
+            'title': 'div.row.row-detail > div > h2 > font',
+            'download':'body > div.container > div.row.row-detail > div > div > div.info > div.top > div > p.opt > a.xs-show.btn-read',
+        },
+        'www.06ak.com': {
+            'titles': '#ul_all_chapters>li>a',
+            'title': 'body > div.container > section > div.novel_info_main > div > h1',
+            'download':'body > div.container > section > div.novel_info_main > div > div:nth-child(5) > a.l_btn',
+        }
+    }
+    const isAk = location.host === 'www.06ak.com';
+
+    const selector = selectors[location.host]
+    if (!selector){return}
+
     // Your code here...
     console.log("ak 小说脚本运行中 ", location.href)
 
 
 
-    // 获取小说章节内容
     async function getContent(url) {
-        let content = await fetch(url).then(res => res.text())
+        let content = ''
+        if (isAk){
+            content = await fetch(url).then(res => res.text())
+        }else {
+            // 狼人小说返回的文档使用了 GB2312编码, 需要解码
+            content = await fetch(url).then(res => res.arrayBuffer())
+                .then(res => {
+                return new TextDecoder('gbk').decode(res)
+            })
+        }
         let parser = new DOMParser()
         let p = parser.parseFromString(content, "text/html")
+        if (!isAk){
+            return p.querySelector('#content > div').textContent;
+        }
         let contents = [...p.querySelectorAll("#article>p")].map(a => a.textContent)
         return contents
     }
 
-    // 下载
     function downloadTextAsFile(text, filename) {
         // 创建一个 Blob 实例
         var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
@@ -48,31 +76,42 @@
         }, 0);
     }
 
-    // 获取所有章节内容并下载
     async function download() {
         console.log("执行下载函数")
-        const article = $('body > div.container > section > div.novel_info_main > div > h1')[0].textContent
+        const article = $(selector.title)[0].textContent
 
-        const titles = [...$('#ul_all_chapters>li>a')]
+        const titles = [...document.querySelectorAll(selector.titles)]
         let contents = []
         for (let i = 0; i < titles.length; i++) {
             let a = titles[i]
+            console.log(`正在处理 ${a.textContent}`)
+
             contents.push('')
             contents.push(a.textContent, '')
+
+            if (!isAk){
+                let content = await getContent(a.href)
+                contents.push(content)
+                continue
+            }
+
             let page2 = a.href.replace('\.html', '_2.html')
             let content1 = await getContent(a.href)
+
             let content2 = await getContent(page2)
             contents.push(...content1, ...content2)
-            console.log(`正在处理 ${a.textContent}`)
+
         }
         contents[0] = article
 
         downloadTextAsFile(contents.join('\n'), article)
+        globalThis.contents = contents
     }
 
-    if (location.pathname.match(/\/book\/\d+$/)) {
+    let path = location.pathname
+    if (path.match(/\/book\/\d+$/) || path.match(/\/html\/\w+\/$/)) {
         console.log('匹配到目录页面')
-        let d = $('body > div.container > section > div.novel_info_main > div > div:nth-child(5) > a.l_btn')[0]
+        let d = $(selector.download)[0]
         d.href = "#"
         d.textContent = "下载"
         d.addEventListener('click', download)
