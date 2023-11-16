@@ -18,7 +18,7 @@
     // blob 下载
     function downloadTextAsFile(text, filename) {
         // 创建一个 Blob 实例
-        var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+        var blob = new Blob([text], { type: "text/plain;charset=utf-8", endings: "native" });
 
         // 创建一个 a 标签并设置属性
         var a = document.createElement("a");
@@ -50,7 +50,7 @@
 
 
 
-        // @override 
+        // @override
         // 返回文档编码方式需要处理
         async getArticle(url) {
             const res = await fetch(url);
@@ -61,11 +61,11 @@
         getArticleContent(parser) {
 
         }
-        // @override 
+        // @override
         // 有些章节分几页,需要单独处理
         async pages(url) {
             let content = await this.getContent(url);
-            return [content]
+            return Array.isArray(content) ? content: [content]
         }
 
         async getContent(url) {
@@ -92,7 +92,7 @@
                 console.log(`正在处理 ${a.textContent}`)
                 contents.push('', a.textContent, '')
                 let content = await this.pages(a.href)
-                contents.push(content)
+                contents.push(...content)
             }
             contents[0] = article
 
@@ -104,7 +104,6 @@
         init() {
             console.log(this)
             let d = $(this.download)[0]
-            d.href = "#"
             d.textContent = "下载"
             d.addEventListener('click', (e) => this.run(e))
             globalThis.download = () => this.run();
@@ -148,7 +147,7 @@
         getArticleContent(parser) {
             return [...parser.querySelectorAll("#article>p")].map(a => a.textContent)
         }
-        // @override 
+        // @override
         // 有些章节分几页,需要单独处理
         async pages(url) {
             let content1 = await this.getContent(url);
@@ -168,7 +167,8 @@
         static pathMatch = /\/book\/\d+\/$/;
 
         getArticleContent(parser) {
-            return parser.querySelector('div.bookread-content-box').textContent;
+            const c = parser.querySelector('div.bookread-content-box').innerHTML.split('<br>');
+            return c
         }
     }
 
