@@ -7,6 +7,7 @@
 // @match        https://www.06ak.com/book/*
 // @match        https://www.langrenxiaoshuo.com/html/*/
 // @match        https://www.hotupub.net/book/*/
+// @match        https://www.diyibanzhu.buzz/*/*/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
 // ==/UserScript==
@@ -65,7 +66,7 @@
         // 有些章节分几页,需要单独处理
         async pages(url) {
             let content = await this.getContent(url);
-            return Array.isArray(content) ? content: [content]
+            return Array.isArray(content) ? content : [content]
         }
 
         async getContent(url) {
@@ -83,7 +84,7 @@
             e.preventDefault()
             console.log("执行下载函数")
             console.log("小说名 Selector: ", this.title)
-            const article = $(this.title)[0].textContent
+            const article = document.querySelector(this.title).textContent
 
             const titles = [...document.querySelectorAll(this.titles)]
             let contents = []
@@ -103,7 +104,7 @@
 
         init() {
             console.log(this)
-            let d = $(this.download)[0]
+            let d = document.querySelector(this.download)
             d.textContent = "下载"
             d.addEventListener('click', (e) => this.run(e))
             globalThis.download = () => this.run();
@@ -172,10 +173,33 @@
         }
     }
 
+    // 狼人小说 www.diyibanzhu.buzz
+    class Diyibanzhu extends Base {
+        titles = 'div.ml_content > div.zb > div.ml_list > ul > li > a';
+        title = 'div.introduce > h1';
+        download = 'div.introduce > div > p:nth-child(4) > a';
+
+        static host = 'www.diyibanzhu.buzz';
+        static pathMatch = /\/\d+\/\d+\/$/;
+
+        async getArticle(url) {
+            return await fetch(url).then(res => res.arrayBuffer())
+                .then(res => {
+                    return new TextDecoder('gbk').decode(res)
+                })
+        }
+
+        getArticleContent(parser) {
+            const c = parser.querySelector('#articlecontent').innerHTML.replaceAll('&nbsp;', '').split('<br>');
+            return c
+        }
+
+    }
+
     const host = location.host;
     const path = location.pathname;
 
-    [Lang, Ak, Hotu].some(v => {
+    [Lang, Ak, Hotu, Diyibanzhu].some(v => {
         if (v.host === host && path.match(v.pathMatch)) {
 
             (new v()).init();
