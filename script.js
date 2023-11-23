@@ -8,6 +8,7 @@
 // @match        https://www.langrenxiaoshuo.com/html/*/
 // @match        https://www.hotupub.net/book/*/
 // @match        https://www.diyibanzhu.buzz/*/*/
+// @match        https://www.xhszw.com/book/*/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
 // ==/UserScript==
@@ -15,6 +16,15 @@
 
 (async function () {
     'use strict';
+
+    function log(...infos) {
+        console.log(...infos)
+    }
+
+    function sleep(d) {
+        let now = Date.now();
+        while (Date.now() - now <= d);
+    }
 
     // blob 下载
     function downloadTextAsFile(text, filename) {
@@ -48,6 +58,8 @@
         host = '';
         // 匹配书籍目录页面
         matchReg = '';
+        // 获取内容间隔 ms
+        sleepTime = 0;
 
 
 
@@ -79,23 +91,31 @@
             return this.getArticleContent(p)
         }
 
+        async getTitles() {
+            const titles = [...document.querySelectorAll(this.titles)]
+            return titles.map(v => { return { href: v.href, textContent: v.textContent } })
+        }
+
 
         async run(e) {
             e.preventDefault()
-            console.log("执行下载函数")
-            console.log("小说名 Selector: ", this.title)
+            log("执行下载函数")
+            log("小说名 Selector: ", this.title)
             const article = document.querySelector(this.title).textContent
 
-            const titles = [...document.querySelectorAll(this.titles)]
-            let contents = []
+            const titles = await this.getTitles().catch(console.error)
+
+            let contents = [article]
             for (let i = 0; i < titles.length; i++) {
                 let a = titles[i]
-                console.log(`正在处理 ${a.textContent}`)
+                log(`正在处理 ${a.textContent}`)
                 contents.push('', a.textContent, '')
-                let content = await this.pages(a.href)
+                let content = await this.pages(a.href).catch(console.error)
                 contents.push(...content)
+                if (this.sleepTime) {
+                    sleep(this.sleepTime)
+                }
             }
-            contents[0] = article
 
             downloadTextAsFile(contents.join('\n'), article)
             globalThis.contents = contents
@@ -103,7 +123,7 @@
         }
 
         init() {
-            console.log(this)
+            log(this)
             let d = document.querySelector(this.download)
             d.textContent = "下载"
             d.addEventListener('click', (e) => this.run(e))
@@ -131,6 +151,8 @@
         getArticleContent(parser) {
             return parser.querySelector('#content > div').textContent;
         }
+
+
 
     }
 
@@ -173,7 +195,7 @@
         }
     }
 
-    // 狼人小说 www.diyibanzhu.buzz
+    // 第一版主 www.diyibanzhu.buzz
     class Diyibanzhu extends Base {
         titles = 'div.ml_content > div.zb > div.ml_list > ul > li > a';
         title = 'div.introduce > h1';
@@ -196,10 +218,51 @@
 
     }
 
+    // https://www.xhszw.com/book/8308/
+    class Xhszw extends Base {
+        titles = '#list-chapterAll > dd > a';
+        title = 'div.bookinfo > h1';
+        download = 'div.bookinfo > div > a:nth-child(1)';
+        sleepTime = 1000;
+
+        static host = 'www.xhszw.com';
+        static pathMatch = /\/book\/\d+\/$/;
+
+        async getContent(url) {
+            const [, articleid, chapterid] = /.+\/(\d+)\/(\d+).html/.exec(url);
+            const api = 'https://www.xhszw.com/api/reader_js.php'
+            let content = await fetch(api, {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `articleid=${articleid}&chapterid=${chapterid}&pid=1`
+            }).then(res => res.text())
+
+            return content.replaceAll(/<\/?p>/g, '')
+
+        }
+
+        async getTitles() {
+            log('in getTitles function')
+            let parseTitle = (content) => {
+                let parser = new DOMParser()
+                let p = parser.parseFromString(content, "text/html")
+                return Array.from(p.querySelectorAll(this.titles)).map(v => { return { href: v.href, textContent: v.textContent } })
+            }
+            let titles = []
+            let pages = Array.from(document.querySelectorAll('#indexselect > option'))
+            log('title is: ', titles)
+            for (let page of pages) {
+                let domstr = await fetch(page.value).then(res => res.text())
+                titles.push(...parseTitle(domstr))
+            }
+            return titles
+
+        }
+    }
     const host = location.host;
     const path = location.pathname;
 
-    [Lang, Ak, Hotu, Diyibanzhu].some(v => {
+    [Lang, Ak, Hotu, Diyibanzhu, Xhszw].some(v => {
         if (v.host === host && path.match(v.pathMatch)) {
 
             (new v()).init();
