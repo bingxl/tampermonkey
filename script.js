@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         06ak
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
 // @author       You
 // @match        https://www.06ak.com/book/*
@@ -9,6 +9,7 @@
 // @match        https://www.hotupub.net/book/*/
 // @match        https://www.diyibanzhu.buzz/*/*/
 // @match        https://www.xhszw.com/book/*/
+// @match        https://xhszw.com/book/*/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
 // ==/UserScript==
@@ -55,7 +56,7 @@
         // 点击后下载的元素 selector
         download = '';
         // 网站host
-        host = '';
+        host = [];
         // 匹配书籍目录页面
         matchReg = '';
         // 获取内容间隔 ms
@@ -138,7 +139,7 @@
         title = 'div.row.row-detail > div > h2 > font';
         download = 'body > div.container > div.row.row-detail > div > div > div.info > div.top > div > p.opt > a.xs-show.btn-read';
 
-        static host = 'www.langrenxiaoshuo.com';
+        static host = ['www.langrenxiaoshuo.com'];
         static pathMatch = /\/html\/\w+\/$/;
 
         async getArticle(url) {
@@ -162,7 +163,7 @@
         title = 'body > div.container > section > div.novel_info_main > div > h1';
         download = 'body > div.container > section > div.novel_info_main > div > div:nth-child(5) > a.l_btn';
 
-        static host = 'www.06ak.com';
+        static host = ['www.06ak.com'];
         static pathMatch = /\/book\/\d+$/;
 
         // @override
@@ -186,7 +187,7 @@
         title = 'div.bookdetails-left-mainbox > div:nth-child(1) > div > div > h1';
         download = 'p.bookdetalis-bookinfo-bookbtnbox.suofang > a';
 
-        static host = 'www.hotupub.net';
+        static host = ['www.hotupub.net'];
         static pathMatch = /\/book\/\d+\/$/;
 
         getArticleContent(parser) {
@@ -201,7 +202,7 @@
         title = 'div.introduce > h1';
         download = 'div.introduce > div > p:nth-child(4) > a';
 
-        static host = 'www.diyibanzhu.buzz';
+        static host = ['www.diyibanzhu.buzz'];
         static pathMatch = /\/\d+\/\d+\/$/;
 
         async getArticle(url) {
@@ -225,7 +226,7 @@
         download = 'div.bookinfo > div > a:nth-child(1)';
         sleepTime = 1000;
 
-        static host = 'www.xhszw.com';
+        static host = ['www.xhszw.com', 'xhszw.com'];
         static pathMatch = /\/book\/\d+\/$/;
 
         async getContent(url) {
@@ -263,7 +264,7 @@
     const path = location.pathname;
 
     [Lang, Ak, Hotu, Diyibanzhu, Xhszw].some(v => {
-        if (v.host === host && path.match(v.pathMatch)) {
+        if (v.host.includes(host) && path.match(v.pathMatch)) {
 
             (new v()).init();
             return true
