@@ -1,5 +1,5 @@
 /**
- * @file 繁体简体转换
+ * @file 将txt目录下所有txt文件转为简体到./简体下
  * @author bingxl<bingxl@outlook.com>
  */
 
@@ -61,4 +61,4 @@ async function run(dir) {
 
 }
 
-run(__dirname)
+run(path.join(__dirname, 'txt'))
