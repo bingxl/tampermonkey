@@ -32,13 +32,13 @@ function t2s(str) {
 }
 
 /**
- * 将给定文件转为简体并写入 dir/简体/目录中
+ * 将给定文件转为简体并写入 ./简体/目录中
  * @param {string} filename 文件名
  * @param {string} dir 文件所在目录
  */
 async function convert(filename, dir) {
     const file = await open(path.join(dir, filename));
-    const writeFile = await open(path.join(dir, './简体/', t2s(filename)), 'w')
+    const writeFile = await open(path.join('./简体/', t2s(filename)), 'w')
     for await (const line of file.readLines()) {
         await writeFile.write(t2s(line) + "\n")
     }
