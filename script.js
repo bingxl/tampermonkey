@@ -61,6 +61,8 @@
         matchReg = '';
         // 获取内容间隔 ms
         sleepTime = 0;
+        // 并发数
+        taskMax = 20;
 
 
 
@@ -79,7 +81,7 @@
         // 有些章节分几页,需要单独处理
         async pages(url) {
             let content = await this.getContent(url);
-            return Array.isArray(content) ? content : [content]
+            return Array.isArray(content) ? content.join('\n') : content
         }
 
         async getContent(url) {
@@ -106,20 +108,41 @@
 
             const titles = await this.getTitles().catch(console.error)
 
-            let contents = [article]
+            let contents = []
+            let tasks = new Set()
+            let currentTaskNum = 0
             for (let i = 0; i < titles.length; i++) {
                 let a = titles[i]
-                log(`正在处理 ${a.textContent}`)
-                contents.push('', a.textContent, '')
-                let content = await this.pages(a.href).catch(console.error)
-                contents.push(...content)
+                if (tasks.size >= this.taskMax) {
+                    // 任务并发控制, 达到最大值时等待
+                    await Promise.any(tasks.values())
+                }
+
+                let task = new Promise((resolve, reject) => {
+                    this.pages(a.href).then(res => {
+                        contents[i] = `\n${a.textContent}\n${res}`
+                        log(`${++currentTaskNum}/${titles.length} ${a.textContent}`)
+                        resolve()
+                    }).catch(err => {
+                        console.error(err);
+                        reject(err)
+                    }).finally(() => {
+                        // 当前任务已完成, 从任务列表移除
+                        tasks.delete(task)
+                    })
+                })
+
+                tasks.add(task)
+
                 if (this.sleepTime) {
                     sleep(this.sleepTime)
                 }
             }
 
-            downloadTextAsFile(contents.join('\n'), article)
-            globalThis.contents = contents
+            await Promise.all(tasks.values())
+
+            downloadTextAsFile(article + "\n" + contents.join('\n'), article)
+
             return false
         }
 
@@ -150,7 +173,7 @@
         }
 
         getArticleContent(parser) {
-            return parser.querySelector('#content > div').textContent;
+            return parser.querySelector('#content > div').textContent + "\n";
         }
 
 
@@ -169,7 +192,7 @@
         // @override
         // 从DOM树中获取章节内容
         getArticleContent(parser) {
-            return [...parser.querySelectorAll("#article>p")].map(a => a.textContent)
+            return [...parser.querySelectorAll("#article>p")].map(a => a.textContent + "\n").join('')
         }
         // @override
         // 有些章节分几页,需要单独处理
@@ -177,7 +200,7 @@
             let content1 = await this.getContent(url);
             let page2 = url.replace('\.html', '_2.html')
             let content2 = await this.getContent(page2)
-            return [...content1, ...content2]
+            return content1 + "\n" + content2;
         }
     }
 
@@ -191,7 +214,7 @@
         static pathMatch = /\/book\/\d+\/$/;
 
         getArticleContent(parser) {
-            const c = parser.querySelector('div.bookread-content-box').innerHTML.split('<br>');
+            const c = parser.querySelector('div.bookread-content-box').innerHTML.replaceAll('<br>', '\n');
             return c
         }
     }
@@ -213,8 +236,8 @@
         }
 
         getArticleContent(parser) {
-            const c = parser.querySelector('#articlecontent').innerHTML.replaceAll('&nbsp;', '').split('<br>');
-            return c
+            const c = parser.querySelector('#articlecontent').innerHTML.replaceAll('&nbsp;', '').replaceAll('<br>', '\n');
+            return c + "\n"
         }
 
     }
@@ -238,7 +261,7 @@
                 body: `articleid=${articleid}&chapterid=${chapterid}&pid=1`
             }).then(res => res.text())
 
-            return content.replaceAll(/<\/?p>/g, '')
+            return content.replaceAll(/<\/?p>/g, '\n')
 
         }
 
