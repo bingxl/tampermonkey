@@ -168,6 +168,12 @@ ${res}`;
       this.title = "body > div.container > section > div.novel_info_main > div > h1";
       this.download = "body > div.container > section > div.novel_info_main > div > div:nth-child(5) > a.l_btn";
     }
+    static {
+      this.host = ["www.06ak.com"];
+    }
+    static {
+      this.pathMatch = /\/book\/\d+$/;
+    }
     // @override
     // 从DOM树中获取章节内容
     getArticleContent(parser) {
@@ -182,8 +188,6 @@ ${res}`;
       return content1 + "\n" + content2;
     }
   };
-  Ak.host = ["www.06ak.com"];
-  Ak.pathMatch = /\/book\/\d+$/;
 
   // src/sites/Diyibanzhu.ts
   var Diyibanzhu = class extends Base {
@@ -192,6 +196,12 @@ ${res}`;
       this.titles = "div.ml_content > div.zb > div.ml_list > ul > li > a";
       this.title = "div.introduce > h1";
       this.download = "div.introduce > div > p:nth-child(4) > a";
+    }
+    static {
+      this.host = ["www.diyibanzhu.buzz"];
+    }
+    static {
+      this.pathMatch = /\/\d+\/\d+\/$/;
     }
     /** @override */
     async getArticle(url) {
@@ -205,8 +215,6 @@ ${res}`;
       return c + "\n";
     }
   };
-  Diyibanzhu.host = ["www.diyibanzhu.buzz"];
-  Diyibanzhu.pathMatch = /\/\d+\/\d+\/$/;
 
   // src/sites/Hotu.ts
   var Hotu = class extends Base {
@@ -216,13 +224,17 @@ ${res}`;
       this.title = "div.bookdetails-left-mainbox > div:nth-child(1) > div > div > h1";
       this.download = "p.bookdetalis-bookinfo-bookbtnbox.suofang > a";
     }
+    static {
+      this.host = ["www.hotupub.net"];
+    }
+    static {
+      this.pathMatch = /\/book\/\d+\/$/;
+    }
     getArticleContent(parser) {
       const c = parser.querySelector("div.bookread-content-box")?.innerHTML.replaceAll("<br>", "\n") ?? "";
       return c;
     }
   };
-  Hotu.host = ["www.hotupub.net"];
-  Hotu.pathMatch = /\/book\/\d+\/$/;
 
   // src/sites/Lang.ts
   var Lang = class extends Base {
@@ -231,6 +243,12 @@ ${res}`;
       this.titles = "body > div.container > div.row.row-section > div > div:nth-child(4) > ul > li > a";
       this.title = "div.row.row-detail > div > h2 > font";
       this.download = "body > div.container > div.row.row-detail > div > div > div.info > div.top > div > p.opt > a.xs-show.btn-read";
+    }
+    static {
+      this.host = ["www.langrenxiaoshuo.com"];
+    }
+    static {
+      this.pathMatch = /\/html\/\w+\/$/;
     }
     async getArticle(url) {
       return await fetch(url).then((res) => res.arrayBuffer()).then((res) => {
@@ -241,8 +259,6 @@ ${res}`;
       return parser.querySelector("#content > div")?.textContent ?? "\n";
     }
   };
-  Lang.host = ["www.langrenxiaoshuo.com"];
-  Lang.pathMatch = /\/html\/\w+\/$/;
 
   // src/sites/Xhszw.ts
   var Xhszw = class extends Base {
@@ -252,6 +268,12 @@ ${res}`;
       this.title = "div.bookinfo > h1";
       this.download = "div.bookinfo > div > a:nth-child(1)";
       this.sleepTime = 1e3;
+    }
+    static {
+      this.host = ["www.xhszw.com", "xhszw.com"];
+    }
+    static {
+      this.pathMatch = /\/book\/\d+\/$/;
     }
     /**
      * @override
@@ -290,8 +312,6 @@ ${res}`;
       return titles;
     }
   };
-  Xhszw.host = ["www.xhszw.com", "xhszw.com"];
-  Xhszw.pathMatch = /\/book\/\d+\/$/;
 
   // src/sites/index.ts
   var sites = [

@@ -23,6 +23,6 @@ esbuild.buildSync({
     outfile: './target/main.js',
     bundle: true,
     charset: "utf8",
-    target: "es2021",
+    target: "esnext",
     banner: { js: banner },
 })
