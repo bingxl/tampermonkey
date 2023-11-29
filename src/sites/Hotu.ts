@@ -1,5 +1,5 @@
 
-import { Base } from "../Base";
+import { Base } from "./Base";
 // 河图小说
 export class Hotu extends Base {
     titles = 'div.bookdetails-catalog-box > ul > li > a';

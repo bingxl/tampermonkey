@@ -1,4 +1,4 @@
-import { Base } from "../Base";
+import { Base } from "./Base";
 
 // 第一版主 www.diyibanzhu.buzz
 export class Diyibanzhu extends Base {

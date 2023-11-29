@@ -1,4 +1,4 @@
-import { downloadTextAsFile, log, sleep } from './tool'
+import { downloadTextAsFile, log, sleep } from '../tool/misc'
 
 export class Base {
     /** 小说章节的选择器 */
@@ -77,7 +77,7 @@ export class Base {
      * @returns {Chapter[]}
      */
     async getTitles() {
-        const titles = [...document.querySelectorAll<HTMLAnchorElement>(this.titles)]
+        const titles = Array.from(document.querySelectorAll<HTMLAnchorElement>(this.titles))
         return titles.map(v => { return { href: v.href, textContent: v.textContent } })
     }
 
@@ -114,8 +114,8 @@ export class Base {
                 }).finally(() => {
                     // 当前任务已完成, 从任务列表移除
                     tasks.delete(task);
-                })
-            })
+                });
+            });
 
             tasks.add(task);
 

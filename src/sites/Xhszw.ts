@@ -1,5 +1,5 @@
-import { Base } from "../Base";
-import { ChapterInter, log } from "../tool";
+import { Base } from "./Base";
+import { ChapterInter, log } from "../tool/misc";
 
 // https://www.xhszw.com/book/8308/
 export class Xhszw extends Base {
@@ -44,8 +44,8 @@ export class Xhszw extends Base {
         let pages: HTMLOptionElement[] = Array.from(document.querySelectorAll('#indexselect > option'))
         log('title is: ', titles)
         for (let page of pages) {
-            let domstr = await fetch(page.value).then(res => res.text())
-            titles.push(...parseTitle(domstr))
+            let domStr = await fetch(page.value).then(res => res.text())
+            titles.push(...parseTitle(domStr))
         }
         return titles
 

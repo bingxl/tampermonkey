@@ -1,5 +1,5 @@
 
-import { Base } from '../Base'
+import { Base } from './Base'
 
 
 // 狼人小说 www.langrenxiaoshuo.com

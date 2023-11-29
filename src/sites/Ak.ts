@@ -1,4 +1,4 @@
-import { Base } from "../Base";
+import { Base } from "./Base";
 
 // 06Ak小说 www.06ak.com
 export class Ak extends Base {
@@ -12,7 +12,7 @@ export class Ak extends Base {
     // @override
     // 从DOM树中获取章节内容
     getArticleContent(parser: Document) {
-        return [...parser.querySelectorAll("#article>p")].map(a => a.textContent + "\n").join('')
+        return Array.from(parser.querySelectorAll("#article>p")).map(a => a.textContent + "\n").join('')
     }
     // @override
     // 有些章节分几页,需要单独处理
