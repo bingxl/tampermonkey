@@ -16,7 +16,7 @@
 
 "use strict";
 (() => {
-  // src/tool.ts
+  // src/tool/misc.ts
   function downloadTextAsFile(text, filename) {
     const blob = new Blob([text], { type: "text/plain;charset=utf-8", endings: "native" });
     const a = document.createElement("a");
@@ -38,7 +38,7 @@
       ;
   }
 
-  // src/Base.ts
+  // src/sites/Base.ts
   var Base = class {
     constructor() {
       /** 小说章节的选择器 */
@@ -108,7 +108,7 @@
      * @returns {Chapter[]}
      */
     async getTitles() {
-      const titles = [...document.querySelectorAll(this.titles)];
+      const titles = Array.from(document.querySelectorAll(this.titles));
       return titles.map((v) => {
         return { href: v.href, textContent: v.textContent };
       });
@@ -177,7 +177,7 @@ ${res}`;
     // @override
     // 从DOM树中获取章节内容
     getArticleContent(parser) {
-      return [...parser.querySelectorAll("#article>p")].map((a) => a.textContent + "\n").join("");
+      return Array.from(parser.querySelectorAll("#article>p")).map((a) => a.textContent + "\n").join("");
     }
     // @override
     // 有些章节分几页,需要单独处理
@@ -306,8 +306,8 @@ ${res}`;
       let pages = Array.from(document.querySelectorAll("#indexselect > option"));
       log("title is: ", titles);
       for (let page of pages) {
-        let domstr = await fetch(page.value).then((res) => res.text());
-        titles.push(...parseTitle(domstr));
+        let domStr = await fetch(page.value).then((res) => res.text());
+        titles.push(...parseTitle(domStr));
       }
       return titles;
     }
@@ -325,7 +325,7 @@ ${res}`;
   // src/main.ts
   var { host, pathname } = location;
   sites.some((v) => {
-    if (v.host.includes(host) && pathname.match(v.pathMatch)) {
+    if (v?.host.includes(host) && pathname.match(v.pathMatch)) {
       new v().init();
       return true;
     }
