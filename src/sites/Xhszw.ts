@@ -6,7 +6,7 @@ export class Xhszw extends Base {
     titles = '#list-chapterAll > dd > a';
     title = 'div.bookinfo > h1';
     download = 'div.bookinfo > div > a:nth-child(1)';
-    sleepTime = 1000;
+    sleepTime = 100;
 
     static host = ['www.xhszw.com', 'xhszw.com'];
     static pathMatch = /\/book\/\d+\/$/;
@@ -16,7 +16,7 @@ export class Xhszw extends Base {
      */
     async getContent(url: string) {
         const [, articleid, chapterid] = /.+\/(\d+)\/(\d+).html/.exec(url) ?? [];
-        const api = 'https://www.xhszw.com/api/reader_js.php'
+        const api = '/api/reader_js.php'
         return await fetch(api, {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },

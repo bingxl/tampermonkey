@@ -267,7 +267,7 @@ ${res}`;
       this.titles = "#list-chapterAll > dd > a";
       this.title = "div.bookinfo > h1";
       this.download = "div.bookinfo > div > a:nth-child(1)";
-      this.sleepTime = 1e3;
+      this.sleepTime = 100;
     }
     static {
       this.host = ["www.xhszw.com", "xhszw.com"];
@@ -280,7 +280,7 @@ ${res}`;
      */
     async getContent(url) {
       const [, articleid, chapterid] = /.+\/(\d+)\/(\d+).html/.exec(url) ?? [];
-      const api = "https://www.xhszw.com/api/reader_js.php";
+      const api = "/api/reader_js.php";
       return await fetch(api, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
