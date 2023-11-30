@@ -267,7 +267,7 @@ ${res}`;
       this.titles = "#list-chapterAll > dd > a";
       this.title = "div.bookinfo > h1";
       this.download = "div.bookinfo > div > a:nth-child(1)";
-      this.sleepTime = 100;
+      this.sleepTime = 500;
     }
     static {
       this.host = ["www.xhszw.com", "xhszw.com"];
