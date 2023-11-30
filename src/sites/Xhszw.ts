@@ -6,7 +6,7 @@ export class Xhszw extends Base {
     titles = '#list-chapterAll > dd > a';
     title = 'div.bookinfo > h1';
     download = 'div.bookinfo > div > a:nth-child(1)';
-    sleepTime = 100;
+    sleepTime = 500;
 
     static host = ['www.xhszw.com', 'xhszw.com'];
     static pathMatch = /\/book\/\d+\/$/;
