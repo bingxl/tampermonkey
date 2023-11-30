@@ -12,6 +12,7 @@
 // @match        https://xhszw.com/book/*/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
+// @downloadURL  https://github.com/bingxl/tampermonkey/raw/main/target/main.js
 // ==/UserScript==
 
 "use strict";
