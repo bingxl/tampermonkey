@@ -1,8 +1,8 @@
 import { Ak } from "./Ak"
-import { Base } from "./Base"
 import { Diyibanzhu } from "./Diyibanzhu"
 import { Hotu } from "./Hotu"
 import { Lang } from "./Lang"
+import { Wfxs } from "./Wfxs"
 import { Xhszw } from "./Xhszw"
 
 export const sites: any[] = [
@@ -11,4 +11,5 @@ export const sites: any[] = [
     Diyibanzhu,
     Hotu,
     Xhszw,
+    Wfxs,
 ]

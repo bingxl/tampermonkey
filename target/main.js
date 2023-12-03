@@ -10,6 +10,7 @@
 // @match        https://www.diyibanzhu.buzz/*/*/
 // @match        https://www.xhszw.com/book/*/
 // @match        https://xhszw.com/book/*/
+// @match        https://m.wfxs.tw/booklist/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
 // @downloadURL  https://github.com/bingxl/tampermonkey/raw/main/target/main.js
@@ -261,6 +262,71 @@ ${res}`;
     }
   };
 
+  // src/sites/Wfxs.ts
+  var Wfxs = class extends Base {
+    constructor() {
+      super(...arguments);
+      this.titles = "#html_box > li > a";
+      this.title = "body > div.h_header.d_header > h2";
+      this.download = "#shoucang";
+      this.sleepTime = 300;
+    }
+    static {
+      this.host = ["m.wfxs.tw"];
+    }
+    static {
+      this.pathMatch = /\/booklist\/\d+\.html/;
+    }
+    /**
+     * @override
+     */
+    getArticleContent(parser) {
+      const contents = Array.from(parser.querySelectorAll("#read_conent_box>p") ?? []).map((v) => v.textContent);
+      return contents.join("\n");
+    }
+    /**
+    * 从DOM 树中提取小说内容
+    * @param {string} url 
+    * @returns {string} 章节内容
+    */
+    async getContent(url) {
+      let content = await this.getArticle(url);
+      let parser = new DOMParser();
+      let p = parser.parseFromString(content, "text/html");
+      const content1 = [this.getArticleContent(p)];
+      const next = p?.querySelector("body > article > div.page > div > ul > li:nth-child(3) > a");
+      if (next?.textContent === "下一頁") {
+        content1.push(await this.getContent(next.href));
+      }
+      return content1.join("\n");
+    }
+    /**
+     * @override
+     */
+    async getTitles() {
+      log("in getTitles function");
+      let parseTitle = (content) => {
+        let parser = new DOMParser();
+        let p = parser.parseFromString(content, "text/html");
+        const titles2 = Array.from(p.querySelectorAll(this.titles));
+        return titles2.map((v) => {
+          return { href: v.href, textContent: v.textContent };
+        });
+      };
+      let titles = [];
+      let pages = Array.from(document.querySelectorAll("#chapter_min_list_box > div > div > div.entry > ul > li > a"));
+      log("title is: ", titles);
+      const len = pages.length;
+      let cur = 0;
+      for (let page of pages) {
+        let domStr = await fetch(page.href).then((res) => res.text());
+        titles.push(...parseTitle(domStr));
+        log(`处理目录${cur++}/${len}`);
+      }
+      return titles;
+    }
+  };
+
   // src/sites/Xhszw.ts
   var Xhszw = class extends Base {
     constructor() {
@@ -320,7 +386,8 @@ ${res}`;
     Ak,
     Diyibanzhu,
     Hotu,
-    Xhszw
+    Xhszw,
+    Wfxs
   ];
 
   // src/main.ts

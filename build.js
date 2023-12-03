@@ -13,6 +13,7 @@ const banner = `// ==UserScript==
 // @match        https://www.diyibanzhu.buzz/*/*/
 // @match        https://www.xhszw.com/book/*/
 // @match        https://xhszw.com/book/*/
+// @match        https://m.wfxs.tw/booklist/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
 // @downloadURL  https://github.com/bingxl/tampermonkey/raw/main/target/main.js
