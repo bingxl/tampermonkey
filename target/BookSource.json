@@ -1,98 +1,50 @@
 [
     {
-        "bookSourceName": "微风小说",
+        "bookSourceGroup": "H",
+        "bookSourceName": "第一版主",
         "bookSourceType": 0,
-        "bookSourceUrl": "https://m.wfxs.tw/",
+        "bookSourceUrl": "https://www.diyibanzhu.buzz",
         "customOrder": 0,
         "enabled": true,
         "enabledCookieJar": true,
         "enabledExplore": true,
+        "exploreUrl": "[\n    {\n        \"title\": \"玄幻小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/xuanhuan/{{page}}.html\"\n    },\n    {\n        \"title\": \"仙侠小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/xianxia/{{page}}.html\"\n    },\n    {\n        \"title\": \"都市小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/dushi/{{page}}.html\"\n    },\n    {\n        \"title\": \"军史小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/junshi/{{page}}.html\"\n    },\n    {\n        \"title\": \"网游小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/wangyou/{{page}}.html\"\n    },\n    {\n        \"title\": \"科幻小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/kehuan/{{page}}.html\"\n    },\n    {\n        \"title\": \"耽美小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/danmei/{{page}}.html\"\n    },\n    {\n        \"title\": \"辣文合集\",\n        \"url\": \"https://www.diyibanzhu.buzz/lawen/{{page}}.html\"\n    }\n]",
         "lastUpdateTime": 0,
         "respondTime": 180000,
         "ruleBookInfo": {
-            "intro": ".bh_book_title_hide@text",
-            "name": ".entry@tag.h1@text",
-            "kind": "[property=\"og:novel:category\"]@content",
-            "author": "[property=\"og:novel:author\"]@content",
-            "lastChapter": "[property=\"og:novel:latest_chapter_name\"]@content",
-            "coverUrl": ".entry@tag.img@src",
-            "tocUrl": ".more@tag.a@href"
+            "author": ".introduce@class.bq@tag.a@text",
+            "coverUrl": ".pic@tag.img@src",
+            "intro": ".jj@text",
+            "kind": ".catalog1@tag.font.0@text",
+            "lastChapter": ".lastchapter@tag.a@text",
+            "name": "class.introduce@tag.h1@text"
         },
         "ruleContent": {
-            "content": "id.read_conent_box@html",
-            "nextContentUrl": ".page.1@text.下一頁@href"
+            "content": "id.articlecontent@html"
         },
         "ruleExplore": {
-            "bookList": ".item@tag.a",
-            "name": ".t@text",
-            "author": ".author@text",
-            "coverUrl": "img@src",
-            "bookUrl": "href",
-            "intro": "p@text"
-        },
-        "ruleReview": {},
-        "ruleSearch": {
-            "author": ".author@text",
-            "bookList": "@css:.entry div.item a",
-            "bookUrl": "href",
-            "coverUrl": "img@src",
-            "intro": "tag.p@text",
-            "name": ".t@text"
-        },
-        "ruleToc": {
-            "nextTocUrl": ".inner@class.entry@tag.a@href",
-            "chapterList": "id.html_box@a",
-            "chapterName": "text",
-            "chapterUrl": "href"
-        },
-        "searchUrl": "/s.html?type=articlename&s={{key}}&page={{page}}",
-        "weight": 0,
-        "bookSourceGroup": "H",
-        "exploreUrl": "[\n    {\n        \"title\": \"分类\",\n        \"url\": \"\",\n        \"style\": {\n            \"layout_flexBasisPercent\": 1,\n            \"layout_flexGrow\": 1\n        }\n    },\n    {\n        \"title\": \"總裁豪門\",\n        \"url\": \"https://m.wfxs.tw/haomenzongcai/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"懸疑靈異\",\n        \"url\": \"https://m.wfxs.tw/xuanyilingyi/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"浪漫青春\",\n        \"url\": \"https://m.wfxs.tw/langmanqingchun/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"仙俠玄幻\",\n        \"url\": \"https://m.wfxs.tw/xianxiaxuanhuan/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"穿越架空\",\n        \"url\": \"https://m.wfxs.tw/chuanyuejiakong/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"都市異能\",\n        \"url\": \"https://m.wfxs.tw/dushiyineng/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"都市言情\",\n        \"url\": \"https://m.wfxs.tw/dushiyanqing/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"其他類型\",\n        \"url\": \"https://m.wfxs.tw/qita/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"現代言情\",\n        \"url\": \"https://m.wfxs.tw/xianyan/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"古代言情\",\n        \"url\": \"https://m.wfxs.tw/guyan/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"排行榜\",\n        \"url\": \"\",\n        \"style\": {\n            \"layout_flexBasisPercent\": 1,\n            \"layout_flexGrow\": 1\n        }\n    },\n    {\n        \"title\": \"暢銷榜\",\n        \"url\": \"https://m.wfxs.tw/rank/weekvisit/\"\n    },\n    {\n        \"title\": \"24小時熱門榜\",\n        \"url\": \"https://m.wfxs.tw/rank/dayvisit/\"\n    },\n    {\n        \"title\": \"最熱榜\",\n        \"url\": \"https://m.wfxs.tw/rank/allvisit/\"\n    },\n    {\n        \"title\": \"留存榜\",\n        \"url\": \"https://m.wfxs.tw/rank/allvote/\"\n    },\n    {\n        \"title\": \"完結榜\",\n        \"url\": \"https://m.wfxs.tw/full/\"\n    },\n    {\n        \"title\": \"潛力榜\",\n        \"url\": \"https://m.wfxs.tw/rank/size/\"\n    },\n    {\n        \"title\": \"新書推薦榜\",\n        \"url\": \"https://m.wfxs.tw/rank/postdate/\"\n    },\n    {\n        \"title\": \"收藏人氣榜\",\n        \"url\": \"https://m.wfxs.tw/rank/goodnum/\"\n    }\n]"
-    },
-    {
-        "bookSourceGroup": "H",
-        "bookSourceName": "狼人小说",
-        "bookSourceType": 0,
-        "bookSourceUrl": "https://www.langrenxiaoshuo.com",
-        "concurrentRate": "",
-        "customOrder": 0,
-        "enabled": true,
-        "enabledCookieJar": true,
-        "enabledExplore": true,
-        "exploreUrl": "[\n{\n\"title\": \"全部\",\n\"url\":\"/allbook{{page === 1 ? '' : '_15155_' + page}}.html\"\n}\n]",
-        "lastUpdateTime": 1701623355430,
-        "respondTime": 180000,
-        "ruleBookInfo": {
-            "author": ".top .fix p@text",
-            "intro": ".desc@text",
-            "lastChapter": ".font[color=\"red\"]@text",
-            "name": ".top h2@text"
-        },
-        "ruleContent": {
-            "content": "#content div@html"
-        },
-        "ruleExplore": {
-            "author": "dt.0@tag.span@text",
-            "bookList": ".item",
+            "author": ".p1@tag.a@text",
+            "bookList": ".tt",
             "bookUrl": "tag.a.0@href",
             "coverUrl": "img@src",
-            "lastChapter": "dd@tag.a.0@text",
-            "name": "dt.0@tag.a@text"
+            "intro": ".p2@text",
+            "name": "tag.h3@a@text"
         },
         "ruleReview": {},
         "ruleSearch": {
-            "author": "class.s4@text",
-            "bookList": "@css:ul.txt-list:not([align])>li:gt(0)",
+            "author": "td.2@text",
+            "bookList": "tag.tr[!0]",
             "bookUrl": "a.0@href",
-            "name": "a.0@text"
+            "lastChapter": "a.1@text",
+            "name": "a.0@text",
+            "wordCount": "td.3@text"
         },
         "ruleToc": {
-            "chapterList": ".section-list li a",
+            "chapterList": ".ml_list@tag.li@tag.a",
             "chapterName": "text",
             "chapterUrl": "href"
         },
-        "searchUrl": "/plus/search.php?q={{key}},{\"charset\":\"gbk\"}",
+        "searchUrl": "/modules/article/search.php?searchkey={{java.utf8ToGbk(key)}}&page={{page}},{\n\"charset\": \"gbk\",\n\"webview\": \"true\"\n}",
         "weight": 0
     },
     {
@@ -102,10 +54,10 @@
         "bookSourceUrl": "https://www.06ak.com",
         "customOrder": 0,
         "enabled": true,
-        "enabledCookieJar": true,
+        "enabledCookieJar": false,
         "enabledExplore": true,
         "exploreUrl": "[\n    {\n        \"title\": \"玄幻\",\n        \"url\": \"/list/xuanhuan/{{page}}/\"\n    },\n    {\n        \"title\": \"武俠\",\n        \"url\": \"/list/wuxia/{{page}}/\"\n    },\n    {\n        \"title\": \"都市\",\n        \"url\": \"/list/dushi/{{page}}/\"\n    },\n    {\n        \"title\": \"歷史\",\n        \"url\": \"/list/lishi/{{page}}/\"\n    },\n    {\n        \"title\": \"游戲\",\n        \"url\": \"/list/youxi/{{page}}/\"\n    },\n    {\n        \"title\": \"科幻\",\n        \"url\": \"/list/kehuan/{{page}}/\"\n    },\n    {\n        \"title\": \"其他\",\n        \"url\": \"/list/qita/{{page}}/\"\n    }\n]",
-        "lastUpdateTime": 0,
+        "lastUpdateTime": 1701662719897,
         "loginUrl": "https://www.06ak.com",
         "respondTime": 180000,
         "ruleBookInfo": {
@@ -140,6 +92,57 @@
             "chapterUrl": "href"
         },
         "searchUrl": "/search,{\n  \"method\": \"POST\",\n  \"headers\": {\n   \"Content-Type\": \"application/x-www-form-urlencoded\",\n\"Origin\": \"https://www.06ak.com\",\n\"Referer\":\"https://www.06ak.com/\"\n},\n  \"body\": \"searchkey={{encodeURIComponent(key)}}&searchtype=all&Submit=\"\n}",
+        "weight": 0
+    },
+    {
+        "bookSourceGroup": "H",
+        "bookSourceName": "微风小说",
+        "bookSourceType": 0,
+        "bookSourceUrl": "https://m.wfxs.tw/",
+        "customOrder": 0,
+        "enabled": true,
+        "enabledCookieJar": true,
+        "enabledExplore": true,
+        "exploreUrl": "[\n    {\n        \"title\": \"分类\",\n        \"url\": \"\",\n        \"style\": {\n            \"layout_flexBasisPercent\": 1,\n            \"layout_flexGrow\": 1\n        }\n    },\n    {\n        \"title\": \"總裁豪門\",\n        \"url\": \"https://m.wfxs.tw/haomenzongcai/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"懸疑靈異\",\n        \"url\": \"https://m.wfxs.tw/xuanyilingyi/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"浪漫青春\",\n        \"url\": \"https://m.wfxs.tw/langmanqingchun/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"仙俠玄幻\",\n        \"url\": \"https://m.wfxs.tw/xianxiaxuanhuan/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"穿越架空\",\n        \"url\": \"https://m.wfxs.tw/chuanyuejiakong/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"都市異能\",\n        \"url\": \"https://m.wfxs.tw/dushiyineng/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"都市言情\",\n        \"url\": \"https://m.wfxs.tw/dushiyanqing/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"其他類型\",\n        \"url\": \"https://m.wfxs.tw/qita/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"現代言情\",\n        \"url\": \"https://m.wfxs.tw/xianyan/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"古代言情\",\n        \"url\": \"https://m.wfxs.tw/guyan/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"排行榜\",\n        \"url\": \"\",\n        \"style\": {\n            \"layout_flexBasisPercent\": 1,\n            \"layout_flexGrow\": 1\n        }\n    },\n    {\n        \"title\": \"暢銷榜\",\n        \"url\": \"https://m.wfxs.tw/rank/weekvisit/\"\n    },\n    {\n        \"title\": \"24小時熱門榜\",\n        \"url\": \"https://m.wfxs.tw/rank/dayvisit/\"\n    },\n    {\n        \"title\": \"最熱榜\",\n        \"url\": \"https://m.wfxs.tw/rank/allvisit/\"\n    },\n    {\n        \"title\": \"留存榜\",\n        \"url\": \"https://m.wfxs.tw/rank/allvote/\"\n    },\n    {\n        \"title\": \"完結榜\",\n        \"url\": \"https://m.wfxs.tw/full/\"\n    },\n    {\n        \"title\": \"潛力榜\",\n        \"url\": \"https://m.wfxs.tw/rank/size/\"\n    },\n    {\n        \"title\": \"新書推薦榜\",\n        \"url\": \"https://m.wfxs.tw/rank/postdate/\"\n    },\n    {\n        \"title\": \"收藏人氣榜\",\n        \"url\": \"https://m.wfxs.tw/rank/goodnum/\"\n    }\n]",
+        "lastUpdateTime": 0,
+        "respondTime": 180000,
+        "ruleBookInfo": {
+            "author": "[property=\"og:novel:author\"]@content",
+            "coverUrl": ".entry@tag.img@src",
+            "intro": ".bh_book_title_hide@text",
+            "kind": "[property=\"og:novel:category\"]@content",
+            "lastChapter": "[property=\"og:novel:latest_chapter_name\"]@content",
+            "name": ".entry@tag.h1@text",
+            "tocUrl": ".more@tag.a@href"
+        },
+        "ruleContent": {
+            "content": "id.read_conent_box@html",
+            "nextContentUrl": ".page.1@text.下一頁@href"
+        },
+        "ruleExplore": {
+            "author": ".author@text",
+            "bookList": ".item@tag.a",
+            "bookUrl": "href",
+            "coverUrl": "img@src",
+            "intro": "p@text",
+            "name": ".t@text"
+        },
+        "ruleReview": {},
+        "ruleSearch": {
+            "author": ".author@text",
+            "bookList": "@css:.entry div.item a",
+            "bookUrl": "href",
+            "coverUrl": "img@src",
+            "intro": "tag.p@text",
+            "name": ".t@text"
+        },
+        "ruleToc": {
+            "chapterList": "id.html_box@a",
+            "chapterName": "text",
+            "chapterUrl": "href",
+            "nextTocUrl": ".inner@class.entry@tag.a@href"
+        },
+        "searchUrl": "/s.html?type=articlename&s={{key}}&page={{page}}",
         "weight": 0
     },
     {
@@ -191,6 +194,51 @@
             "nextTocUrl": "option@value"
         },
         "searchUrl": "/search,{\n  \"method\": \"POST\",\n  \"body\": \"searchkey={{encodeURIComponent(key)}}&searchtype=all&submit=&action=login\"\n}",
+        "weight": 0
+    },
+    {
+        "bookSourceGroup": "H",
+        "bookSourceName": "狼人小说",
+        "bookSourceType": 0,
+        "bookSourceUrl": "https://www.langrenxiaoshuo.com",
+        "concurrentRate": "",
+        "customOrder": 0,
+        "enabled": true,
+        "enabledCookieJar": true,
+        "enabledExplore": true,
+        "exploreUrl": "[\n{\n\"title\": \"全部\",\n\"url\":\"/allbook{{page === 1 ? '' : '_15155_' + page}}.html\"\n}\n]",
+        "lastUpdateTime": 1701623355430,
+        "respondTime": 180000,
+        "ruleBookInfo": {
+            "author": ".top .fix p@text",
+            "intro": ".desc@text",
+            "lastChapter": ".font[color=\"red\"]@text",
+            "name": ".top h2@text"
+        },
+        "ruleContent": {
+            "content": "#content div@html"
+        },
+        "ruleExplore": {
+            "author": "dt.0@tag.span@text",
+            "bookList": ".item",
+            "bookUrl": "tag.a.0@href",
+            "coverUrl": "img@src",
+            "lastChapter": "dd@tag.a.0@text",
+            "name": "dt.0@tag.a@text"
+        },
+        "ruleReview": {},
+        "ruleSearch": {
+            "author": "class.s4@text",
+            "bookList": "@css:ul.txt-list:not([align])>li:gt(0)",
+            "bookUrl": "a.0@href",
+            "name": "a.0@text"
+        },
+        "ruleToc": {
+            "chapterList": ".section-list li a",
+            "chapterName": "text",
+            "chapterUrl": "href"
+        },
+        "searchUrl": "/plus/search.php?q={{key}},{\"charset\":\"gbk\"}",
         "weight": 0
     }
 ]
