@@ -7,6 +7,7 @@
 + https://www.hotupub.net
 + https://www.diyibanzhu.buzz/*/*/
 + https://www.xhszw.com/book/*/
++ https://m.wfxs.tw/booklist/*
 
 
 以上网站都只能下载免费部分
@@ -24,3 +25,7 @@
 
 构建: `npm run build` 或 `node build.js`
 
+## 阅读3.0 书源
+[阅读3.0 legado](https://github.com/gedoor/legado)
+
+在软件中使用网络导入, 导入 url `https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/BookSource.json`
