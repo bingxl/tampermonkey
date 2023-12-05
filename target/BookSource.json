@@ -1,50 +1,94 @@
 [
     {
-        "bookSourceGroup": "H",
-        "bookSourceName": "第一版主",
-        "bookSourceType": 0,
-        "bookSourceUrl": "https://www.diyibanzhu.buzz",
+        "bookSourceGroup": "漫画",
+        "bookSourceName": "肉慢屋",
+        "bookSourceType": 2,
+        "bookSourceUrl": "http://rouman5.com",
         "customOrder": 0,
         "enabled": true,
         "enabledCookieJar": true,
         "enabledExplore": true,
-        "exploreUrl": "[\n    {\n        \"title\": \"玄幻小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/xuanhuan/{{page}}.html\"\n    },\n    {\n        \"title\": \"仙侠小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/xianxia/{{page}}.html\"\n    },\n    {\n        \"title\": \"都市小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/dushi/{{page}}.html\"\n    },\n    {\n        \"title\": \"军史小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/junshi/{{page}}.html\"\n    },\n    {\n        \"title\": \"网游小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/wangyou/{{page}}.html\"\n    },\n    {\n        \"title\": \"科幻小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/kehuan/{{page}}.html\"\n    },\n    {\n        \"title\": \"耽美小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/danmei/{{page}}.html\"\n    },\n    {\n        \"title\": \"辣文合集\",\n        \"url\": \"https://www.diyibanzhu.buzz/lawen/{{page}}.html\"\n    }\n]",
+        "exploreUrl": "[\n    {\n        \"title\": \"全部\",\n        \"url\": \"http://rouman5.com/books?page={{page-1}}\"\n    },\n    {\n        \"title\": \"正妹\",\n        \"url\": \"http://rouman5.com/books?tag=正妹&page={{page-1}}\"\n    },\n    {\n        \"title\": \"恋爱\",\n        \"url\": \"http://rouman5.com/books?tag=恋爱&page={{page-1}}\"\n    },\n    {\n        \"title\": \"出版漫画\",\n        \"url\": \"http://rouman5.com/books?tag=出版漫画&page={{page-1}}\"\n    },\n    {\n        \"title\": \"肉慾\",\n        \"url\": \"http://rouman5.com/books?tag=肉慾&page={{page-1}}\"\n    },\n    {\n        \"title\": \"浪漫\",\n        \"url\": \"http://rouman5.com/books?tag=浪漫&page={{page-1}}\"\n    },\n    {\n        \"title\": \"大尺度\",\n        \"url\": \"http://rouman5.com/books?tag=大尺度&page={{page-1}}\"\n    },\n    {\n        \"title\": \"巨乳\",\n        \"url\": \"http://rouman5.com/books?tag=巨乳&page={{page-1}}\"\n    },\n    {\n        \"title\": \"有夫之婦\",\n        \"url\": \"http://rouman5.com/books?tag=有夫之婦&page={{page-1}}\"\n    },\n    {\n        \"title\": \"女大生\",\n        \"url\": \"http://rouman5.com/books?tag=女大生&page={{page-1}}\"\n    },\n    {\n        \"title\": \"狗血劇\",\n        \"url\": \"http://rouman5.com/books?tag=狗血劇&page={{page-1}}\"\n    },\n    {\n        \"title\": \"同居\",\n        \"url\": \"http://rouman5.com/books?tag=同居&page={{page-1}}\"\n    },\n    {\n        \"title\": \"好友\",\n        \"url\": \"http://rouman5.com/books?tag=好友&page={{page-1}}\"\n    },\n    {\n        \"title\": \"調教\",\n        \"url\": \"http://rouman5.com/books?tag=調教&page={{page-1}}\"\n    },\n    {\n        \"title\": \"动作\",\n        \"url\": \"http://rouman5.com/books?tag=动作&page={{page-1}}\"\n    },\n    {\n        \"title\": \"後宮\",\n        \"url\": \"http://rouman5.com/books?tag=後宮&page={{page-1}}\"\n    },\n    {\n        \"title\": \"不倫\",\n        \"url\": \"http://rouman5.com/books?tag=不倫&page={{page-1}}\"\n    }\n]",
         "lastUpdateTime": 0,
         "respondTime": 180000,
         "ruleBookInfo": {
-            "author": ".introduce@class.bq@tag.a@text",
-            "coverUrl": ".pic@tag.img@src",
-            "intro": ".jj@text",
-            "kind": ".catalog1@tag.font.0@text",
-            "lastChapter": ".lastchapter@tag.a@text",
-            "name": "class.introduce@tag.h1@text"
+            "author": ".bookid_bookInfo__6bSwb@tag.p.0@text",
+            "canReName": "href",
+            "coverUrl": ".bookid_root__65KrY@tag.img@src",
+            "intro": ".bookid_bookInfo__6bSwb@tag.p.3@text",
+            "lastChapter": ".bookid_bookInfo__6bSwb@tag.small@text",
+            "name": "tag.h5.0@text"
         },
         "ruleContent": {
-            "content": "id.articlecontent@html"
+            "content": ".id_comicImage__E_Yo8@html"
         },
         "ruleExplore": {
-            "author": ".p1@tag.a@text",
-            "bookList": ".tt",
-            "bookUrl": "tag.a.0@href",
-            "coverUrl": "img@src",
-            "intro": ".p2@text",
-            "name": "tag.h3@a@text"
+            "bookList": ".comicBox_link__5r9nX",
+            "bookUrl": "href",
+            "coverUrl": ".comicBox_thumbImg__Sh8GH.0@html<js>/data-src=\"(\\S+)\"/.exec(result)[1]</js>",
+            "lastChapter": ".comicBox_lastUpdate__d_LCd@tag.span@text",
+            "name": ".comicBox_title__2KhbP@text"
         },
         "ruleReview": {},
         "ruleSearch": {
-            "author": "td.2@text",
-            "bookList": "tag.tr[!0]",
-            "bookUrl": "a.0@href",
-            "lastChapter": "a.1@text",
-            "name": "a.0@text",
-            "wordCount": "td.3@text"
+            "bookList": ".comicBox_link__5r9nX",
+            "bookUrl": "href",
+            "coverUrl": ".comicBox_thumbImg__Sh8GH.0@html<js>/data-src=\"(\\S+)\"/.exec(result)[1]</js>",
+            "lastChapter": ".comicBox_lastUpdate__d_LCd@tag.span@text",
+            "name": ".comicBox_title__2KhbP@text"
         },
         "ruleToc": {
-            "chapterList": ".ml_list@tag.li@tag.a",
+            "chapterList": ".bookid_chapter__R6xLx@tag.a",
             "chapterName": "text",
             "chapterUrl": "href"
         },
-        "searchUrl": "/modules/article/search.php?searchkey={{java.utf8ToGbk(key)}}&page={{page}},{\n\"charset\": \"gbk\",\n\"webview\": \"true\"\n}",
+        "searchUrl": "/search?term={{key}}&page={{page-1}}",
+        "weight": 0
+    },
+    {
+        "bookSourceGroup": "🎨漫画",
+        "bookSourceName": "包子漫画",
+        "bookSourceType": 2,
+        "bookSourceUrl": "https://www.baozimh.com/",
+        "customOrder": 0,
+        "enabled": true,
+        "enabledCookieJar": true,
+        "enabledExplore": true,
+        "exploreUrl": "[\n    {\n        \"title\": \"区域\",\n        \"url\": \"\",\n        \"style\": {\n            \"layout_flexBasisPercent\": 1,\n            \"layout_flexGrow\": 1\n        }\n    },\n    {\n        \"title\": \"全部\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"國漫\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=cn&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"日本\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=jp&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"韓國\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=kr&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"歐美\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=en&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"状态\",\n        \"url\": \"\",\n        \"style\": {\n            \"layout_flexBasisPercent\": 1,\n            \"layout_flexGrow\": 1\n        }\n    },\n    {\n        \"title\": \"全部\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"連載中\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=all&state=serial&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"已完結\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=all&state=pub&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"分类\",\n        \"url\": \"\",\n        \"style\": {\n            \"layout_flexBasisPercent\": 1,\n            \"layout_flexGrow\": 1\n        }\n    },\n    {\n        \"title\": \"全部\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"戀愛\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=lianai&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"純愛\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=chunai&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"古風\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=gufeng&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"異能\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=yineng&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"懸疑\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=xuanyi&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"劇情\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=juqing&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"科幻\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=kehuan&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"奇幻\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=qihuan&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"玄幻\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=xuanhuan&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"穿越\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=chuanyue&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"冒險\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=mouxian&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"推理\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=tuili&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"武俠\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=wuxia&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"格鬥\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=gedou&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"戰爭\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=zhanzheng&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"熱血\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=rexie&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"搞笑\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=gaoxiao&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"大女主\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=danuzhu&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"都市\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=dushi&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"總裁\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=zongcai&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"後宮\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=hougong&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"日常\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=richang&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"韓漫\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=hanman&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"少年\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=shaonian&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"其它\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=qita&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"首字母\",\n        \"url\": \"\",\n        \"style\": {\n            \"layout_flexBasisPercent\": 1,\n            \"layout_flexGrow\": 1\n        }\n    },\n    {\n        \"title\": \"全部\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=all&state=all&filter=*&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"ABCD\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=all&state=all&filter=ABCD&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"EFGH\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=all&state=all&filter=EFGH&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"IJKL\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=all&state=all&filter=IJKL&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"MNOP\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=all&state=all&filter=MNOP&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"QRST\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=all&state=all&filter=QRST&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"UVW\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=all&state=all&filter=UVW&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"XYZ\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=all&state=all&filter=XYZ&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    },\n    {\n        \"title\": \"0-9\",\n        \"url\": \"https://www.baozimh.com/api/bzmhq/amp_comic_list?type=all&region=all&state=all&filter=0-9&page={{page}}&limit=50&language=cn&__amp_source_origin=https%3A%2F%2Fwww.baozimh.com\"\n    }\n]",
+        "lastUpdateTime": 1701762582358,
+        "respondTime": 180000,
+        "ruleBookInfo": {
+            "author": ".comics-detail__author@text",
+            "coverUrl": "[name=\"og:image\"]@content",
+            "kind": ".tag-list@class.tag@text",
+            "name": ".comics-detail__title@text"
+        },
+        "ruleContent": {
+            "content": ".comic-contain img@html",
+            "nextContentUrl": ".next_chapter@tag.a@href"
+        },
+        "ruleExplore": {
+            "author": "author",
+            "bookList": "items[*]",
+            "bookUrl": "https://www.baozimh.com/comic/{{$.comic_id}}",
+            "coverUrl": "https://static-tw.baozimh.com/cover/{{$.topic_img}}?w=285&h=375&q=100",
+            "name": "name"
+        },
+        "ruleReview": {},
+        "ruleSearch": {
+            "author": ".tags@text",
+            "bookList": ".comics-card",
+            "bookUrl": "a.0@href",
+            "coverUrl": "img@src",
+            "kind": ".tab@text",
+            "name": "h3@text"
+        },
+        "ruleToc": {
+            "chapterList": ".comics-chapters a",
+            "chapterName": "text",
+            "chapterUrl": "href"
+        },
+        "searchUrl": "https://www.baozimh.com/search?q={{key}}",
         "weight": 0
     },
     {
@@ -91,7 +135,55 @@
             "chapterName": "text",
             "chapterUrl": "href"
         },
-        "searchUrl": "/search,{\n  \"method\": \"POST\",\n  \"headers\": {\n   \"Content-Type\": \"application/x-www-form-urlencoded\",\n\"Origin\": \"https://www.06ak.com\",\n\"Referer\":\"https://www.06ak.com/\"\n},\n  \"body\": \"searchkey={{encodeURIComponent(key)}}&searchtype=all&Submit=\"\n}",
+        "searchUrl": "/search,{\n  \"method\": \"POST\",\n  \"body\": \"searchkey={{encodeURIComponent(key)}}&searchtype=all&Submit=\"\n}",
+        "weight": 0
+    },
+    {
+        "bookSourceGroup": "H",
+        "bookSourceName": "第一版主",
+        "bookSourceType": 0,
+        "bookSourceUrl": "https://www.diyibanzhu.buzz",
+        "customOrder": 0,
+        "enabled": true,
+        "enabledCookieJar": true,
+        "enabledExplore": true,
+        "exploreUrl": "[\n\n    {\n        \"title\": \"玄幻小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/xuanhuan/{{page}}.html\"\n    },\n    {\n        \"title\": \"仙侠小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/xianxia/{{page}}.html\"\n    },\n    {\n        \"title\": \"都市小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/dushi/{{page}}.html\"\n    },\n    {\n        \"title\": \"军史小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/junshi/{{page}}.html\"\n    },\n    {\n        \"title\": \"网游小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/wangyou/{{page}}.html\"\n    },\n    {\n        \"title\": \"科幻小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/kehuan/{{page}}.html\"\n    },\n    {\n        \"title\": \"耽美小说\",\n        \"url\": \"https://www.diyibanzhu.buzz/danmei/{{page}}.html\"\n    },\n    {\n        \"title\": \"辣文合集\",\n        \"url\": \"https://www.diyibanzhu.buzz/lawen/{{page}}.html\"\n    }\n \n]",
+        "lastUpdateTime": 0,
+        "respondTime": 180000,
+        "ruleBookInfo": {
+            "author": ".introduce@class.bq@tag.a@text",
+            "coverUrl": "img.1@src",
+            "intro": ".jj@text",
+            "kind": ".catalog1@tag.font.0@text",
+            "lastChapter": ".lastchapter@tag.a@text",
+            "name": "class.introduce@tag.h1@text"
+        },
+        "ruleContent": {
+            "content": "id.articlecontent@html"
+        },
+        "ruleExplore": {
+            "author": ".p1@tag.a@text",
+            "bookList": ".tt",
+            "bookUrl": "tag.a.0@href",
+            "coverUrl": "img@src",
+            "intro": ".p2@text",
+            "name": "tag.h3@a@text"
+        },
+        "ruleReview": {},
+        "ruleSearch": {
+            "author": "td.2@text",
+            "bookList": "tag.tr[!0]",
+            "bookUrl": "a.0@href",
+            "lastChapter": "a.1@text",
+            "name": "a.0@text",
+            "wordCount": "td.3@text"
+        },
+        "ruleToc": {
+            "chapterList": ".ml_list@tag.li@tag.a",
+            "chapterName": "text",
+            "chapterUrl": "href"
+        },
+        "searchUrl": "/modules/article/search.php?searchkey={{java.utf8ToGbk(key)}}&page={{page}},{\n\"charset\": \"gbk\",\n\"webview\": \"true\"\n}",
         "weight": 0
     },
     {
