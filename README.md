@@ -29,3 +29,15 @@
 [阅读3.0 legado](https://github.com/gedoor/legado)
 
 在软件中使用网络导入, 导入 url `https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/BookSource.json`
+
+已完成小说列表
++ [狼人小说](https://www.langrenxiaoshuo.com)
++ [微风小说](https://m.wfxs.tw)
++ [第一版主](https://www.diyibanzhu.buzz)
++ [AK小说](https://www.06ak.com)
++ [xhszw](https://www.xhszw.com)
++ [河图文化](https://www.hotupub.net)
+
+已完成漫画列表
++ [rouman5](http://rouman5.com)
++ [包子漫画](https://www.baozimh.com)
