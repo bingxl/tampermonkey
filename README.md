@@ -31,13 +31,25 @@
 在软件中使用网络导入, 导入 url `https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/BookSource.json`
 
 已完成小说列表
++ [AK小说](https://www.06ak.com)
++ [阿姑小说](http://m.aguxs.com)
++ [八毛小说](http://m.bamxs.com)
++ [精品笔趣阁](https://bqgjpw.com)
++ [第一版主](https://www.diyibanzhu.buzz)
++ [笔趣阁 fangzie](https://m.fangzie.com)
++ [河图文化](https://www.hotupub.net)
 + [狼人小说](https://www.langrenxiaoshuo.com)
 + [微风小说](https://m.wfxs.tw)
-+ [第一版主](https://www.diyibanzhu.buzz)
-+ [AK小说](https://www.06ak.com)
 + [xhszw](https://www.xhszw.com)
-+ [河图文化](https://www.hotupub.net)
++ [新御书屋](https://m.xinyushuwu1.com)
++ [依兰小说](https://www.yilanxs.com)
+
 
 已完成漫画列表
 + [rouman5](http://rouman5.com)
 + [包子漫画](https://www.baozimh.com)
+
+## 书源编辑方法
+编辑书源时先到 `src/booksource/`下找到对应json文件进行编辑或新增json文件; `target/BookSource.json`文件都是程序生成的,请吴在此编辑.
+
+生成书源命令 `pnpm run booksource`

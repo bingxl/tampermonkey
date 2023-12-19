@@ -1,0 +1,52 @@
+{
+    "bookSourceComment": "特别不稳定，使用前先在浏览器中打开 https://www.xhszw.com 看能否进入",
+    "bookSourceGroup": "self,18+🈲,🌐",
+    "bookSourceName": "小黄书",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.xhszw.com",
+    "customOrder": 0,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "exploreUrl": "[\n    {\n        \"title\": \"玄幻小说\",\n        \"url\": \"https://www.xhszw.com/list/xuanhuanxiaoshuo_{{page}}.html\"\n    },\n    {\n        \"title\": \"修真小说\",\n        \"url\": \"https://www.xhszw.com/list/xiuzhenxiaoshuo_{{page}}.html\"\n    },\n    {\n        \"title\": \"都市小说\",\n        \"url\": \"https://www.xhszw.com/list/dushixiaoshuo_{{page}}.html\"\n    },\n    {\n        \"title\": \"穿越小说\",\n        \"url\": \"https://www.xhszw.com/list/chuanyuexiaoshuo_{{page}}.html\"\n    },\n    {\n        \"title\": \"网游小说\",\n        \"url\": \"https://www.xhszw.com/list/wangyouxiaoshuo_{{page}}.html\"\n    },\n    {\n        \"title\": \"历史小说\",\n        \"url\": \"https://www.xhszw.com/list/lishixiaoshuo_{{page}}.html\"\n    },\n    {\n        \"title\": \"短篇合集\",\n        \"url\": \"https://www.xhszw.com/list/duanpianheji_{{page}}.html\"\n    },\n    {\n        \"title\": \"其他小说\",\n        \"url\": \"https://www.xhszw.com/list/qitaxiaoshuo_{{page}}.html\"\n    }\n]",
+    "lastUpdateTime": 1701839477115,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+        "author": "[property=\"og:novel:author\"]@content",
+        "coverUrl": "class.bookcover@tag.img@src",
+        "init": "",
+        "intro": ".bookintro@text##小黄书实时更新\\S*",
+        "kind": "[property=\"og:novel:category\"]@content",
+        "lastChapter": "[property=\"og:novel:lastest_chapter_name\"]@content",
+        "name": "[property=\"og:novel:book_name\"]@content",
+        "wordCount": "class.booktag@tag.span.0@text"
+    },
+    "ruleContent": {
+        "content": "all"
+    },
+    "ruleExplore": {
+        "author": "class.author.0@text",
+        "bookList": ".bookinfo",
+        "bookUrl": "a.0@href",
+        "intro": ".update@text##小黄书实时更新\\S*",
+        "lastChapter": ".cat@tag.a@text",
+        "name": ".bookname@tag.a@text"
+    },
+    "ruleReview": {},
+    "ruleSearch": {
+        "author": "class.author.0@text",
+        "bookList": ".bookinfo",
+        "bookUrl": "a.0@href",
+        "intro": ".update@text##小黄书实时更新\\S*",
+        "lastChapter": "a.1@text",
+        "name": "a.0@text"
+    },
+    "ruleToc": {
+        "chapterList": "id.list-chapterAll@tag.dd",
+        "chapterName": "a@text",
+        "chapterUrl": "a@href<js>\nvar match = result.match(/(\\d+)/g)\nvar h = '/api/reader_js.php'\n\nvar option = {\n    \"method\": \"POST\",\n    \"body\": `articleid=${match[0]}&chapterid=${match[1]}&pid=1`,\n    \"webView\": true\n}; \nh + \",\" + JSON.stringify(option)\n</js>",
+        "nextTocUrl": "option@value"
+    },
+    "searchUrl": "/search,{\n  \"method\": \"POST\",\n  \"body\": \"searchkey={{encodeURIComponent(key)}}&searchtype=all&submit=&action=login\"\n}",
+    "weight": 0
+}

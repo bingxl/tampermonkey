@@ -1,0 +1,51 @@
+{
+    "bookSourceGroup": "self,18+🈲",
+    "bookSourceName": "微风小说",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://m.wfxs.tw/",
+    "customOrder": 0,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "exploreUrl": "[\n    {\n        \"title\": \"分类\",\n        \"url\": \"\",\n        \"style\": {\n            \"layout_flexBasisPercent\": 1,\n            \"layout_flexGrow\": 1\n        }\n    },\n    {\n        \"title\": \"總裁豪門\",\n        \"url\": \"https://m.wfxs.tw/haomenzongcai/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"懸疑靈異\",\n        \"url\": \"https://m.wfxs.tw/xuanyilingyi/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"浪漫青春\",\n        \"url\": \"https://m.wfxs.tw/langmanqingchun/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"仙俠玄幻\",\n        \"url\": \"https://m.wfxs.tw/xianxiaxuanhuan/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"穿越架空\",\n        \"url\": \"https://m.wfxs.tw/chuanyuejiakong/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"都市異能\",\n        \"url\": \"https://m.wfxs.tw/dushiyineng/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"都市言情\",\n        \"url\": \"https://m.wfxs.tw/dushiyanqing/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"其他類型\",\n        \"url\": \"https://m.wfxs.tw/qita/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"現代言情\",\n        \"url\": \"https://m.wfxs.tw/xianyan/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"古代言情\",\n        \"url\": \"https://m.wfxs.tw/guyan/{{page === 1 ? '' : page + '/'}}\"\n    },\n    {\n        \"title\": \"排行榜\",\n        \"url\": \"\",\n        \"style\": {\n            \"layout_flexBasisPercent\": 1,\n            \"layout_flexGrow\": 1\n        }\n    },\n    {\n        \"title\": \"暢銷榜\",\n        \"url\": \"https://m.wfxs.tw/rank/weekvisit/\"\n    },\n    {\n        \"title\": \"24小時熱門榜\",\n        \"url\": \"https://m.wfxs.tw/rank/dayvisit/\"\n    },\n    {\n        \"title\": \"最熱榜\",\n        \"url\": \"https://m.wfxs.tw/rank/allvisit/\"\n    },\n    {\n        \"title\": \"留存榜\",\n        \"url\": \"https://m.wfxs.tw/rank/allvote/\"\n    },\n    {\n        \"title\": \"完結榜\",\n        \"url\": \"https://m.wfxs.tw/full/\"\n    },\n    {\n        \"title\": \"潛力榜\",\n        \"url\": \"https://m.wfxs.tw/rank/size/\"\n    },\n    {\n        \"title\": \"新書推薦榜\",\n        \"url\": \"https://m.wfxs.tw/rank/postdate/\"\n    },\n    {\n        \"title\": \"收藏人氣榜\",\n        \"url\": \"https://m.wfxs.tw/rank/goodnum/\"\n    }\n]",
+    "lastUpdateTime": 0,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+        "author": "[property=\"og:novel:author\"]@content",
+        "coverUrl": ".entry@tag.img@src",
+        "intro": ".bh_book_title_hide@text",
+        "kind": "[property=\"og:novel:category\"]@content",
+        "lastChapter": "[property=\"og:novel:latest_chapter_name\"]@content",
+        "name": ".entry@tag.h1@text",
+        "tocUrl": ".more@tag.a@href"
+    },
+    "ruleContent": {
+        "content": "id.read_conent_box@html",
+        "nextContentUrl": ".page.1@text.下一頁@href"
+    },
+    "ruleExplore": {
+        "author": ".author@text",
+        "bookList": ".item@tag.a",
+        "bookUrl": "href",
+        "coverUrl": "img@src",
+        "intro": "p@text",
+        "name": ".t@text"
+    },
+    "ruleReview": {},
+    "ruleSearch": {
+        "author": ".author@text",
+        "bookList": "@css:.entry div.item a",
+        "bookUrl": "href",
+        "coverUrl": "img@src",
+        "intro": "tag.p@text",
+        "name": ".t@text"
+    },
+    "ruleToc": {
+        "chapterList": "id.html_box@a",
+        "chapterName": "text",
+        "chapterUrl": "href",
+        "nextTocUrl": ".inner@class.entry@tag.a@href"
+    },
+    "searchUrl": "/s.html?type=articlename&s={{key}}&page={{page}}",
+    "weight": 0
+}

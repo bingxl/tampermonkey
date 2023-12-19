@@ -1,0 +1,41 @@
+{
+    "bookSourceGroup": "self",
+    "bookSourceName": "阿姑小说",
+    "bookSourceType": 0,
+    "bookSourceUrl": "http://m.aguxs.com",
+    "customOrder": 0,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "exploreUrl": "[\n    {\n        \"title\": \"总裁\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=25&page={{page}}\"\n    },\n    {\n        \"title\": \"网游\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=9&page={{page}}\"\n    },\n    {\n        \"title\": \"科幻\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=16&page={{page}}\"\n    },\n    {\n        \"title\": \"军事\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=8&page={{page}}\"\n    },\n    {\n        \"title\": \"言情\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=5&page={{page}}\"\n    },\n    {\n        \"title\": \"名著\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=20&page={{page}}\"\n    },\n    {\n        \"title\": \"校园\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=6&page={{page}}\"\n    },\n    {\n        \"title\": \"灵异\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=17&page={{page}}\"\n    },\n    {\n        \"title\": \"玄幻\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=1&page={{page}}\"\n    },\n    {\n        \"title\": \"竞技\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=10&page={{page}}\"\n    },\n    {\n        \"title\": \"官场\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=13&page={{page}}\"\n    },\n    {\n        \"title\": \"穿越\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=11&page={{page}}\"\n    },\n    {\n        \"title\": \"热门\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=24&page={{page}}\"\n    },\n    {\n        \"title\": \"推理\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=18&page={{page}}\"\n    },\n    {\n        \"title\": \"耽美\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=15&page={{page}}\"\n    },\n    {\n        \"title\": \"都市\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=4&page={{page}}\"\n    },\n    {\n        \"title\": \"仙侠\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=3&page={{page}}\"\n    },\n    {\n        \"title\": \"历史\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=7&page={{page}}\"\n    },\n    {\n        \"title\": \"武侠\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=2&page={{page}}\"\n    },\n    {\n        \"title\": \"乡村\",\n        \"url\": \"http://m.aguxs.com/aguclass.asp?id=21&page={{page}}\"\n    }\n]",
+    "lastUpdateTime": 1702977498910,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+        "author": ".jie@a.1@text",
+        "coverUrl": ".pic@img@src",
+        "intro": ".novelinfo@text",
+        "name": ".jie@a.0@text",
+        "wordCount": ".jie@span.1@text##字数："
+    },
+    "ruleContent": {
+        "content": ".novelinfvie@html##<img.{10}(\\w+)\\..{5}##$1"
+    },
+    "ruleExplore": {},
+    "ruleReview": {},
+    "ruleSearch": {
+        "author": "span.1@text##作者:|时间:.*",
+        "bookList": ".booklist_a@.list_a",
+        "bookUrl": "a.0@href",
+        "coverUrl": "img@src",
+        "intro": ".intro@text",
+        "kind": "span.0@text",
+        "name": "a.1@text"
+    },
+    "ruleToc": {
+        "chapterList": ".sso_a@a",
+        "chapterName": "text",
+        "chapterUrl": "href"
+    },
+    "searchUrl": "/search.asp?word={{java.encodeURI(key, 'gbk')}}&page={{page}}",
+    "weight": 0
+}

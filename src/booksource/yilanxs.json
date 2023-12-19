@@ -1,0 +1,27 @@
+{
+    "bookSourceGroup": "self",
+    "bookSourceName": "依兰小说",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.yilanxs.com",
+    "customOrder": 0,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "lastUpdateTime": 0,
+    "respondTime": 180000,
+    "ruleBookInfo": {},
+    "ruleContent": {},
+    "ruleExplore": {},
+    "ruleReview": {},
+    "ruleSearch": {
+        "author": ".s4@text",
+        "bookList": ".novelslistss@li",
+        "bookUrl": "a.0@href",
+        "kind": ".s1@text",
+        "lastChapter": "a.1@text",
+        "name": "a.0@text"
+    },
+    "ruleToc": {},
+    "searchUrl": "/search/,{\n\"method\":\"POST\",\n\"body\":\"keyword={{java.encodeURI(key)}}\",\n}",
+    "weight": 0
+}

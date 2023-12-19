@@ -1,0 +1,51 @@
+{
+    "bookSourceGroup": "self,18+🈲",
+    "bookSourceName": "新御书屋",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://m.xinyushuwu1.com",
+    "customOrder": 0,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "exploreUrl": "[\n    {\n        \"title\": \"玄幻小说\",\n        \"url\": \"/sort/1_{{page}}/\"\n    },\n    {\n        \"title\": \"仙侠小说\",\n        \"url\": \"/sort/2_{{page}}/\"\n    },\n    {\n        \"title\": \"都市小说\",\n        \"url\": \"/sort/3_{{page}}/\"\n    },\n    {\n        \"title\": \"军史小说\",\n        \"url\": \"/sort/4_{{page}}/\"\n    },\n    {\n        \"title\": \"网游小说\",\n        \"url\": \"/sort/5_{{page}}/\"\n    },\n    {\n        \"title\": \"科幻小说\",\n        \"url\": \"/sort/6_{{page}}/\"\n    },\n    {\n        \"title\": \"耽美小说\",\n        \"url\": \"/sort/7_{{page}}/\"\n    },\n    {\n        \"title\": \"辣文合集\",\n        \"url\": \"/sort/8_{{page}}/\"\n    },\n  {\n        \"title\": \"排行榜\",\n        \"url\": \"\",\n        \"style\": {\n            \"layout_flexBasisPercent\": 1,\n            \"layout_flexGrow\": 1\n        }\n    },\n    {\n        \"title\": \"日点击榜\",\n        \"url\": \"https://m.xinyushuwu1.com/top/dayvisit_{{page}}/\"\n    },\n    {\n        \"title\": \"周点击榜\",\n        \"url\": \"https://m.xinyushuwu1.com/top/weekvisit_{{page}}/\"\n    },\n    {\n        \"title\": \"月点击榜\",\n        \"url\": \"https://m.xinyushuwu1.com/top/monthvisit_{{page}}/\"\n    },\n    {\n        \"title\": \"总点击榜\",\n        \"url\": \"https://m.xinyushuwu1.com/top/allvisit_{{page}}/\"\n    },\n    {\n        \"title\": \"总收藏榜\",\n        \"url\": \"https://m.xinyushuwu1.com/top/goodnum_{{page}}/\"\n    },\n    {\n        \"title\": \"字数排行\",\n        \"url\": \"https://m.xinyushuwu1.com/top/size_{{page}}/\"\n    },\n    {\n        \"title\": \"日推荐榜\",\n        \"url\": \"https://m.xinyushuwu1.com/top/dayvote_{{page}}/\"\n    },\n    {\n        \"title\": \"周推荐榜\",\n        \"url\": \"https://m.xinyushuwu1.com/top/weekvote_{{page}}/\"\n    },\n    {\n        \"title\": \"月推荐榜\",\n        \"url\": \"https://m.xinyushuwu1.com/top/monthvote_{{page}}/\"\n    },\n    {\n        \"title\": \"总推荐榜\",\n        \"url\": \"https://m.xinyushuwu1.com/top/allvote_{{page}}/\"\n    },\n    {\n        \"title\": \"最新入库\",\n        \"url\": \"https://m.xinyushuwu1.com/top/postdate_{{page}}/\"\n    },\n    {\n        \"title\": \"最近更新\",\n        \"url\": \"https://m.xinyushuwu1.com/top/lastupdate_{{page}}/\"\n    }\n\n]",
+    "header": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0",
+    "lastUpdateTime": 1702147294080,
+    "respondTime": 180000,
+    "ruleBookInfo": {
+        "author": ".infotype@a.0@text",
+        "coverUrl": ".pic@img@src",
+        "intro": ".intro@p@text",
+        "kind": ".infotype@p.1@text##类型：",
+        "lastChapter": ".infotype@a.1@text",
+        "name": ".cataloginfo@h3@text",
+        "tocUrl": ".gochapter@a@href"
+    },
+    "ruleContent": {
+        "content": "id.novelcontent@html##上一页|下一页|返回目录|加入书签|上一章|下一章|本章未完.*",
+        "nextContentUrl": "text.下一页@href"
+    },
+    "ruleExplore": {
+        "author": "a.1@text",
+        "bookList": ".article||.articlegeneral",
+        "bookUrl": "a.0@href",
+        "coverUrl": "img@src",
+        "intro": ".simple@text",
+        "kind": ".p1@text##[|]",
+        "name": "h6@text||.blue@text"
+    },
+    "ruleReview": {},
+    "ruleSearch": {
+        "author": "a.1@text",
+        "bookList": ".sone",
+        "bookUrl": "a.0@href",
+        "name": "a.0@text"
+    },
+    "ruleToc": {
+        "chapterList": ".chapters@a",
+        "chapterName": "text",
+        "chapterUrl": "href",
+        "nextTocUrl": ".page@text.下一页@href"
+    },
+    "searchUrl": "/s.php,{\n\"method\":\"POST\",\n\"charset\":\"gbk\",\n\"body\":\"s={{java.encodeURI(key,'gbk')}}&type=articlename\"\n}",
+    "weight": 0
+}
