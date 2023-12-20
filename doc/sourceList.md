@@ -10,7 +10,7 @@
 + [河图文化](https://www.hotupub.net)
 + [狼人小说](https://www.langrenxiaoshuo.com)
 + [肉慢屋](http://rouman5.com)
-+ [微风小说](https://m.wfxs.tw/)
++ [微风小说](https://m.wfxs.tw)
 + [小黄书](https://www.xhszw.com)
 + [新御书屋](https://m.xinyushuwu1.com)
 + [依兰小说](https://www.yilanxs.com)

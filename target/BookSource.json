@@ -81,12 +81,13 @@
             "name": "a.1@text"
         },
         "ruleToc": {
-            "chapterList": ".sso_a@a",
+            "chapterList": ".sso_a@li",
             "chapterName": "text",
-            "chapterUrl": "href"
+            "chapterUrl": "a@href"
         },
         "searchUrl": "/search.asp?word={{java.encodeURI(key, 'gbk')}}&page={{page}}",
-        "weight": 0
+        "weight": 0,
+        "bookSourceComment": "此网站小说经常出现少章节内容(目录可能齐全,但没内容)"
     },
     {
         "bookSourceComment": "正文中有些字会用图片替代，所以将图片文字转为文字的拼音",
@@ -519,7 +520,7 @@
         "bookSourceGroup": "self,18+🈲",
         "bookSourceName": "微风小说",
         "bookSourceType": 0,
-        "bookSourceUrl": "https://m.wfxs.tw/",
+        "bookSourceUrl": "https://m.wfxs.tw",
         "customOrder": 0,
         "enabled": true,
         "enabledCookieJar": true,

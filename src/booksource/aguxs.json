@@ -32,10 +32,11 @@
         "name": "a.1@text"
     },
     "ruleToc": {
-        "chapterList": ".sso_a@a",
+        "chapterList": ".sso_a@li",
         "chapterName": "text",
-        "chapterUrl": "href"
+        "chapterUrl": "a@href"
     },
     "searchUrl": "/search.asp?word={{java.encodeURI(key, 'gbk')}}&page={{page}}",
-    "weight": 0
+    "weight": 0,
+    "bookSourceComment": "此网站小说经常出现少章节内容(目录可能齐全,但没内容)"
 }
