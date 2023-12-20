@@ -17,7 +17,7 @@
         "name": ".block_txt2@a.1@text"
     },
     "ruleContent": {
-        "content": "id.nr1@html##\\-\\-\\>\\>.*|无广告的.*",
+        "content": "id.nr1@html##\\(第\\d/\\d页\\).*|无广告的.*",
         "nextContentUrl": "text.下一页@href"
     },
     "ruleExplore": {},
