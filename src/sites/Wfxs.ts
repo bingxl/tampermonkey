@@ -11,6 +11,7 @@ export class Wfxs extends Base {
 
     static host = ['m.wfxs.tw'];
     static pathMatch = /\/booklist\/\d+\.html/;
+    static siteName = '微风小说';
 
     /**
      * @override

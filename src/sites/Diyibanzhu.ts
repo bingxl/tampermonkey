@@ -8,6 +8,7 @@ export class Diyibanzhu extends Base {
 
     static host = ['www.diyibanzhu.buzz'];
     static pathMatch = /\/\d+\/\d+\/$/;
+    static siteName = '第一版主';
 
     /** @override */
     async getArticle(url: string) {

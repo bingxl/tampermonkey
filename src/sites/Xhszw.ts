@@ -10,6 +10,7 @@ export class Xhszw extends Base {
 
     static host = ['www.xhszw.com', 'xhszw.com'];
     static pathMatch = /\/book\/\d+\/$/;
+    static siteName = 'xhszw';
 
     /**
      * @override

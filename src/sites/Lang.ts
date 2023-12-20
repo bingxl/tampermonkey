@@ -10,6 +10,7 @@ export class Lang extends Base {
 
     static host = ['www.langrenxiaoshuo.com'];
     static pathMatch = /\/html\/\w+\/$/;
+    static siteName = '狼人小说';
 
     async getArticle(url: string) {
         return await fetch(url).then(res => res.arrayBuffer())

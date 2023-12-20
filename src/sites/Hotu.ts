@@ -8,6 +8,7 @@ export class Hotu extends Base {
 
     static host = ['www.hotupub.net'];
     static pathMatch = /\/book\/\d+\/$/;
+    static siteName = '河图小说';
 
     getArticleContent(parser: Document) {
         const c = parser.querySelector('div.bookread-content-box')?.innerHTML.replaceAll('<br>', '\n') ?? "";
