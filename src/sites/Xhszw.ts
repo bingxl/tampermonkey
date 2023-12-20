@@ -8,7 +8,7 @@ export class Xhszw extends Base {
     download = 'div.bookinfo > div > a:nth-child(1)';
     sleepTime = 500;
 
-    static host = ['www.xhszw.com', 'xhszw.com'];
+    static host = ['https://www.xhszw.com/book/*/', 'https://xhszw.com/book/*/'];
     static pathMatch = /\/book\/\d+\/$/;
     static siteName = 'xhszw';
 

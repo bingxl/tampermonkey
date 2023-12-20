@@ -6,7 +6,7 @@ export class Hotu extends Base {
     title = 'div.bookdetails-left-mainbox > div:nth-child(1) > div > div > h1';
     download = 'p.bookdetalis-bookinfo-bookbtnbox.suofang > a';
 
-    static host = ['www.hotupub.net'];
+    static host = ['https://www.hotupub.net/book/*/'];
     static pathMatch = /\/book\/\d+\/$/;
     static siteName = '河图小说';
 

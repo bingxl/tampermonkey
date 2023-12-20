@@ -9,6 +9,7 @@
 + https://www.xhszw.com/book/*/
 + https://m.wfxs.tw/booklist/*
 
+[点此查看更多具体网站](/doc/siteList.md)
 
 以上网站都只能下载免费部分
 
@@ -44,6 +45,8 @@
 + [xhszw](https://www.xhszw.com)
 + [新御书屋](https://m.xinyushuwu1.com)
 + [依兰小说](https://www.yilanxs.com)
+
+[点此查看更多具体书源](/doc/sourceList.md)
 
 
 已完成漫画列表

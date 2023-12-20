@@ -3,14 +3,14 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.2
 // @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
-// @author       You
-// @match        https://www.06ak.com/book/*
-// @match        https://www.langrenxiaoshuo.com/html/*/
-// @match        https://www.hotupub.net/book/*/
-// @match        https://www.diyibanzhu.buzz/*/*/
-// @match        https://www.xhszw.com/book/*/
-// @match        https://xhszw.com/book/*/
-// @match        https://m.wfxs.tw/booklist/*
+// @author       bingxl
+// @match       https://www.langrenxiaoshuo.com/html/*/
+// @match       https://www.06ak.com/book/*
+// @match       https://www.diyibanzhu.buzz/*/*/
+// @match       https://www.hotupub.net/book/*/
+// @match       https://www.xhszw.com/book/*/
+// @match       https://xhszw.com/book/*/
+// @match       https://m.wfxs.tw/booklist/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
 // @downloadURL  https://github.com/bingxl/tampermonkey/raw/main/target/main.js
@@ -171,10 +171,13 @@ ${res}`;
       this.download = "body > div.container > section > div.novel_info_main > div > div:nth-child(5) > a.l_btn";
     }
     static {
-      this.host = ["www.06ak.com"];
+      this.host = ["https://www.06ak.com/book/*"];
     }
     static {
       this.pathMatch = /\/book\/\d+$/;
+    }
+    static {
+      this.siteName = "06Ak小说";
     }
     // @override
     // 从DOM树中获取章节内容
@@ -200,10 +203,13 @@ ${res}`;
       this.download = "div.introduce > div > p:nth-child(4) > a";
     }
     static {
-      this.host = ["www.diyibanzhu.buzz"];
+      this.host = ["https://www.diyibanzhu.buzz/*/*/"];
     }
     static {
       this.pathMatch = /\/\d+\/\d+\/$/;
+    }
+    static {
+      this.siteName = "第一版主";
     }
     /** @override */
     async getArticle(url) {
@@ -227,10 +233,13 @@ ${res}`;
       this.download = "p.bookdetalis-bookinfo-bookbtnbox.suofang > a";
     }
     static {
-      this.host = ["www.hotupub.net"];
+      this.host = ["https://www.hotupub.net/book/*/"];
     }
     static {
       this.pathMatch = /\/book\/\d+\/$/;
+    }
+    static {
+      this.siteName = "河图小说";
     }
     getArticleContent(parser) {
       const c = parser.querySelector("div.bookread-content-box")?.innerHTML.replaceAll("<br>", "\n") ?? "";
@@ -247,10 +256,13 @@ ${res}`;
       this.download = "body > div.container > div.row.row-detail > div > div > div.info > div.top > div > p.opt > a.xs-show.btn-read";
     }
     static {
-      this.host = ["www.langrenxiaoshuo.com"];
+      this.host = ["https://www.langrenxiaoshuo.com/html/*/"];
     }
     static {
       this.pathMatch = /\/html\/\w+\/$/;
+    }
+    static {
+      this.siteName = "狼人小说";
     }
     async getArticle(url) {
       return await fetch(url).then((res) => res.arrayBuffer()).then((res) => {
@@ -272,10 +284,13 @@ ${res}`;
       this.sleepTime = 300;
     }
     static {
-      this.host = ["m.wfxs.tw"];
+      this.host = ["https://m.wfxs.tw/booklist/*"];
     }
     static {
       this.pathMatch = /\/booklist\/\d+\.html/;
+    }
+    static {
+      this.siteName = "微风小说";
     }
     /**
      * @override
@@ -337,10 +352,13 @@ ${res}`;
       this.sleepTime = 500;
     }
     static {
-      this.host = ["www.xhszw.com", "xhszw.com"];
+      this.host = ["https://www.xhszw.com/book/*/", "https://xhszw.com/book/*/"];
     }
     static {
       this.pathMatch = /\/book\/\d+\/$/;
+    }
+    static {
+      this.siteName = "xhszw";
     }
     /**
      * @override
@@ -393,7 +411,8 @@ ${res}`;
   // src/main.ts
   var { host, pathname } = location;
   sites.some((v) => {
-    if (v?.host.includes(host) && pathname.match(v.pathMatch)) {
+    const hosts = v.host.map((h) => new URL(h).host);
+    if (hosts.includes(host) && pathname.match(v.pathMatch)) {
       new v().init();
       return true;
     }

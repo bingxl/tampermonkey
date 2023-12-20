@@ -7,7 +7,7 @@ export class Ak extends Base {
     title = 'body > div.container > section > div.novel_info_main > div > h1';
     download = 'body > div.container > section > div.novel_info_main > div > div:nth-child(5) > a.l_btn';
 
-    static host = ['www.06ak.com'];
+    static host = ['https://www.06ak.com/book/*'];
     static pathMatch = /\/book\/\d+$/;
     static siteName = '06Ak小说';
     // @override

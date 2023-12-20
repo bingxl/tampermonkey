@@ -8,7 +8,7 @@ export class Lang extends Base {
     title = 'div.row.row-detail > div > h2 > font';
     download = 'body > div.container > div.row.row-detail > div > div > div.info > div.top > div > p.opt > a.xs-show.btn-read';
 
-    static host = ['www.langrenxiaoshuo.com'];
+    static host = ['https://www.langrenxiaoshuo.com/html/*/'];
     static pathMatch = /\/html\/\w+\/$/;
     static siteName = '狼人小说';
 

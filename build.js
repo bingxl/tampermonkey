@@ -3,34 +3,72 @@ const fs = require('fs');
 const path = require('path');
 
 
-const banner = `// ==UserScript==
+
+
+// esbuild 打包js
+async function build() {
+
+    /**
+     * 油猴子脚本头部注释部分
+     * @param {*} sites 
+     * @returns 
+     */
+    function getBanner(sites) {
+        const results = sites.map(v => `// @match       ${v.href}`).join('\n');
+        return `// ==UserScript==
 // @name         06ak
 // @namespace    http://tampermonkey.net/
 // @version      0.2
 // @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
-// @author       You
-// @match        https://www.06ak.com/book/*
-// @match        https://www.langrenxiaoshuo.com/html/*/
-// @match        https://www.hotupub.net/book/*/
-// @match        https://www.diyibanzhu.buzz/*/*/
-// @match        https://www.xhszw.com/book/*/
-// @match        https://xhszw.com/book/*/
-// @match        https://m.wfxs.tw/booklist/*
+// @author       bingxl
+${results}
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
 // @downloadURL  https://github.com/bingxl/tampermonkey/raw/main/target/main.js
 // ==/UserScript==
 `
+    }
 
-// esbuild 打包js
-function build() {
+    // 先编译sites, 获取其中的 siteName 和 url
+    esbuild.buildSync({
+        entryPoints: ['./src/sites/index.ts'],
+        charset: "utf8",
+        target: "esnext",
+        format: "cjs",
+        bundle: true,
+        outfile: "./target/sites.js"
+    });
+
+    const { sites } = require('./target/sites.js');
+    const siteNames = [];
+    sites.forEach(site => {
+        site.host.forEach(v => {
+            const url = new URL(v);
+            siteNames.push({
+                siteName: site.siteName,
+                href: url.href,
+                origin: url.origin,
+            })
+        })
+    });
+
+    /** 脚本能下载网站 doc 生成 */
+    const siteListContent = '## 油猴子下载网站列表\n' + siteNames.map(v => `+ [${v.siteName}](${v.origin})\n`).join('');
+    fs.writeFile('./doc/siteList.md', siteListContent, err => {
+        if (err) {
+            console.error(err);
+        }
+    })
+
+
+    /** 构建油猴子脚本 */
     esbuild.buildSync({
         entryPoints: ['./src/main.ts'],
         outfile: './target/main.js',
         bundle: true,
         charset: "utf8",
         target: "esnext",
-        banner: { js: banner },
+        banner: { js: getBanner(siteNames) },
     })
 }
 
@@ -52,6 +90,8 @@ function handleBookSource() {
             return;
         }
 
+        let docs = `## 书源列表`;
+
         // 迭代处理每个文件
         files.forEach(file => {
             // 检查文件是否为JSON文件
@@ -60,6 +100,10 @@ function handleBookSource() {
                 const filePath = path.join(directoryPath, file);
                 const jsonData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
+                // doc 数据
+                const { bookSourceName, bookSourceUrl } = jsonData;
+
+                docs += `\n+ [${bookSourceName}](${bookSourceUrl})`
                 // 将数据追加到数组中
                 jsonDataArray = jsonDataArray.concat(jsonData);
             }
@@ -75,7 +119,10 @@ function handleBookSource() {
                     return;
                 }
                 console.log('书源文件处理完成');
-            });
+            }
+        );
+
+        fs.writeFile('./doc/sourceList.md', docs, err => { if (err) { console.error(err) } });
 
     });
 

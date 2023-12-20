@@ -9,7 +9,7 @@ export class Wfxs extends Base {
     download = '#shoucang';
     sleepTime = 300;
 
-    static host = ['m.wfxs.tw'];
+    static host = ['https://m.wfxs.tw/booklist/*'];
     static pathMatch = /\/booklist\/\d+\.html/;
     static siteName = '微风小说';
 

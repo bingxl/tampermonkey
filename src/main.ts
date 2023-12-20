@@ -27,7 +27,8 @@ const { host, pathname } = location;
 // 注册类
 sites.some(v => {
     // 匹配注册类(只匹配一次)并执行
-    if (v?.host.includes(host) && pathname.match(v.pathMatch)) {
+    const hosts = v.host.map((h: string) => (new URL(h)).host)
+    if (hosts.includes(host) && pathname.match(v.pathMatch)) {
 
         (new v()).init();
         return true

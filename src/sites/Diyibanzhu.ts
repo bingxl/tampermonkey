@@ -6,7 +6,7 @@ export class Diyibanzhu extends Base {
     title = 'div.introduce > h1';
     download = 'div.introduce > div > p:nth-child(4) > a';
 
-    static host = ['www.diyibanzhu.buzz'];
+    static host = ['https://www.diyibanzhu.buzz/*/*/'];
     static pathMatch = /\/\d+\/\d+\/$/;
     static siteName = '第一版主';
 
