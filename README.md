@@ -36,6 +36,7 @@
 + [八毛小说](http://m.bamxs.com)
 + [精品笔趣阁](https://bqgjpw.com)
 + [第一版主](https://www.diyibanzhu.buzz)
++ [大众文学](https://m.dzwx520.com)
 + [笔趣阁 fangzie](https://m.fangzie.com)
 + [河图文化](https://www.hotupub.net)
 + [狼人小说](https://www.langrenxiaoshuo.com)
