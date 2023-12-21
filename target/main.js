@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         06ak
 // @namespace    http://tampermonkey.net/
-// @version      2023112123
+// @version      2023122123
 // @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
 // @author       bingxl
 // @homepage     https://github.com/bingxl/tampermonkey

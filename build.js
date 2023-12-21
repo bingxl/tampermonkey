@@ -24,7 +24,7 @@ async function build() {
                 date.getDate(),
                 date.getFullYear(),
             ];
-            return `${year}${month}${dayOfMonth}${hour}`
+            return `${year}${month + 1}${dayOfMonth}${hour}`
         }
 
         const results = sites.map(v => `// @match        ${v.href}`).join('\n');
