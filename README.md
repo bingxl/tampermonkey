@@ -5,7 +5,11 @@
 
 ## 使用方法
 浏览器中安装油猴子或 tampermonkey 扩展.
-打开tampermonkey面板 -> 实用工具 -> 从 URL 安装,  输入 `https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/main.js` 安装
+打开tampermonkey面板 -> 实用工具 -> 从 URL 安装,  输入 
+```
+https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/main.js
+``` 
+后点击安装
 
 安装完后确认油猴子脚本中打开了 `小说下载`脚本
 
@@ -28,7 +32,10 @@
 ## 阅读3.0 书源
 [阅读3.0 legado](https://github.com/gedoor/legado)
 
-在软件中使用网络导入, 导入 url `https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/BookSource.json`
+在软件中使用网络导入, 导入 url 
+```
+https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/BookSource.json
+```
 
 已完成小说列表
 + [AK小说](https://www.06ak.com)
