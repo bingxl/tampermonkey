@@ -6,3 +6,5 @@
 + [xhszw](https://www.xhszw.com)
 + [xhszw](https://xhszw.com)
 + [微风小说](https://m.wfxs.tw)
++ [天涯书库](https://www.tianyabooks.com)
++ [天涯书库-武侠小说](https://wx.tianyabooks.com)

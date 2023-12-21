@@ -1,18 +1,22 @@
 // ==UserScript==
 // @name         06ak
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      2023112123
 // @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
 // @author       bingxl
-// @match       https://www.langrenxiaoshuo.com/html/*/
-// @match       https://www.06ak.com/book/*
-// @match       https://www.diyibanzhu.buzz/*/*/
-// @match       https://www.hotupub.net/book/*/
-// @match       https://www.xhszw.com/book/*/
-// @match       https://xhszw.com/book/*/
-// @match       https://m.wfxs.tw/booklist/*
+// @homepage     https://github.com/bingxl/tampermonkey
+// @match        https://www.langrenxiaoshuo.com/html/*/
+// @match        https://www.06ak.com/book/*
+// @match        https://www.diyibanzhu.buzz/*/*/
+// @match        https://www.hotupub.net/book/*/
+// @match        https://www.xhszw.com/book/*/
+// @match        https://xhszw.com/book/*/
+// @match        https://m.wfxs.tw/booklist/*
+// @match        https://www.tianyabooks.com/*/*/
+// @match        https://wx.tianyabooks.com/book/*/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
+// @updateURL    https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/main.js
 // @downloadURL  https://github.com/bingxl/tampermonkey/raw/main/target/main.js
 // ==/UserScript==
 
@@ -39,6 +43,10 @@
     while (Date.now() - now <= d)
       ;
   }
+  function gbk2Utf8(buffer) {
+    const decode = new TextDecoder("gbk");
+    return decode.decode(buffer);
+  }
 
   // src/sites/Base.ts
   var Base = class {
@@ -49,6 +57,10 @@
       this.title = "";
       /** 下载按钮选择器 */
       this.download = "";
+      /**章节内容选择器 */
+      this.contentSelector = "";
+      /**获取章节内容时的字符集 */
+      this.charset = "utf8";
       /** @type {string[]} 网站 host */
       this.host = [];
       /** 书籍目录页面 匹配正则 location.pathname.match() */
@@ -66,7 +78,14 @@
      */
     async getArticle(url) {
       const res = await fetch(url);
-      return await res.text();
+      let result = "";
+      if (this.charset.includes("gb")) {
+        const buffer = await res.arrayBuffer();
+        result = gbk2Utf8(buffer);
+      } else {
+        result = await res.text();
+      }
+      return result;
     }
     /**
      * 从DOM树中获取章节内容
@@ -75,7 +94,8 @@
      * @return {string} 小说章节内容
      */
     getArticleContent(parser) {
-      return "";
+      const c = parser.querySelector(this.contentSelector)?.innerText ?? "";
+      return c;
     }
     /**
      * 处理一章分多页的问题
@@ -274,6 +294,44 @@ ${res}`;
     }
   };
 
+  // src/sites/Tianya.ts
+  var Tianya = class extends Base {
+    constructor() {
+      super(...arguments);
+      this.titles = ".book dl a";
+      this.title = ".book > h1";
+      this.download = "#main > div.book > h2 > a";
+      this.contentSelector = "#main > p:nth-child(4)";
+      this.charset = "gbk";
+    }
+    static {
+      this.host = ["https://www.tianyabooks.com/*/*/"];
+    }
+    static {
+      this.pathMatch = /\/\w+\/.+\//;
+    }
+    static {
+      this.siteName = "天涯书库";
+    }
+  };
+
+  // src/sites/TianyaWx.ts
+  var TianyaWx = class extends Tianya {
+    constructor() {
+      super(...arguments);
+      this.contentSelector = "td p";
+    }
+    static {
+      this.host = ["https://wx.tianyabooks.com/book/*/"];
+    }
+    static {
+      this.pathMatch = /\/book\/\w+\//;
+    }
+    static {
+      this.siteName = "天涯书库-武侠小说";
+    }
+  };
+
   // src/sites/Wfxs.ts
   var Wfxs = class extends Base {
     constructor() {
@@ -405,7 +463,9 @@ ${res}`;
     Diyibanzhu,
     Hotu,
     Xhszw,
-    Wfxs
+    Wfxs,
+    Tianya,
+    TianyaWx
   ];
 
   // src/main.ts

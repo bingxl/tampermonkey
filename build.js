@@ -14,16 +14,31 @@ async function build() {
      * @returns 
      */
     function getBanner(sites) {
-        const results = sites.map(v => `// @match       ${v.href}`).join('\n');
+
+        // 脚本版本
+        function version() {
+            const date = new Date();
+            const [hour, month, dayOfMonth, year] = [
+                date.getHours(),
+                date.getMonth(),
+                date.getDate(),
+                date.getFullYear(),
+            ];
+            return `${year}${month}${dayOfMonth}${hour}`
+        }
+
+        const results = sites.map(v => `// @match        ${v.href}`).join('\n');
         return `// ==UserScript==
 // @name         06ak
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      ${version()}
 // @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
 // @author       bingxl
+// @homepage     https://github.com/bingxl/tampermonkey
 ${results}
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
+// @updateURL    https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/main.js
 // @downloadURL  https://github.com/bingxl/tampermonkey/raw/main/target/main.js
 // ==/UserScript==
 `

@@ -37,3 +37,13 @@ export function sleep(d: number) {
 }
 
 export interface ChapterInter { href: string, textContent: string }
+
+/**
+ * GBK buffer 转utf8字符串
+ * @param {ArrayBuffer} buffer 经过GBK编码的 arrayBuffer
+ * @returns 转为utf8编码的字符串
+ */
+export function gbk2Utf8(buffer: ArrayBuffer) {
+    const decode = new TextDecoder('gbk');
+    return decode.decode(buffer);
+}

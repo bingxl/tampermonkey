@@ -1,4 +1,4 @@
-import { downloadTextAsFile, log, sleep } from '../tool/misc'
+import { downloadTextAsFile, gbk2Utf8, log, sleep } from '../tool/misc'
 
 export class Base {
     /** 小说章节的选择器 */
@@ -7,6 +7,11 @@ export class Base {
     title = '';
     /** 下载按钮选择器 */
     download = '';
+    /**章节内容选择器 */
+    contentSelector = "";
+    /**获取章节内容时的字符集 */
+    charset = 'utf8';
+
     /** @type {string[]} 网站 host */
     host = [];
     /** 书籍目录页面 匹配正则 location.pathname.match() */
@@ -26,7 +31,14 @@ export class Base {
      */
     async getArticle(url: string) {
         const res = await fetch(url);
-        return await res.text();
+        let result = "";
+        if (this.charset.includes('gb')) {
+            const buffer = await res.arrayBuffer();
+            result = gbk2Utf8(buffer)
+        } else {
+            result = await res.text();
+        }
+        return result;
     }
 
     /**
@@ -36,7 +48,9 @@ export class Base {
      * @return {string} 小说章节内容
      */
     getArticleContent(parser: Document) {
-        return ""
+        const c = parser.querySelector<HTMLElement>(this.contentSelector)?.innerText ?? "";
+        return c
+
     }
     /**
      * 处理一章分多页的问题
