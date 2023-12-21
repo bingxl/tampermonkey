@@ -1,6 +1,18 @@
 # tampermonkey
 一些自用的网页脚本
 
+
+
+## 使用方法
+浏览器中安装油猴子或 tampermonkey 扩展.
+打开tampermonkey面板 -> 实用工具 -> 从 URL 安装,  输入 `https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/main.js` 安装
+
+安装完后确认油猴子脚本中打开了 `小说下载`脚本
+
+进入支持的网站中小说目录页, 页面右上角出现下载字样时点击下载, 等待完成.
+
+
+
 ## 支持的小说网站:
 + https://www.06ak.com
 + https://www.langrenxiaoshuo.com
@@ -12,19 +24,6 @@
 [点此查看更多具体网站](/doc/siteList.md)
 
 以上网站都只能下载免费部分
-
-## 使用方法
-浏览器中安装油猴子或 tampermonkey 扩展.
-打开tampermonkey面板 -> 实用工具 -> 从 URL 安装,  输入 `https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/main.js` 安装
-
-
-## 文本转简体
-将`txt`文件放到 `./txt` 目录下, 运行 `node ts.js`
-
-## developer
-新增/修改具体网站的内容 到 `./src/sites/` 下编辑
-
-构建: `npm run build` 或 `node build.js`
 
 ## 阅读3.0 书源
 [阅读3.0 legado](https://github.com/gedoor/legado)
@@ -49,9 +48,13 @@
 [点此查看更多具体书源](/doc/sourceList.md)
 
 
-已完成漫画列表
-+ [rouman5](http://rouman5.com)
-+ [包子漫画](https://www.baozimh.com)
+## 文本转简体
+将`txt`文件放到 `./txt` 目录下, 运行 `node ts.js`
+
+## 新增/编辑下载网站方式
+新增/修改具体网站的内容 到 `./src/sites/` 下编辑
+
+构建: `npm run build` 或 `node build.js`
 
 ## 书源编辑方法
 编辑书源时先到 `src/booksource/`下找到对应json文件进行编辑或新增json文件; `target/BookSource.json`文件都是程序生成的,请吴在此编辑.

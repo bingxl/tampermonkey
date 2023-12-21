@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         06ak
+// @name         小说下载
 // @namespace    http://tampermonkey.net/
-// @version      2023122123
+// @version      202312221
 // @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
 // @author       bingxl
 // @homepage     https://github.com/bingxl/tampermonkey
@@ -35,9 +35,6 @@
       window.URL.revokeObjectURL(a.href);
     }, 0);
   }
-  function log(...infos) {
-    console.log(...infos);
-  }
   function sleep(d) {
     let now = Date.now();
     while (Date.now() - now <= d)
@@ -48,8 +45,12 @@
     return decode.decode(buffer);
   }
 
+  // src/show.html
+  var show_default = '<div id="bingxl-root">\r\n\r\n    <style>\r\n        #bingxl-root {\r\n            position: fixed;\r\n            top: 20px;\r\n            right: 20px;\r\n            background-color: cornsilk;\r\n            max-width: 200px;\r\n\r\n        }\r\n\r\n        .log {\r\n            max-height: 250px;\r\n            overflow-y: scroll;\r\n        }\r\n    </style>\r\n\r\n\r\n    <p><button class="download">下载</button> | <button class="clear">清除日志</button></p>\r\n\r\n\r\n    <section class="log">\r\n\r\n    </section>\r\n\r\n</div>';
+
   // src/sites/Base.ts
   var Base = class {
+    // 挂载到文档中的DOM结构 和 时间监听处理
     constructor() {
       /** 小说章节的选择器 */
       this.titles = "";
@@ -69,6 +70,27 @@
       this.sleepTime = 0;
       /** 同时获取数据的最大值 (并发量控制) */
       this.taskMax = 20;
+      const parser = new DOMParser();
+      const root = parser.parseFromString(show_default, "text/html");
+      document.body.append(root.querySelector("#bingxl-root") ?? "");
+      document.querySelector("#bingxl-root .download")?.addEventListener("click", (e) => this.run(e));
+      const logContainer = document.querySelector("#bingxl-root .log");
+      document.querySelector("#bingxl-root .clear")?.addEventListener("click", (e) => {
+        if (logContainer) {
+          logContainer.innerHTML = "";
+        }
+      });
+      this.log = (...infos) => {
+        if (logContainer) {
+          const p = document.createElement("p");
+          infos.forEach((v) => {
+            const span = document.createElement("span");
+            span.innerText = v;
+            p.appendChild(span);
+          });
+          logContainer.appendChild(p);
+        }
+      };
     }
     /**
      * 获取小说内容,返回文档编码方式需要处理
@@ -137,8 +159,7 @@
     }
     async run(e) {
       e?.preventDefault();
-      log("执行下载函数");
-      log("小说名 Selector: ", this.title);
+      this.log("执行下载函数");
       const article = document.querySelector(this.title)?.textContent ?? "";
       const titles = await this.getTitles().catch(console.error) ?? [];
       let contents = [];
@@ -154,7 +175,7 @@
             contents[i] = `
 ${a.textContent}
 ${res}`;
-            log(`${++currentTaskNum}/${titles.length} ${a.textContent}`);
+            this.log(`${++currentTaskNum}/${titles.length} ${a.textContent}`);
             resolve("");
           }).catch((err) => {
             console.error(err);
@@ -171,14 +192,6 @@ ${res}`;
       await Promise.all(tasks.values());
       downloadTextAsFile(article + "\n" + contents.join("\n"), article);
       return false;
-    }
-    init() {
-      log(this);
-      let d = document.querySelector(this.download);
-      if (d) {
-        d.textContent = "下载";
-        d.addEventListener("click", (e) => this.run(e));
-      }
     }
   };
 
@@ -377,7 +390,7 @@ ${res}`;
      * @override
      */
     async getTitles() {
-      log("in getTitles function");
+      this.log("in getTitles function");
       let parseTitle = (content) => {
         let parser = new DOMParser();
         let p = parser.parseFromString(content, "text/html");
@@ -388,13 +401,13 @@ ${res}`;
       };
       let titles = [];
       let pages = Array.from(document.querySelectorAll("#chapter_min_list_box > div > div > div.entry > ul > li > a"));
-      log("title is: ", titles);
+      this.log("title is: ", titles);
       const len = pages.length;
       let cur = 0;
       for (let page of pages) {
         let domStr = await fetch(page.href).then((res) => res.text());
         titles.push(...parseTitle(domStr));
-        log(`处理目录${cur++}/${len}`);
+        this.log(`处理目录${cur++}/${len}`);
       }
       return titles;
     }
@@ -436,7 +449,7 @@ ${res}`;
      * @override
      */
     async getTitles() {
-      log("in getTitles function");
+      this.log("in getTitles function");
       let parseTitle = (content) => {
         let parser = new DOMParser();
         let p = parser.parseFromString(content, "text/html");
@@ -447,7 +460,7 @@ ${res}`;
       };
       let titles = [];
       let pages = Array.from(document.querySelectorAll("#indexselect > option"));
-      log("title is: ", titles);
+      this.log("title is: ", titles);
       for (let page of pages) {
         let domStr = await fetch(page.value).then((res) => res.text());
         titles.push(...parseTitle(domStr));
@@ -473,7 +486,7 @@ ${res}`;
   sites.some((v) => {
     const hosts = v.host.map((h) => new URL(h).host);
     if (hosts.includes(host) && pathname.match(v.pathMatch)) {
-      new v().init();
+      new v();
       return true;
     }
   });

@@ -1,4 +1,7 @@
-import { downloadTextAsFile, gbk2Utf8, log, sleep } from '../tool/misc'
+import { downloadTextAsFile, gbk2Utf8, sleep } from '../tool/misc';
+
+// @ts-ignore
+import domStr from '../show.html'
 
 export class Base {
     /** 小说章节的选择器 */
@@ -20,6 +23,45 @@ export class Base {
     sleepTime = 0;
     /** 同时获取数据的最大值 (并发量控制) */
     taskMax = 20;
+
+
+    log: (...infos: any[]) => void;
+
+    // 挂载到文档中的DOM结构 和 时间监听处理
+    constructor() {
+
+        // 解析 DOM 
+        const parser = new DOMParser();
+        const root = parser.parseFromString(domStr, 'text/html');
+
+        // 将 DOM 挂载到当前页面中
+        document.body.append(root.querySelector('#bingxl-root') ?? '');
+
+        document.querySelector<HTMLButtonElement>('#bingxl-root .download')?.addEventListener('click', e => this.run(e))
+
+
+        const logContainer = document.querySelector<HTMLElement>('#bingxl-root .log');
+        // 清除日志
+        document.querySelector('#bingxl-root .clear')?.addEventListener('click', e => {
+            if (logContainer) {
+                logContainer.innerHTML = '';
+            }
+        })
+
+        this.log = (...infos: any[]) => {
+            if (logContainer) {
+                const p = document.createElement('p');
+                infos.forEach(v => {
+                    const span = document.createElement('span');
+                    span.innerText = v;
+                    p.appendChild(span);
+                })
+
+
+                logContainer.appendChild(p)
+            }
+        }
+    }
 
 
 
@@ -98,8 +140,7 @@ export class Base {
 
     async run(e: MouseEvent) {
         e?.preventDefault();
-        log("执行下载函数");
-        log("小说名 Selector: ", this.title);
+        this.log("执行下载函数");
         // 小说名
         const article = document.querySelector<HTMLElement>(this.title)?.textContent ?? "";
 
@@ -120,7 +161,7 @@ export class Base {
                 this.pages(a.href).then(res => {
                     // 将章节内容存入contents
                     contents[i] = `\n${a.textContent}\n${res}`;
-                    log(`${++currentTaskNum}/${titles.length} ${a.textContent}`);
+                    this.log(`${++currentTaskNum}/${titles.length} ${a.textContent}`);
                     resolve("");
                 }).catch(err => {
                     console.error(err);
@@ -147,13 +188,8 @@ export class Base {
         return false
     }
 
-    init() {
-        log(this)
-        let d = document.querySelector<HTMLAnchorElement>(this.download)
-        if (d) {
-            d.textContent = "下载"
-            d.addEventListener('click', (e) => this.run(e))
-        }
-    }
+
+
+
 
 }

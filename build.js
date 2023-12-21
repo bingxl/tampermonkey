@@ -29,7 +29,7 @@ async function build() {
 
         const results = sites.map(v => `// @match        ${v.href}`).join('\n');
         return `// ==UserScript==
-// @name         06ak
+// @name         小说下载
 // @namespace    http://tampermonkey.net/
 // @version      ${version()}
 // @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
@@ -51,7 +51,10 @@ ${results}
         target: "esnext",
         format: "cjs",
         bundle: true,
-        outfile: "./target/sites.js"
+        outfile: "./target/sites.js",
+        loader: {
+            ".html": 'text'
+        },
     });
 
     const { sites } = require('./target/sites.js');
@@ -84,6 +87,9 @@ ${results}
         charset: "utf8",
         target: "esnext",
         banner: { js: getBanner(siteNames) },
+        loader: {
+            ".html": 'text'
+        },
     })
 }
 

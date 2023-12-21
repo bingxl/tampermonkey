@@ -23,9 +23,13 @@ export function downloadTextAsFile(text: string, filename: string) {
     }, 0);
 }
 
-export function log(...infos: any[]) {
-    console.log(...infos)
-}
+
+
+
+/** 
+ * --------------------log end
+ */
+
 
 /**
  * 程序空转一定时间, 不精确

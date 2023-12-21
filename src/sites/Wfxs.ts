@@ -1,5 +1,5 @@
 import { Base } from "./Base";
-import { ChapterInter, log } from "../tool/misc";
+import { ChapterInter } from "../tool/misc";
 
 // 微风小说
 // https://m.wfxs.tw/
@@ -49,7 +49,7 @@ export class Wfxs extends Base {
      * @override
      */
     async getTitles() {
-        log('in getTitles function')
+        this.log('in getTitles function')
         let parseTitle = (content: string) => {
             let parser = new DOMParser();
             let p = parser.parseFromString(content, "text/html");
@@ -58,13 +58,13 @@ export class Wfxs extends Base {
         }
         let titles: Array<ChapterInter> = []
         let pages: HTMLAnchorElement[] = Array.from(document.querySelectorAll('#chapter_min_list_box > div > div > div.entry > ul > li > a'))
-        log('title is: ', titles)
+        this.log('title is: ', titles)
         const len = pages.length;
         let cur = 0;
         for (let page of pages) {
             let domStr = await fetch(page.href).then(res => res.text())
             titles.push(...parseTitle(domStr))
-            log(`处理目录${cur++}/${len}`)
+            this.log(`处理目录${cur++}/${len}`)
         }
         return titles
 

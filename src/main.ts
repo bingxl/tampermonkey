@@ -30,7 +30,7 @@ sites.some(v => {
     const hosts = v.host.map((h: string) => (new URL(h)).host)
     if (hosts.includes(host) && pathname.match(v.pathMatch)) {
 
-        (new v()).init();
+        new v();
         return true
     }
 })
