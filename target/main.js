@@ -17,7 +17,7 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
 // @updateURL    https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/main.js
-// @downloadURL  https://github.com/bingxl/tampermonkey/raw/main/target/main.js
+// @downloadURL  https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/main.js
 // ==/UserScript==
 
 "use strict";
