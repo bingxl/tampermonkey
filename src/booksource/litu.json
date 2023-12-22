@@ -1,0 +1,52 @@
+{
+    "bookSourceComment": "",
+    "bookSourceGroup": "bingxl,18+,🎨 漫画",
+    "bookSourceName": "🔞🎨丽图·污漫画",
+    "bookSourceType": 2,
+    "bookSourceUrl": "https://litu100.xyz",
+    "customOrder": 400,
+    "enabled": true,
+    "enabledCookieJar": false,
+    "enabledExplore": true,
+    "exploreUrl": "                        更  新  时  间                             \n全部::/comics/{{page}}.html\n连载中::/comics/kk-1/{{page}}.html\n已完结::/comics/kk-2/{{page}}.html\n单行本::/comics/kk-3/{{page}}.html\n韩国::/comics/kk-韩国/{{page}}.html\n日本::/comics/kk-日本/{{page}}.html\n中国::/comics/kk-中国/{{page}}.html\n                       发  布  时  间                           \n全部::/comics/sort-added/{{page}}.html\n连载中::/comics/kk-1/sort-added/{{page}}.html\n已完结::/comics/kk-2/sort-added/{{page}}.html\n单行本::/comics/kk-3/sort-added/{{page}}.html\n韩国::/comics/kk-韩国/sort-added/{{page}}.html\n日本::/comics/kk-日本/sort-added/{{page}}.html\n中国::/comics/kk-中国/sort-added/{{page}}.html                       \n                       浏  览  最  多                         \n今日热漫::/                        \n全部::/comics/sort-read/{{page}}.html\n连载中::/comics/kk-1/sort-read/{{page}}.html\n已完结::/comics/kk-2/sort-read/{{page}}.html\n单行本::/comics/kk-3/sort-read/{{page}}.htm\n韩国::/comics/kk-韩国/sort-read/{{page}}.html\n日本::/comics/kk-日本/sort-read/{{page}}.html\n中国::/comics/kk-中国/sort-read/{{page}}.html\n                         评  论  最  多                         \n全部::/comics/sort-comment/{{page}}.html\n连载中::/comics/kk-1/sort-comment/{{page}}.html\n已完结::/comics/kk-2/sort-comment/{{page}}.html\n单行本::/comics/kk-3/sort-comment/{{page}}.html\n韩国::/comics/kk-韩国/sort-comment/{{page}}.html\n日本::/comics/kk-日本/sort-comment/{{page}}.html\n中国::/comics/kk-中国/sort-comment/{{page}}.html",
+    "lastUpdateTime": 1703190717682,
+    "respondTime": 4695,
+    "ruleBookInfo": {
+        "author": "text.作者：@text",
+        "coverUrl": ".cover@img@src",
+        "intro": "text.简介：@text",
+        "kind": "text.状态：@text",
+        "lastChapter": ".status a@text",
+        "name": ".title"
+    },
+    "ruleContent": {
+        "content": ".comic@img@html@js:\nlet imgs = [];\nlet imgArr = result.split('>');\nimgArr.forEach(v => {\n    // 存在 data-src 则 src 不是真的内容\n    const dataMatch = /data-src=\\\"(\\S+)\\\"/.exec(v)\n    if (dataMatch) {\n        imgs.push(dataMatch[1])\n        return\n    }\n    // data-src 不存在则看src\n    let srcMatch = / src=\\\"(\\S+)\\\"/.exec(v);\n    if (srcMatch) {\n        imgs.push(srcMatch[1])\n        return\n    }\n})\n\nimgs.map(v => `<img src=\"${v}\" />`).join(\"\\n\")",
+        "title": ""
+    },
+    "ruleExplore": {
+        "author": "text.作者：@text",
+        "bookList": ".right a&&.item",
+        "bookUrl": "a@href",
+        "coverUrl": "img@src",
+        "kind": "text.国家：@text",
+        "lastChapter": "div.4,div.5@text##更新：",
+        "name": "a.1@text||div.0@text##\\d*?\\s|\\s"
+    },
+    "ruleReview": {},
+    "ruleSearch": {
+        "author": "text.作者：@text",
+        "bookList": ".item",
+        "bookUrl": "a@href",
+        "coverUrl": "img@src",
+        "kind": "text.国家：@text",
+        "lastChapter": "div.5@text##更新：",
+        "name": "div.4@text"
+    },
+    "ruleToc": {
+        "chapterList": ".chapters a",
+        "chapterName": "text",
+        "chapterUrl": "href"
+    },
+    "searchUrl": "https://litu100.xyz/comics/kk-{{key}}.html",
+    "weight": 0
+}

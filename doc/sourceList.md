@@ -9,6 +9,7 @@
 + [笔趣阁 fangzie](https://m.fangzie.com)
 + [河图文化](https://www.hotupub.net)
 + [狼人小说](https://www.langrenxiaoshuo.com)
++ [🔞🎨丽图·污漫画](https://litu100.xyz)
 + [肉慢屋](http://rouman5.com)
 + [微风小说](https://m.wfxs.tw)
 + [小黄书](https://www.xhszw.com)

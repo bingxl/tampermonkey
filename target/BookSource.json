@@ -1,6 +1,6 @@
 [
     {
-        "bookSourceGroup": "self,18+🈲,🌐",
+        "bookSourceGroup": "bingxl,18+,🌐",
         "bookSourceName": "AK小说",
         "bookSourceType": 0,
         "bookSourceUrl": "https://www.06ak.com",
@@ -48,7 +48,7 @@
         "weight": 0
     },
     {
-        "bookSourceGroup": "self",
+        "bookSourceGroup": "bingxl",
         "bookSourceName": "阿姑小说",
         "bookSourceType": 0,
         "bookSourceUrl": "http://m.aguxs.com",
@@ -91,7 +91,7 @@
     },
     {
         "bookSourceComment": "正文中有些字会用图片替代，所以将图片文字转为文字的拼音",
-        "bookSourceGroup": "self",
+        "bookSourceGroup": "bingxl",
         "bookSourceName": "八毛小说",
         "bookSourceType": 0,
         "bookSourceUrl": "http://m.bamxs.com",
@@ -132,7 +132,7 @@
         "weight": 0
     },
     {
-        "bookSourceGroup": "🎨漫画,self",
+        "bookSourceGroup": "🎨漫画,bingxl",
         "bookSourceName": "包子漫画",
         "bookSourceType": 2,
         "bookSourceUrl": "https://www.baozimh.com",
@@ -181,7 +181,7 @@
         "weight": 0
     },
     {
-        "bookSourceGroup": "self,小说",
+        "bookSourceGroup": "bingxl,小说",
         "bookSourceName": "精品笔趣阁",
         "bookSourceType": 0,
         "bookSourceUrl": "https://bqgjpw.com",
@@ -233,7 +233,7 @@
         "weight": 0
     },
     {
-        "bookSourceGroup": "self,18+🈲",
+        "bookSourceGroup": "bingxl,18+",
         "bookSourceName": "第一版主",
         "bookSourceType": 0,
         "bookSourceUrl": "https://www.diyibanzhu.buzz",
@@ -281,7 +281,7 @@
         "weight": 0
     },
     {
-        "bookSourceGroup": "self",
+        "bookSourceGroup": "bingxl",
         "bookSourceName": "大众文学网",
         "bookSourceType": 0,
         "bookSourceUrl": "https://m.dzwx520.com",
@@ -320,7 +320,7 @@
         "weight": 0
     },
     {
-        "bookSourceGroup": "self",
+        "bookSourceGroup": "bingxl",
         "bookSourceName": "笔趣阁 fangzie",
         "bookSourceType": 0,
         "bookSourceUrl": "https://m.fangzie.com",
@@ -367,7 +367,7 @@
         "weight": 0
     },
     {
-        "bookSourceGroup": "self,18+🈲,🌐",
+        "bookSourceGroup": "bingxl,18+,🌐",
         "bookSourceName": "河图文化",
         "bookSourceType": 0,
         "bookSourceUrl": "https://www.hotupub.net",
@@ -425,7 +425,7 @@
         "weight": 0
     },
     {
-        "bookSourceGroup": "self,18+🈲",
+        "bookSourceGroup": "bingxl,18+",
         "bookSourceName": "狼人小说",
         "bookSourceType": 0,
         "bookSourceUrl": "https://www.langrenxiaoshuo.com",
@@ -470,7 +470,59 @@
         "weight": 0
     },
     {
-        "bookSourceGroup": "self,🎨漫画,18+🈲,🌐",
+        "bookSourceComment": "",
+        "bookSourceGroup": "bingxl,18+,🎨 漫画",
+        "bookSourceName": "🔞🎨丽图·污漫画",
+        "bookSourceType": 2,
+        "bookSourceUrl": "https://litu100.xyz",
+        "customOrder": 400,
+        "enabled": true,
+        "enabledCookieJar": false,
+        "enabledExplore": true,
+        "exploreUrl": "                        更  新  时  间                             \n全部::/comics/{{page}}.html\n连载中::/comics/kk-1/{{page}}.html\n已完结::/comics/kk-2/{{page}}.html\n单行本::/comics/kk-3/{{page}}.html\n韩国::/comics/kk-韩国/{{page}}.html\n日本::/comics/kk-日本/{{page}}.html\n中国::/comics/kk-中国/{{page}}.html\n                       发  布  时  间                           \n全部::/comics/sort-added/{{page}}.html\n连载中::/comics/kk-1/sort-added/{{page}}.html\n已完结::/comics/kk-2/sort-added/{{page}}.html\n单行本::/comics/kk-3/sort-added/{{page}}.html\n韩国::/comics/kk-韩国/sort-added/{{page}}.html\n日本::/comics/kk-日本/sort-added/{{page}}.html\n中国::/comics/kk-中国/sort-added/{{page}}.html                       \n                       浏  览  最  多                         \n今日热漫::/                        \n全部::/comics/sort-read/{{page}}.html\n连载中::/comics/kk-1/sort-read/{{page}}.html\n已完结::/comics/kk-2/sort-read/{{page}}.html\n单行本::/comics/kk-3/sort-read/{{page}}.htm\n韩国::/comics/kk-韩国/sort-read/{{page}}.html\n日本::/comics/kk-日本/sort-read/{{page}}.html\n中国::/comics/kk-中国/sort-read/{{page}}.html\n                         评  论  最  多                         \n全部::/comics/sort-comment/{{page}}.html\n连载中::/comics/kk-1/sort-comment/{{page}}.html\n已完结::/comics/kk-2/sort-comment/{{page}}.html\n单行本::/comics/kk-3/sort-comment/{{page}}.html\n韩国::/comics/kk-韩国/sort-comment/{{page}}.html\n日本::/comics/kk-日本/sort-comment/{{page}}.html\n中国::/comics/kk-中国/sort-comment/{{page}}.html",
+        "lastUpdateTime": 1703190717682,
+        "respondTime": 4695,
+        "ruleBookInfo": {
+            "author": "text.作者：@text",
+            "coverUrl": ".cover@img@src",
+            "intro": "text.简介：@text",
+            "kind": "text.状态：@text",
+            "lastChapter": ".status a@text",
+            "name": ".title"
+        },
+        "ruleContent": {
+            "content": ".comic@img@html@js:\nlet imgs = [];\nlet imgArr = result.split('>');\nimgArr.forEach(v => {\n    // 存在 data-src 则 src 不是真的内容\n    const dataMatch = /data-src=\\\"(\\S+)\\\"/.exec(v)\n    if (dataMatch) {\n        imgs.push(dataMatch[1])\n        return\n    }\n    // data-src 不存在则看src\n    let srcMatch = / src=\\\"(\\S+)\\\"/.exec(v);\n    if (srcMatch) {\n        imgs.push(srcMatch[1])\n        return\n    }\n})\n\nimgs.map(v => `<img src=\"${v}\" />`).join(\"\\n\")",
+            "title": ""
+        },
+        "ruleExplore": {
+            "author": "text.作者：@text",
+            "bookList": ".right a&&.item",
+            "bookUrl": "a@href",
+            "coverUrl": "img@src",
+            "kind": "text.国家：@text",
+            "lastChapter": "div.4,div.5@text##更新：",
+            "name": "a.1@text||div.0@text##\\d*?\\s|\\s"
+        },
+        "ruleReview": {},
+        "ruleSearch": {
+            "author": "text.作者：@text",
+            "bookList": ".item",
+            "bookUrl": "a@href",
+            "coverUrl": "img@src",
+            "kind": "text.国家：@text",
+            "lastChapter": "div.5@text##更新：",
+            "name": "div.4@text"
+        },
+        "ruleToc": {
+            "chapterList": ".chapters a",
+            "chapterName": "text",
+            "chapterUrl": "href"
+        },
+        "searchUrl": "https://litu100.xyz/comics/kk-{{key}}.html",
+        "weight": 0
+    },
+    {
+        "bookSourceGroup": "bingxl,🎨漫画,18+,🌐",
         "bookSourceName": "肉慢屋",
         "bookSourceType": 2,
         "bookSourceUrl": "http://rouman5.com",
@@ -517,7 +569,7 @@
         "weight": 0
     },
     {
-        "bookSourceGroup": "self,18+🈲",
+        "bookSourceGroup": "bingxl,18+",
         "bookSourceName": "微风小说",
         "bookSourceType": 0,
         "bookSourceUrl": "https://m.wfxs.tw",
@@ -569,7 +621,7 @@
     },
     {
         "bookSourceComment": "特别不稳定，使用前先在浏览器中打开 https://www.xhszw.com 看能否进入",
-        "bookSourceGroup": "self,18+🈲,🌐",
+        "bookSourceGroup": "bingxl,18+,🌐",
         "bookSourceName": "小黄书",
         "bookSourceType": 0,
         "bookSourceUrl": "https://www.xhszw.com",
@@ -620,7 +672,7 @@
         "weight": 0
     },
     {
-        "bookSourceGroup": "self,18+🈲",
+        "bookSourceGroup": "bingxl,18+",
         "bookSourceName": "新御书屋",
         "bookSourceType": 0,
         "bookSourceUrl": "https://m.xinyushuwu1.com",
@@ -671,7 +723,7 @@
         "weight": 0
     },
     {
-        "bookSourceGroup": "self",
+        "bookSourceGroup": "bingxl",
         "bookSourceName": "依兰小说",
         "bookSourceType": 0,
         "bookSourceUrl": "https://www.yilanxs.com",
