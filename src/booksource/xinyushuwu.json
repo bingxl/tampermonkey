@@ -3,7 +3,7 @@
     "bookSourceName": "新御书屋",
     "bookSourceType": 0,
     "bookSourceUrl": "https://m.xinyushuwu1.com",
-    "customOrder": 0,
+    "customOrder": 15,
     "enabled": true,
     "enabledCookieJar": true,
     "enabledExplore": true,
@@ -46,6 +46,6 @@
         "chapterUrl": "href",
         "nextTocUrl": ".page@text.下一页@href"
     },
-    "searchUrl": "/s.php,{\n\"method\":\"POST\",\n\"charset\":\"gbk\",\n\"body\":\"s={{java.encodeURI(key,'gbk')}}&type=articlename\"\n}",
+    "searchUrl": "/s.php,{\n\"method\":\"POST\",\n\"body\":\"s={{java.encodeURI(key,'gbk')}}&type=articlename\"\n}",
     "weight": 0
 }
