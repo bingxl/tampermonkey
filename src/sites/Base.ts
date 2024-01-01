@@ -1,4 +1,6 @@
+
 import { downloadTextAsFile, gbk2Utf8, sleep } from '../tool/misc';
+import { IDB } from '../tool/idbSample';
 
 // @ts-ignore
 import domStr from '../show.html'
@@ -26,6 +28,10 @@ export class Base {
 
 
     log: (...infos: any[]) => void;
+
+    /**存储到localForage中的 key 值, 下载时查找所有keyPath 对应的值 */
+    keyPath: string[] = [];
+    store!: IDB;
 
     // 挂载到文档中的DOM结构 和 时间监听处理
     constructor() {
@@ -63,7 +69,17 @@ export class Base {
         }
     }
 
-
+    /**
+     * 将章节内容存储到 缓存区 (indexedDB/ webSQL/ localStorage/ sessionStorage) 
+     * @param {number} index 当前存储数据在 keyPath 中的排序
+     * @param {string} keyPath key
+     */
+    async storeContent(index: number, key: string, content: string) {
+        this.keyPath[index] = key;
+        await this.store.setItem(key, content).catch(e => {
+            console.error(e)
+        })
+    }
 
     /**
      * 获取小说内容,返回文档编码方式需要处理
@@ -143,24 +159,37 @@ export class Base {
         this.log("执行下载函数");
         // 小说名
         const article = document.querySelector<HTMLElement>(this.title)?.textContent ?? "";
+        this.store = new IDB();
+        await this.clear();
+
+        // 小说名存最前面
+        let articleKey = '' + Date.now()
+        this.storeContent(0, articleKey, article);
 
         const titles = (await this.getTitles().catch(console.error)) ?? [];
 
-        // 存放每章的内容
-        let contents: string[] = []
-        let tasks = new Set()
-        let currentTaskNum = 0
+        let tasks = new Set();
+        let currentTaskNum = 0;
         for (let i = 0; i < titles.length; i++) {
-            let a = titles[i]
+            let a = titles[i];
+
+            // 存储当前顺序的 keyPath
+            let key = `${article}${Date.now()}-${i}`;
+
             if (tasks.size >= this.taskMax) {
                 // 任务并发控制, 达到最大值时等待
-                await Promise.any(tasks.values())
+                await Promise.any(tasks.values());
             }
 
             let task = new Promise((resolve, reject) => {
-                this.pages(a.href).then(res => {
-                    // 将章节内容存入contents
-                    contents[i] = `\n${a.textContent}\n${res}`;
+                this.pages(a.href).then(async res => {
+                    // 将章节内容缓存
+
+                    const content = `\n${a.textContent}\n${res}`;
+
+                    // 第0 个存放小说名称了
+                    await this.storeContent(i + 1, key, content)
+
                     this.log(`${++currentTaskNum}/${titles.length} ${a.textContent}`);
                     resolve("");
                 }).catch(err => {
@@ -182,14 +211,51 @@ export class Base {
 
         // 等待所有任务执行完成
         await Promise.all(tasks.values());
+        await this.startDownload(article);
 
-        downloadTextAsFile(article + "\n" + contents.join('\n'), article);
+        // 清除本次存储的数据, 并关闭 indexedDB连接
+        await this.clear();
+        this.store?.close();
 
         return false
     }
+    /**
+     * 清除缓存到 store 中的内容
+     */
+    async clear() {
+        for (const key of this.keyPath) {
+            await this.store.removeItem(key);
+        }
+    }
 
+    /**小说内容已缓存完成, 开始导出 */
+    async startDownload(article: string) {
+        const blobOptions: BlobPropertyBag = { type: "text/plain;charset=utf-8", endings: "native" };
+        /**拷贝 keyPath  */
+        const keyPath = [...this.keyPath];
+        let batchSize = 30;
+        let hasNext = true;
+        let blobs = [];
+        /** 分批次转为 blob  */
+        while (hasNext) {
+            // 获取当前 batch 的数据 splice(index, size), 将从index开始的size个数据删除并返回删除的内容
+            // 此处 splice(0, batchSize) 恰好提取前面 batchSize个数据
+            const batchKeys = keyPath.splice(0, batchSize);
+            let strings: string[] = [];
+            for (const key of batchKeys) {
+                let result = (await this.store.getItem(key) as string);
+                strings.push(result ?? "")
+            }
 
+            blobs.push(new Blob([...strings], blobOptions));
 
+            if (keyPath.length <= 0) {
+                hasNext = false;
+            }
+        }
 
+        let contentBlob = new Blob(blobs, blobOptions)
+        downloadTextAsFile(contentBlob, article);
+    }
 
 }

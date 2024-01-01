@@ -1,11 +1,16 @@
 /**
  * 将字符串下载为文件
- * @param {string} text 文件内容
+ * @param {string} content 文件内容
  * @param {string} filename 文件名
  */
-export function downloadTextAsFile(text: string, filename: string) {
+export function downloadTextAsFile(content: string | Blob, filename: string) {
     // 创建一个 Blob 实例
-    const blob = new Blob([text], { type: "text/plain;charset=utf-8", endings: "native" });
+    let blob: Blob;
+    if (typeof content === "string") {
+        blob = new Blob([content], { type: "text/plain;charset=utf-8", endings: "native" });
+    } else {
+        blob = content;
+    }
 
     // 创建一个 a 标签并设置属性
     const a = document.createElement("a");

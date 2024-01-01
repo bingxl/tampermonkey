@@ -18,13 +18,14 @@ async function build() {
         // 脚本版本
         function version() {
             const date = new Date();
-            const [hour, month, dayOfMonth, year] = [
+            const pad = (v) => `${v}`.padStart(2, '0');
+            let [hour, month, dayOfMonth, year] = [
                 date.getHours(),
                 date.getMonth(),
                 date.getDate(),
                 date.getFullYear(),
             ];
-            return `${year}${month + 1}${dayOfMonth}${hour}`
+            return `${year}${pad(month + 1)}${pad(dayOfMonth)}${pad(hour)}`
         }
 
         const results = sites.map(v => `// @match        ${v.href}`).join('\n');
@@ -86,6 +87,7 @@ ${results}
         bundle: true,
         charset: "utf8",
         target: "esnext",
+        format: "iife",
         banner: { js: getBanner(siteNames) },
         loader: {
             ".html": 'text'

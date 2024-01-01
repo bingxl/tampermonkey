@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         小说下载
 // @namespace    http://tampermonkey.net/
-// @version      202312221
+// @version      2024010121
 // @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
 // @author       bingxl
 // @homepage     https://github.com/bingxl/tampermonkey
@@ -23,8 +23,13 @@
 "use strict";
 (() => {
   // src/tool/misc.ts
-  function downloadTextAsFile(text, filename) {
-    const blob = new Blob([text], { type: "text/plain;charset=utf-8", endings: "native" });
+  function downloadTextAsFile(content, filename) {
+    let blob;
+    if (typeof content === "string") {
+      blob = new Blob([content], { type: "text/plain;charset=utf-8", endings: "native" });
+    } else {
+      blob = content;
+    }
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = filename;
@@ -44,6 +49,86 @@
     const decode = new TextDecoder("gbk");
     return decode.decode(buffer);
   }
+
+  // src/tool/idbSample.ts
+  var IDB = class {
+    constructor({ dbName = "IDBSample", storeName = "IDBSampleStore", version = 1 } = {}) {
+      this.version = 1;
+      this.dbName = dbName;
+      this.storeName = storeName;
+      this.version = version;
+    }
+    async init() {
+      if (!this.db) {
+        return new Promise((resolve, reject) => {
+          const request = indexedDB.open(this.dbName, this.version);
+          request.onerror = (err) => {
+            console.error(err);
+            reject(err);
+          };
+          request.onsuccess = () => {
+            this.db = request.result;
+            resolve("");
+          };
+          request.onupgradeneeded = () => {
+            const db = request.result;
+            db.createObjectStore(this.storeName);
+          };
+        });
+      }
+    }
+    async setItem(key, value) {
+      if (!this.db) {
+        await this.init();
+      }
+      ;
+      return new Promise((resolve, reject) => {
+        const request = this.db.transaction([this.storeName], "readwrite").objectStore(this.storeName).add(value, key);
+        request.onerror = (err) => {
+          console.error(err);
+          reject(err);
+        };
+        request.onsuccess = () => {
+          resolve("");
+        };
+      });
+    }
+    async getItem(key) {
+      if (!this.db) {
+        await this.init();
+      }
+      ;
+      return new Promise((resolve, reject) => {
+        const request = this.db.transaction([this.storeName], "readonly").objectStore(this.storeName).get(key);
+        request.onerror = (err) => {
+          console.error(err);
+          reject(err);
+        };
+        request.onsuccess = () => {
+          resolve(request.result);
+        };
+      });
+    }
+    async removeItem(key) {
+      if (!this.db) {
+        await this.init();
+      }
+      ;
+      return new Promise((resolve, reject) => {
+        const request = this.db.transaction([this.storeName], "readwrite").objectStore(this.storeName).delete(key);
+        request.onerror = (err) => {
+          console.error(err);
+          reject(err);
+        };
+        request.onsuccess = () => {
+          resolve("");
+        };
+      });
+    }
+    close() {
+      this.db?.close();
+    }
+  };
 
   // src/show.html
   var show_default = '<div id="bingxl-root">\r\n\r\n    <style>\r\n        #bingxl-root {\r\n            position: fixed;\r\n            top: 20px;\r\n            right: 20px;\r\n            background-color: cornsilk;\r\n            max-width: 200px;\r\n\r\n        }\r\n\r\n        .log {\r\n            max-height: 250px;\r\n            overflow-y: scroll;\r\n        }\r\n    </style>\r\n\r\n\r\n    <p><button class="download">下载</button> | <button class="clear">清除日志</button></p>\r\n\r\n\r\n    <section class="log">\r\n\r\n    </section>\r\n\r\n</div>';
@@ -70,6 +155,8 @@
       this.sleepTime = 0;
       /** 同时获取数据的最大值 (并发量控制) */
       this.taskMax = 20;
+      /**存储到localForage中的 key 值, 下载时查找所有keyPath 对应的值 */
+      this.keyPath = [];
       const parser = new DOMParser();
       const root = parser.parseFromString(show_default, "text/html");
       document.body.append(root.querySelector("#bingxl-root") ?? "");
@@ -91,6 +178,17 @@
           logContainer.appendChild(p);
         }
       };
+    }
+    /**
+     * 将章节内容存储到 缓存区 (indexedDB/ webSQL/ localStorage/ sessionStorage) 
+     * @param {number} index 当前存储数据在 keyPath 中的排序
+     * @param {string} keyPath key
+     */
+    async storeContent(index, key, content) {
+      this.keyPath[index] = key;
+      await this.store.setItem(key, content).catch((e) => {
+        console.error(e);
+      });
     }
     /**
      * 获取小说内容,返回文档编码方式需要处理
@@ -161,20 +259,25 @@
       e?.preventDefault();
       this.log("执行下载函数");
       const article = document.querySelector(this.title)?.textContent ?? "";
+      this.store = new IDB();
+      await this.clear();
+      let articleKey = "" + Date.now();
+      this.storeContent(0, articleKey, article);
       const titles = await this.getTitles().catch(console.error) ?? [];
-      let contents = [];
       let tasks = /* @__PURE__ */ new Set();
       let currentTaskNum = 0;
       for (let i = 0; i < titles.length; i++) {
         let a = titles[i];
+        let key = `${article}${Date.now()}-${i}`;
         if (tasks.size >= this.taskMax) {
           await Promise.any(tasks.values());
         }
         let task = new Promise((resolve, reject) => {
-          this.pages(a.href).then((res) => {
-            contents[i] = `
+          this.pages(a.href).then(async (res) => {
+            const content = `
 ${a.textContent}
 ${res}`;
+            await this.storeContent(i + 1, key, content);
             this.log(`${++currentTaskNum}/${titles.length} ${a.textContent}`);
             resolve("");
           }).catch((err) => {
@@ -190,8 +293,40 @@ ${res}`;
         }
       }
       await Promise.all(tasks.values());
-      downloadTextAsFile(article + "\n" + contents.join("\n"), article);
+      await this.startDownload(article);
+      await this.clear();
+      this.store?.close();
       return false;
+    }
+    /**
+     * 清除缓存到 store 中的内容
+     */
+    async clear() {
+      for (const key of this.keyPath) {
+        await this.store.removeItem(key);
+      }
+    }
+    /**小说内容已缓存完成, 开始导出 */
+    async startDownload(article) {
+      const blobOptions = { type: "text/plain;charset=utf-8", endings: "native" };
+      const keyPath = [...this.keyPath];
+      let batchSize = 30;
+      let hasNext = true;
+      let blobs = [];
+      while (hasNext) {
+        const batchKeys = keyPath.splice(0, batchSize);
+        let strings = [];
+        for (const key of batchKeys) {
+          let result = await this.store.getItem(key);
+          strings.push(result ?? "");
+        }
+        blobs.push(new Blob([...strings], blobOptions));
+        if (keyPath.length <= 0) {
+          hasNext = false;
+        }
+      }
+      let contentBlob = new Blob(blobs, blobOptions);
+      downloadTextAsFile(contentBlob, article);
     }
   };
 
