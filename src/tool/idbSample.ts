@@ -13,6 +13,7 @@ export class IDB {
         this.version = version;
     }
 
+    /**打开数据库 */
     async init() {
         if (!this.db) {
             return new Promise((resolve, reject) => {
@@ -34,6 +35,7 @@ export class IDB {
         }
     }
 
+    /**存放值 */
     async setItem(key: string, value: any) {
         if (!this.db) { await this.init() };
 
@@ -51,6 +53,7 @@ export class IDB {
         })
     }
 
+    /**获取值 */
     async getItem(key: string) {
         if (!this.db) { await this.init() };
         return new Promise((resolve, reject) => {
@@ -67,6 +70,7 @@ export class IDB {
         });
     }
 
+    /**移除值 */
     async removeItem(key: string) {
         if (!this.db) { await this.init() };
         return new Promise((resolve, reject) => {
@@ -83,7 +87,13 @@ export class IDB {
         });
     }
 
+    /**关闭数据库连接 */
     close() {
         this.db?.close();
+    }
+    /**删除数据库 */
+    destroy() {
+        this.db?.close();
+        window.indexedDB.deleteDatabase(this.dbName);
     }
 }

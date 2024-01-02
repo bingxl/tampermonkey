@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         小说下载
 // @namespace    http://tampermonkey.net/
-// @version      2024010121
+// @version      2024010223
 // @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
 // @author       bingxl
 // @homepage     https://github.com/bingxl/tampermonkey
@@ -58,6 +58,7 @@
       this.storeName = storeName;
       this.version = version;
     }
+    /**打开数据库 */
     async init() {
       if (!this.db) {
         return new Promise((resolve, reject) => {
@@ -77,6 +78,7 @@
         });
       }
     }
+    /**存放值 */
     async setItem(key, value) {
       if (!this.db) {
         await this.init();
@@ -93,6 +95,7 @@
         };
       });
     }
+    /**获取值 */
     async getItem(key) {
       if (!this.db) {
         await this.init();
@@ -109,6 +112,7 @@
         };
       });
     }
+    /**移除值 */
     async removeItem(key) {
       if (!this.db) {
         await this.init();
@@ -125,13 +129,19 @@
         };
       });
     }
+    /**关闭数据库连接 */
     close() {
       this.db?.close();
+    }
+    /**删除数据库 */
+    destroy() {
+      this.db?.close();
+      window.indexedDB.deleteDatabase(this.dbName);
     }
   };
 
   // src/show.html
-  var show_default = '<div id="bingxl-root">\r\n\r\n    <style>\r\n        #bingxl-root {\r\n            position: fixed;\r\n            top: 20px;\r\n            right: 20px;\r\n            background-color: cornsilk;\r\n            max-width: 200px;\r\n\r\n        }\r\n\r\n        .log {\r\n            max-height: 250px;\r\n            overflow-y: scroll;\r\n        }\r\n    </style>\r\n\r\n\r\n    <p><button class="download">下载</button> | <button class="clear">清除日志</button></p>\r\n\r\n\r\n    <section class="log">\r\n\r\n    </section>\r\n\r\n</div>';
+  var show_default = '<div id="bingxl-root">\r\n\r\n    <style>\r\n        #bingxl-root {\r\n            position: fixed;\r\n            top: 20px;\r\n            right: 20px;\r\n            background-color: cornsilk;\r\n\r\n        }\r\n\r\n        #bingxl-root .container {\r\n            width: 150px;\r\n            cursor: grab;\r\n        }\r\n\r\n        #bingxl-root .container.hidden {\r\n            width: 0;\r\n            height: 0;\r\n        }\r\n\r\n        header {\r\n            display: flex;\r\n            justify-content: space-around;\r\n\r\n        }\r\n\r\n        .log {\r\n            max-height: 250px;\r\n            overflow-y: scroll;\r\n            width: 150px;\r\n            overflow-x: hidden;\r\n        }\r\n    </style>\r\n\r\n\r\n    <section class="toggle">收起</section>\r\n    <div class="container">\r\n        <header class="header"><button class="download">下载</button> <button class="clear">清除日志</button></header>\r\n        <progress value="0" class="progress"></progress>\r\n\r\n        <section>\r\n            <pre class="log">\r\n\r\n        </pre>\r\n        </section>\r\n    </div>\r\n\r\n</div>';
 
   // src/sites/Base.ts
   var Base = class {
@@ -154,30 +164,57 @@
       /** 获取内容间隔 单位:ms 短时间有太多次请求时有些网站会采取限制策略, 故设置间隔时间*/
       this.sleepTime = 0;
       /** 同时获取数据的最大值 (并发量控制) */
-      this.taskMax = 20;
+      this.taskMax = 3;
       /**存储到localForage中的 key 值, 下载时查找所有keyPath 对应的值 */
       this.keyPath = [];
-      const parser = new DOMParser();
-      const root = parser.parseFromString(show_default, "text/html");
-      document.body.append(root.querySelector("#bingxl-root") ?? "");
-      document.querySelector("#bingxl-root .download")?.addEventListener("click", (e) => this.run(e));
-      const logContainer = document.querySelector("#bingxl-root .log");
-      document.querySelector("#bingxl-root .clear")?.addEventListener("click", (e) => {
-        if (logContainer) {
-          logContainer.innerHTML = "";
-        }
-      });
-      this.log = (...infos) => {
-        if (logContainer) {
-          const p = document.createElement("p");
-          infos.forEach((v) => {
-            const span = document.createElement("span");
-            span.innerText = v;
-            p.appendChild(span);
+      // 使用箭头函数绑定this
+      this.run = async (e) => {
+        e?.preventDefault();
+        this.log("执行下载函数");
+        const article = document.querySelector(this.title)?.textContent ?? "";
+        this.store = new IDB({ dbName: article || "小说名" });
+        await this.clear();
+        let articleKey = "" + Date.now();
+        this.storeContent(0, articleKey, article);
+        const titles = await this.getTitles().catch(console.error) ?? [];
+        let tasks = /* @__PURE__ */ new Set();
+        let currentTaskNum = 0;
+        for (let i = 0; i < titles.length; i++) {
+          let a = titles[i];
+          let key = `${article}${Date.now()}-${i}`;
+          if (tasks.size >= this.taskMax) {
+            await Promise.any(tasks.values()).catch(console.error);
+          }
+          let task = new Promise((resolve, reject) => {
+            this.pages(a.href).then(async (res) => {
+              const content = `
+${a.textContent}
+${res}`;
+              await this.storeContent(i + 1, key, content);
+              this.log(`${++currentTaskNum}/${titles.length} ${a.textContent}`);
+              this.progressEvent(currentTaskNum / titles.length);
+              resolve("");
+            }).catch((err) => {
+              console.error(err);
+              reject(err);
+            }).finally(() => {
+              tasks.delete(task);
+            });
           });
-          logContainer.appendChild(p);
+          tasks.add(task);
+          if (this.sleepTime) {
+            sleep(this.sleepTime);
+          }
         }
+        await Promise.allSettled(tasks.values()).catch(console.error);
+        await startDownload(article, [...this.keyPath], this.store);
+        await this.clear();
+        this.store.destroy();
+        return false;
       };
+      const ui = new Ui(this.run);
+      this.log = ui.log;
+      this.progressEvent = ui.progress;
     }
     /**
      * 将章节内容存储到 缓存区 (indexedDB/ webSQL/ localStorage/ sessionStorage) 
@@ -255,78 +292,79 @@
         return { href: v.href, textContent: v.textContent };
       });
     }
-    async run(e) {
-      e?.preventDefault();
-      this.log("执行下载函数");
-      const article = document.querySelector(this.title)?.textContent ?? "";
-      this.store = new IDB();
-      await this.clear();
-      let articleKey = "" + Date.now();
-      this.storeContent(0, articleKey, article);
-      const titles = await this.getTitles().catch(console.error) ?? [];
-      let tasks = /* @__PURE__ */ new Set();
-      let currentTaskNum = 0;
-      for (let i = 0; i < titles.length; i++) {
-        let a = titles[i];
-        let key = `${article}${Date.now()}-${i}`;
-        if (tasks.size >= this.taskMax) {
-          await Promise.any(tasks.values());
-        }
-        let task = new Promise((resolve, reject) => {
-          this.pages(a.href).then(async (res) => {
-            const content = `
-${a.textContent}
-${res}`;
-            await this.storeContent(i + 1, key, content);
-            this.log(`${++currentTaskNum}/${titles.length} ${a.textContent}`);
-            resolve("");
-          }).catch((err) => {
-            console.error(err);
-            reject(err);
-          }).finally(() => {
-            tasks.delete(task);
-          });
-        });
-        tasks.add(task);
-        if (this.sleepTime) {
-          sleep(this.sleepTime);
-        }
-      }
-      await Promise.all(tasks.values());
-      await this.startDownload(article);
-      await this.clear();
-      this.store?.close();
-      return false;
-    }
     /**
      * 清除缓存到 store 中的内容
      */
     async clear() {
       for (const key of this.keyPath) {
-        await this.store.removeItem(key);
+        if (!key)
+          continue;
+        await this.store.removeItem(key).catch(console.error);
       }
     }
-    /**小说内容已缓存完成, 开始导出 */
-    async startDownload(article) {
-      const blobOptions = { type: "text/plain;charset=utf-8", endings: "native" };
-      const keyPath = [...this.keyPath];
-      let batchSize = 30;
-      let hasNext = true;
-      let blobs = [];
-      while (hasNext) {
-        const batchKeys = keyPath.splice(0, batchSize);
-        let strings = [];
-        for (const key of batchKeys) {
-          let result = await this.store.getItem(key);
-          strings.push(result ?? "");
-        }
-        blobs.push(new Blob([...strings], blobOptions));
-        if (keyPath.length <= 0) {
-          hasNext = false;
+  };
+  async function startDownload(article, keyPath, store) {
+    const blobOptions = { type: "text/plain;charset=utf-8", endings: "native" };
+    let batchSize = 30;
+    let hasNext = true;
+    let blobs = [];
+    while (hasNext) {
+      const batchKeys = keyPath.splice(0, batchSize);
+      let strings = [];
+      for (const key of batchKeys) {
+        let result = await store.getItem(key).catch(() => "");
+        if (result) {
+          strings.push(result);
         }
       }
-      let contentBlob = new Blob(blobs, blobOptions);
-      downloadTextAsFile(contentBlob, article);
+      blobs.push(new Blob([...strings], blobOptions));
+      if (keyPath.length <= 0) {
+        hasNext = false;
+      }
+    }
+    let contentBlob = new Blob(blobs, blobOptions);
+    downloadTextAsFile(contentBlob, article);
+  }
+  var Ui = class {
+    constructor(run) {
+      this.logs = [];
+      // 进度条事件处理
+      this.progress = (value) => {
+        if (this.progressContainer) {
+          this.progressContainer.value = value;
+        }
+      };
+      this.log = (...infos) => {
+        this.logs.unshift(...infos);
+        if (this.logContainer) {
+          this.logContainer.innerText = this.logs.slice(0, 10).join("\n");
+        }
+      };
+      const parser = new DOMParser();
+      const root = parser.parseFromString(show_default, "text/html");
+      document.body.append(root.querySelector("#bingxl-root") ?? "");
+      this.initListen(run);
+    }
+    initListen(run) {
+      this.root = document.querySelector("#bingxl-root");
+      this.root?.querySelector(".download")?.addEventListener("click", (e) => run(e));
+      this.logContainer = this.root?.querySelector(".log") ?? null;
+      this.progressContainer = this.root?.querySelector(".progress") ?? null;
+      this.root?.querySelector(".clear")?.addEventListener("click", (e) => {
+        if (this.logContainer) {
+          this.logContainer.innerHTML = "";
+        }
+      });
+      this.root?.querySelector(".toggle")?.addEventListener("click", () => {
+        const text = this.root?.querySelector(".toggle")?.textContent;
+        if (text === "收起") {
+          this.root.querySelector(".toggle").textContent = "展开";
+          this.root.querySelector(".container").classList.add("hidden");
+        } else {
+          this.root.querySelector(".toggle").textContent = "收起";
+          this.root.querySelector(".container").classList.remove("hidden");
+        }
+      });
     }
   };
 

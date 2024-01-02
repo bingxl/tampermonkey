@@ -6,22 +6,44 @@
             top: 20px;
             right: 20px;
             background-color: cornsilk;
-            max-width: 200px;
+
+        }
+
+        #bingxl-root .container {
+            width: 150px;
+            cursor: grab;
+        }
+
+        #bingxl-root .container.hidden {
+            width: 0;
+            height: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-around;
 
         }
 
         .log {
             max-height: 250px;
             overflow-y: scroll;
+            width: 150px;
+            overflow-x: hidden;
         }
     </style>
 
 
-    <p><button class="download">下载</button> | <button class="clear">清除日志</button></p>
+    <section class="toggle">收起</section>
+    <div class="container">
+        <header class="header"><button class="download">下载</button> <button class="clear">清除日志</button></header>
+        <progress value="0" class="progress"></progress>
 
+        <section>
+            <pre class="log">
 
-    <section class="log">
-
-    </section>
+        </pre>
+        </section>
+    </div>
 
 </div>
