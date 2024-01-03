@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         小说下载
 // @namespace    http://tampermonkey.net/
-// @version      2024010223
+// @version      2024010314
 // @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
 // @author       bingxl
 // @homepage     https://github.com/bingxl/tampermonkey
@@ -141,7 +141,7 @@
   };
 
   // src/show.html
-  var show_default = '<div id="bingxl-root">\r\n\r\n    <style>\r\n        #bingxl-root {\r\n            position: fixed;\r\n            top: 20px;\r\n            right: 20px;\r\n            background-color: cornsilk;\r\n\r\n        }\r\n\r\n        #bingxl-root .container {\r\n            width: 150px;\r\n            cursor: grab;\r\n        }\r\n\r\n        #bingxl-root .container.hidden {\r\n            width: 0;\r\n            height: 0;\r\n        }\r\n\r\n        header {\r\n            display: flex;\r\n            justify-content: space-around;\r\n\r\n        }\r\n\r\n        .log {\r\n            max-height: 250px;\r\n            overflow-y: scroll;\r\n            width: 150px;\r\n            overflow-x: hidden;\r\n        }\r\n    </style>\r\n\r\n\r\n    <section class="toggle">收起</section>\r\n    <div class="container">\r\n        <header class="header"><button class="download">下载</button> <button class="clear">清除日志</button></header>\r\n        <progress value="0" class="progress"></progress>\r\n\r\n        <section>\r\n            <pre class="log">\r\n\r\n        </pre>\r\n        </section>\r\n    </div>\r\n\r\n</div>';
+  var show_default = '<div id="bingxl-root">\r\n\r\n    <style>\r\n        #bingxl-root {\r\n            position: fixed;\r\n            top: 20px;\r\n            right: 20px;\r\n            background-color: cornsilk;\r\n\r\n        }\r\n\r\n        #bingxl-root .container {\r\n            width: 150px;\r\n        }\r\n\r\n        #bingxl-root .container.hidden {\r\n            width: 0;\r\n            height: 0;\r\n        }\r\n\r\n        header {\r\n            display: flex;\r\n            justify-content: space-around;\r\n        }\r\n\r\n        .log {\r\n            max-height: 250px;\r\n            overflow-y: scroll;\r\n            width: 150px;\r\n            overflow-x: hidden;\r\n        }\r\n    </style>\r\n\r\n\r\n    <section class="toggle">收起</section>\r\n    <div class="container">\r\n        <header class="header"><button class="download">下载</button> <button class="clear">清除日志</button></header>\r\n        <progress value="0" class="progress"></progress>\r\n\r\n        <section>\r\n            <pre class="log">\r\n\r\n        </pre>\r\n        </section>\r\n    </div>\r\n\r\n</div>';
 
   // src/sites/Base.ts
   var Base = class {
