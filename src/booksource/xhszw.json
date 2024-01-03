@@ -1,7 +1,7 @@
 {
     "bookSourceComment": "特别不稳定，使用前先在浏览器中打开 https://www.xhszw.com 看能否进入",
     "bookSourceGroup": "bingxl,18+,🌐",
-    "bookSourceName": "小黄书",
+    "bookSourceName": "xhszw",
     "bookSourceType": 0,
     "bookSourceUrl": "https://www.xhszw.com",
     "customOrder": 0,
@@ -15,7 +15,7 @@
         "author": "[property=\"og:novel:author\"]@content",
         "coverUrl": "class.bookcover@tag.img@src",
         "init": "",
-        "intro": ".bookintro@text##小黄书实时更新\\S*",
+        "intro": ".bookintro@text##实时更新\\S*",
         "kind": "[property=\"og:novel:category\"]@content",
         "lastChapter": "[property=\"og:novel:lastest_chapter_name\"]@content",
         "name": "[property=\"og:novel:book_name\"]@content",
@@ -28,7 +28,7 @@
         "author": "class.author.0@text",
         "bookList": ".bookinfo",
         "bookUrl": "a.0@href",
-        "intro": ".update@text##小黄书实时更新\\S*",
+        "intro": ".update@text##实时更新\\S*",
         "lastChapter": ".cat@tag.a@text",
         "name": ".bookname@tag.a@text"
     },
@@ -37,7 +37,7 @@
         "author": "class.author.0@text",
         "bookList": ".bookinfo",
         "bookUrl": "a.0@href",
-        "intro": ".update@text##小黄书实时更新\\S*",
+        "intro": ".update@text##实时更新\\S*",
         "lastChapter": "a.1@text",
         "name": "a.0@text"
     },
