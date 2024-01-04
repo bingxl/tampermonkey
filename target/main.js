@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         小说下载
 // @namespace    http://tampermonkey.net/
-// @version      2024010314
+// @version      2024010414
 // @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
 // @author       bingxl
 // @homepage     https://github.com/bingxl/tampermonkey
@@ -162,9 +162,9 @@
       /** 书籍目录页面 匹配正则 location.pathname.match() */
       this.matchReg = "";
       /** 获取内容间隔 单位:ms 短时间有太多次请求时有些网站会采取限制策略, 故设置间隔时间*/
-      this.sleepTime = 0;
+      this.sleepTime = 2;
       /** 同时获取数据的最大值 (并发量控制) */
-      this.taskMax = 3;
+      this.taskMax = 2;
       /**存储到localForage中的 key 值, 下载时查找所有keyPath 对应的值 */
       this.keyPath = [];
       // 使用箭头函数绑定this

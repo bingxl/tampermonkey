@@ -4,6 +4,7 @@
 		"booksource": "node build.js --task booksource"
 	},
 	"dependencies": {
-		"esbuild": "^0.19.7"
+		"esbuild": "^0.19.7",
+		"node-fetch": "^3.3.2"
 	}
 }

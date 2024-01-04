@@ -22,9 +22,9 @@ export class Base {
     /** 书籍目录页面 匹配正则 location.pathname.match() */
     matchReg = '';
     /** 获取内容间隔 单位:ms 短时间有太多次请求时有些网站会采取限制策略, 故设置间隔时间*/
-    sleepTime = 0;
+    sleepTime = 2;
     /** 同时获取数据的最大值 (并发量控制) */
-    taskMax = 3;
+    taskMax = 2;
 
 
     log: (...infos: any[]) => void;
