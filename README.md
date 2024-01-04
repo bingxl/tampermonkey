@@ -46,7 +46,7 @@ https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/BookSource.jso
 https://raw.githubusercontent.com/bingxl/tampermonkey/main/sources/legadoBookSource.json
 ```
 
-过滤过的源 包含 (名著|正版|出版|国外经典|推荐)且排除(辣文|高辣|韩漫)
+过滤过的源 包含 (名著|正版|出版|国外经典)且排除(辣文|高辣|韩漫)
 
 ```
 https://raw.githubusercontent.com/bingxl/tampermonkey/main/sources/filtered-legado.json

@@ -52,12 +52,14 @@ async function filters({ sourceUrl = "./sources/legadoBookSource.json", key = ""
 
 
     // 书源名/分组/发现 中包含下列文字 
-    const include = /(名著|正版|出版|国外经典|推荐)/;
+    const include = /(名著|正版|出版|国外经典)/;
     // 书源名/分组/发现 中不包含下列文字 
     const pass = /(辣文|高辣|韩漫)/;
 
     const filteredResources = sources.filter(source => {
         const { bookSourceName, bookSourceGroup, exploreUrl } = source;
+        if (bookSourceGroup.includes("推荐")) { return true }
+
         const result = bookSourceGroup + bookSourceName + exploreUrl
         return include.test(result) && !pass.test(result);
     });
