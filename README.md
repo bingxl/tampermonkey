@@ -40,6 +40,18 @@ https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/main.js
 https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/BookSource.json
 ```
 
+原始未处理的书源, 比较多, 接近 2000 多个
+
+```
+https://raw.githubusercontent.com/bingxl/tampermonkey/main/sources/legadoBookSource.json
+```
+
+过滤过的源 包含 (名著|正版|出版|国外经典|推荐)且排除(辣文|高辣|韩漫)
+
+```
+https://raw.githubusercontent.com/bingxl/tampermonkey/main/sources/filtered-legador.json
+```
+
 已完成小说列表
 
 - [AK 小说](https://www.06ak.com)
