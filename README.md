@@ -8,7 +8,7 @@
 打开 tampermonkey 面板 -> 实用工具 -> 从 URL 安装, 输入
 
 ```
-https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/main.js
+https://raw.githubusercontent.com/bingxl/tampermonkey/main/site-download/target/main.js
 ```
 
 后点击安装
@@ -36,20 +36,16 @@ https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/main.js
 
 在软件中使用网络导入, 导入 url
 
-```
-https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/BookSource.json
-```
-
 原始未处理的书源, 比较多, 接近 2000 多个
 
 ```
-https://raw.githubusercontent.com/bingxl/tampermonkey/main/sources/legadoBookSource.json
+https://raw.githubusercontent.com/bingxl/tampermonkey/main/booksource/legadoBookSource.json
 ```
 
 过滤过的源 包含 (名著|正版|出版|国外经典)且排除(辣文|高辣|韩漫)
 
 ```
-https://raw.githubusercontent.com/bingxl/tampermonkey/main/sources/filtered-legado.json
+https://raw.githubusercontent.com/bingxl/tampermonkey/main/booksource/target/filtered-legado.json
 ```
 
 已完成小说列表
@@ -69,18 +65,12 @@ https://raw.githubusercontent.com/bingxl/tampermonkey/main/sources/filtered-lega
 
 [点此查看更多具体书源](/doc/sourceList.md)
 
-## 文本转简体
-
-将`txt`文件放到 `./txt` 目录下, 运行 `node ts.js`
-
 ## 新增/编辑下载网站方式
 
-新增/修改具体网站的内容 到 `./src/sites/` 下编辑
+新增/修改具体网站的内容 到 `./site-download/sites/` 下编辑
 
 构建: `npm run build` 或 `node build.js`
 
 ## 书源编辑方法
-
-编辑书源时先到 `src/booksource/`下找到对应 json 文件进行编辑或新增 json 文件; `target/BookSource.json`文件都是程序生成的,请吴在此编辑.
 
 生成书源命令 `pnpm run booksource`

@@ -1,7 +1,7 @@
 {
 	"scripts": {
-		"build": "node build.js",
-		"booksource": "node build.js --task booksource"
+		"build": "node site-download/cmd/build.js",
+		"booksource": "node booksource/sourceHandle.mjs"
 	},
 	"dependencies": {
 		"esbuild": "^0.19.7",

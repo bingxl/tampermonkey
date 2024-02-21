@@ -16,13 +16,13 @@
 // @match        https://wx.tianyabooks.com/book/*/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
-// @updateURL    https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/main.js
-// @downloadURL  https://raw.githubusercontent.com/bingxl/tampermonkey/main/target/main.js
+// @updateURL    https://raw.githubusercontent.com/bingxl/tampermonkey/main/site-download/target/main.js
+// @downloadURL  https://raw.githubusercontent.com/bingxl/tampermonkey/main/site-downnload/target/main.js
 // ==/UserScript==
 
 "use strict";
 (() => {
-  // src/tool/misc.ts
+  // site-download/tool/misc.ts
   function downloadTextAsFile(content, filename) {
     let blob;
     if (typeof content === "string") {
@@ -50,7 +50,7 @@
     return decode.decode(buffer);
   }
 
-  // src/tool/idbSample.ts
+  // site-download/tool/idbSample.ts
   var IDB = class {
     constructor({ dbName = "IDBSample", storeName = "IDBSampleStore", version = 1 } = {}) {
       this.version = 1;
@@ -140,10 +140,10 @@
     }
   };
 
-  // src/show.html
+  // site-download/show.html
   var show_default = '<div id="bingxl-root">\r\n\r\n    <style>\r\n        #bingxl-root {\r\n            position: fixed;\r\n            top: 20px;\r\n            right: 20px;\r\n            background-color: cornsilk;\r\n\r\n        }\r\n\r\n        #bingxl-root .container {\r\n            width: 150px;\r\n        }\r\n\r\n        #bingxl-root .container.hidden {\r\n            width: 0;\r\n            height: 0;\r\n        }\r\n\r\n        header {\r\n            display: flex;\r\n            justify-content: space-around;\r\n        }\r\n\r\n        .log {\r\n            max-height: 250px;\r\n            overflow-y: scroll;\r\n            width: 150px;\r\n            overflow-x: hidden;\r\n        }\r\n    </style>\r\n\r\n\r\n    <section class="toggle">收起</section>\r\n    <div class="container">\r\n        <header class="header"><button class="download">下载</button> <button class="clear">清除日志</button></header>\r\n        <progress value="0" class="progress"></progress>\r\n\r\n        <section>\r\n            <pre class="log">\r\n\r\n        </pre>\r\n        </section>\r\n    </div>\r\n\r\n</div>';
 
-  // src/sites/Base.ts
+  // site-download/sites/Base.ts
   var Base = class {
     // 挂载到文档中的DOM结构 和 时间监听处理
     constructor() {
@@ -368,7 +368,7 @@ ${res}`;
     }
   };
 
-  // src/sites/Ak.ts
+  // site-download/sites/Ak.ts
   var Ak = class extends Base {
     constructor() {
       super(...arguments);
@@ -400,7 +400,7 @@ ${res}`;
     }
   };
 
-  // src/sites/Diyibanzhu.ts
+  // site-download/sites/Diyibanzhu.ts
   var Diyibanzhu = class extends Base {
     constructor() {
       super(...arguments);
@@ -430,7 +430,7 @@ ${res}`;
     }
   };
 
-  // src/sites/Hotu.ts
+  // site-download/sites/Hotu.ts
   var Hotu = class extends Base {
     constructor() {
       super(...arguments);
@@ -453,7 +453,7 @@ ${res}`;
     }
   };
 
-  // src/sites/Lang.ts
+  // site-download/sites/Lang.ts
   var Lang = class extends Base {
     constructor() {
       super(...arguments);
@@ -480,7 +480,7 @@ ${res}`;
     }
   };
 
-  // src/sites/Tianya.ts
+  // site-download/sites/Tianya.ts
   var Tianya = class extends Base {
     constructor() {
       super(...arguments);
@@ -501,7 +501,7 @@ ${res}`;
     }
   };
 
-  // src/sites/TianyaWx.ts
+  // site-download/sites/TianyaWx.ts
   var TianyaWx = class extends Tianya {
     constructor() {
       super(...arguments);
@@ -518,7 +518,7 @@ ${res}`;
     }
   };
 
-  // src/sites/Wfxs.ts
+  // site-download/sites/Wfxs.ts
   var Wfxs = class extends Base {
     constructor() {
       super(...arguments);
@@ -586,7 +586,7 @@ ${res}`;
     }
   };
 
-  // src/sites/Xhszw.ts
+  // site-download/sites/Xhszw.ts
   var Xhszw = class extends Base {
     constructor() {
       super(...arguments);
@@ -642,7 +642,7 @@ ${res}`;
     }
   };
 
-  // src/sites/index.ts
+  // site-download/sites/index.ts
   var sites = [
     Lang,
     Ak,
@@ -654,7 +654,7 @@ ${res}`;
     TianyaWx
   ];
 
-  // src/main.ts
+  // site-download/main.ts
   var { host, pathname } = location;
   sites.some((v) => {
     const hosts = v.host.map((h) => new URL(h).host);

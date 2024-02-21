@@ -1,6 +1,9 @@
 
 import fs from "node:fs";
 import fetch from 'node-fetch';
+import path from "node:path";
+
+const __dirname = import.meta.dirname
 
 /**
  * 从给定地址获取书源 (本地相对路径/绝对路径/ 网络地址)
@@ -38,7 +41,14 @@ async function getSources(url, key = "", options = undefined) {
  * @param {Object} param0 
  * @returns 
  */
-async function filters({ sourceUrl = "./sources/legadoBookSource.json", key = "", options = undefined, outputFilename = "./sources/filtered-legado.json" } = {}) {
+async function filters({
+    sourceUrl = path.join(__dirname, "./legadoBookSource.json"),
+    key = "",
+    options = undefined,
+    outputFilename = path.join(__dirname, "./target/filtered-legado.json"),
+    include = /(名著|正版|出版|国外经典)/,
+    exclude = /(辣文|高辣|韩漫)/
+} = {}) {
 
     const sources = await getSources(sourceUrl, key, options).catch(err => {
         console.error(err);
@@ -50,18 +60,12 @@ async function filters({ sourceUrl = "./sources/legadoBookSource.json", key = ""
     }
     console.log(typeof sources);
 
-
-    // 书源名/分组/发现 中包含下列文字 
-    const include = /(名著|正版|出版|国外经典)/;
-    // 书源名/分组/发现 中不包含下列文字 
-    const pass = /(辣文|高辣|韩漫)/;
-
     const filteredResources = sources.filter(source => {
         const { bookSourceName, bookSourceGroup, exploreUrl } = source;
         if (bookSourceGroup.includes("推荐")) { return true }
 
         const result = bookSourceGroup + bookSourceName + exploreUrl
-        return include.test(result) && !pass.test(result);
+        return include.test(result) && !exclude.test(result);
     });
     console.log(`处理源个数: ${sources.length} 处理后源个数: ${filteredResources.length}`)
     writeSource(filteredResources, outputFilename);
@@ -78,7 +82,7 @@ function writeSource(sources, filename) {
 
 
 
-const legadoSourceFile = "./sources/legadoBookSource.json";
+const legadoSourceFile = path.join(__dirname, "./legadoBookSource.json");
 
 // 需要从 legado 导入书源时取消下面注释, 并将ip 换为legado提供的ip
 // *********************************************
