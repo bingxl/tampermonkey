@@ -36,13 +36,13 @@ https://raw.githubusercontent.com/bingxl/tampermonkey/main/site-download/target/
 
 在软件中使用网络导入, 导入 url
 
-原始未处理的书源, 比较多, 接近 2000 多个
+原始未处理的书源, 比较多, 接近 2000 多个 [点击直接导入](yuedu://booksource/importonline?src=https://raw.githubusercontent.com/bingxl/tampermonkey/main/booksource/legadoBookSource.json)
 
 ```
 https://raw.githubusercontent.com/bingxl/tampermonkey/main/booksource/legadoBookSource.json
 ```
 
-过滤过的源 包含 (名著|正版|出版|国外经典)且排除(辣文|高辣|韩漫)
+过滤过的源 包含 (名著|正版|出版|国外经典)且排除(辣文|高辣|韩漫) [点击直接导入](yuedu://booksource/importonline?src=https://raw.githubusercontent.com/bingxl/tampermonkey/main/booksource/filtered-legado.json)
 
 ```
 https://raw.githubusercontent.com/bingxl/tampermonkey/main/booksource/target/filtered-legado.json
