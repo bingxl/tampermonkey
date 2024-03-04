@@ -7,6 +7,8 @@
 // @match        *://*/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
+// @updateURL    https://raw.githubusercontent.com/bingxl/tampermonkey/main/shutcut.js
+// @downloadURL  https://raw.githubusercontent.com/bingxl/tampermonkey/main/shutcut.js
 // ==/UserScript==
 
 (() => {
@@ -17,7 +19,11 @@
         "m.happymh.com": {
             // keyboardEvent.key: selector or [selector] eg: ".root > a" or [".root > a", ".root > .b"]
             "ArrowRight": ".jss85 > a",
-            "ArrowLeft": ".jss86 > a"
+            "ArrowLeft": ".jss86 > a",
+        },
+        "mangacopy.com": {
+            "ArrowRight": "div.footer > div.comicContent-next > a",
+            "ArrowLeft": "div.footer > div:nth-child(2) > a",
         },
     }
 

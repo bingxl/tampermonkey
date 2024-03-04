@@ -31,7 +31,8 @@ async function build() {
         }
 
         const results = sites.map(v => `// @match        ${v.href}`).join('\n');
-        return `// ==UserScript==
+        return `// nodejs cmd 生成的文件, 请勿直接编辑此文件
+// ==UserScript==
 // @name         小说下载
 // @namespace    http://tampermonkey.net/
 // @version      ${version()}
@@ -41,12 +42,13 @@ async function build() {
 ${results}
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
-// @updateURL    https://raw.githubusercontent.com/bingxl/tampermonkey/main/site-download/target/main.js
-// @downloadURL  https://raw.githubusercontent.com/bingxl/tampermonkey/main/site-downnload/target/main.js
+// @updateURL    https://raw.githubusercontent.com/bingxl/tampermonkey/main/monkeyscripts/site-download_auto_gen.js
+// @downloadURL  https://raw.githubusercontent.com/bingxl/tampermonkey/main/monkeyscripts/site-download_auto_gen.js
 // ==/UserScript==
 `
     }
 
+    const sitesTmp = path.join(projectRoot, "./sites.js")
     // 先编译sites, 获取其中的 siteName 和 url
     esbuild.buildSync({
         entryPoints: [path.join(projectRoot, './sites/index.ts')],
@@ -54,13 +56,13 @@ ${results}
         target: "esnext",
         format: "cjs",
         bundle: true,
-        outfile: path.join(projectRoot, "./target/sites.js"),
+        outfile: sitesTmp,
         loader: {
             ".html": 'text'
         },
     });
 
-    const { sites } = require(path.join(projectRoot, './target/sites.js'));
+    const { sites } = require(sitesTmp);
     const siteNames = [];
     sites.forEach(site => {
         site.host.forEach(v => {
@@ -85,7 +87,7 @@ ${results}
     /** 构建油猴子脚本 */
     esbuild.buildSync({
         entryPoints: [path.join(projectRoot, './main.ts')],
-        outfile: path.join(projectRoot, './target/main.js'),
+        outfile: path.join(projectRoot, '../monkeyscripts/site-download_auto_gen.js'),
         bundle: true,
         charset: "utf8",
         target: "esnext",
@@ -96,7 +98,8 @@ ${results}
         },
     });
 
-    fs.unlink(path.join(projectRoot, "./target/sites.js"), err => { })
+    // 删除辅助生成的文件
+    fs.unlink(sitesTmp, err => { })
 }
 
 

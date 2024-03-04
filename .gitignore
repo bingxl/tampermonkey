@@ -3,4 +3,4 @@
 /node_modules/*
 /txt/*.txt
 /test/*
-/target/sites.js
+/site-download/sites.js

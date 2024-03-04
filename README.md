@@ -1,6 +1,9 @@
 # tampermonkey
 
-一些自用的网页脚本
+一些自用的网页脚本和阅读(legado)书源
+- 添加网站快捷键的 tampermonkey 脚本 monkeyscripts/shutcuts.js
+- 一些小说下载的 tampermonkey 脚本 monkeyscripts/site-download_auto_gen.js
+- legado 书源 booksource/legadoBookSource.json 和 booksource/target/
 
 ## 使用方法
 
@@ -8,12 +11,16 @@
 打开 tampermonkey 面板 -> 实用工具 -> 从 URL 安装, 输入
 
 ```
-https://raw.githubusercontent.com/bingxl/tampermonkey/main/site-download/target/main.js
+小说下载脚本:
+https://raw.githubusercontent.com/bingxl/tampermonkey/main/monkeyscripts/site-download_auto_gen.js
+
+快捷键脚本:
+https://raw.githubusercontent.com/bingxl/tampermonkey/main/monkeyscripts/shutcut.js
 ```
 
 后点击安装
 
-安装完后确认油猴子脚本中打开了 `小说下载`脚本
+安装完后确认油猴子脚本中启用了脚本
 
 进入支持的网站中小说目录页, 页面右上角出现下载字样时点击下载, 等待完成.
 
