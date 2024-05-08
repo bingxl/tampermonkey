@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         快捷键
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  网站快捷键绑定
 // @author       bingxl
 // @match        *://*/*
@@ -18,8 +18,8 @@
         // location.host
         "m.happymh.com": {
             // keyboardEvent.key: selector or [selector] eg: ".root > a" or [".root > a", ".root > .b"]
-            "ArrowRight": ".jss85 > a",
-            "ArrowLeft": ".jss86 > a",
+            "ArrowRight": "footer article div:first-child",
+            "ArrowLeft": "footer article div:last-child",
         },
         "mangacopy.com": {
             "ArrowRight": "div.footer > div.comicContent-next > a",
