@@ -7,8 +7,8 @@
 // @match        *://*/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
-// @updateURL    https://raw.githubusercontent.com/bingxl/tampermonkey/main/shutcut.js
-// @downloadURL  https://raw.githubusercontent.com/bingxl/tampermonkey/main/shutcut.js
+// @updateURL    https://raw.githubusercontent.com/bingxl/tampermonkey/main/monkeyscripts/shutcut.js
+// @downloadURL  https://raw.githubusercontent.com/bingxl/tampermonkey/main/monkeyscripts/shutcut.js
 // ==/UserScript==
 
 (() => {
