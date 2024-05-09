@@ -18,8 +18,8 @@
         // location.host
         "m.happymh.com": {
             // keyboardEvent.key: selector or [selector] eg: ".root > a" or [".root > a", ".root > .b"]
-            "ArrowRight": "footer article div:first-child",
-            "ArrowLeft": "footer article div:last-child",
+            "ArrowRight": "footer article div:first-child a",
+            "ArrowLeft": "footer article div:last-child a",
         },
         "mangacopy.com": {
             "ArrowRight": "div.footer > div.comicContent-next > a",
