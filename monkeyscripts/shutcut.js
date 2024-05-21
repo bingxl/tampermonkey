@@ -15,16 +15,25 @@
 
     // 绑定快捷键的网站
     const sites = {
-        // location.host
-        "m.happymh.com": {
+        // btoa(location.host)
+        // 嗨皮漫画
+        "bS5oYXBweW1oLmNvbQ==": {
             // keyboardEvent.key: selector or [selector] eg: ".root > a" or [".root > a", ".root > .b"]
             "ArrowRight": "footer article div:first-child a",
             "ArrowLeft": "footer article div:last-child a",
         },
-        "mangacopy.com": {
+        // manga copy
+        "bWFuZ2Fjb3B5LmNvbQ==": {
             "ArrowRight": "div.footer > div.comicContent-next > a",
             "ArrowLeft": "div.footer > div:nth-child(2) > a",
         },
+
+        // jin man
+        "MThjb21pYy52aXA=": {
+            "ArrowRight": "ul.menu-bolock-ul > li:nth-child(8) > a",
+            "ArrowLeft": "ul.menu-bolock-ul > li:nth-child(9) > a",
+        },
+
     }
 
     function click(target) {
@@ -32,9 +41,11 @@
         document.querySelector(target)?.click()
     }
 
-    if (location.host in sites) {
+    const hostASCII = btoa(location.host);
+
+    if (hostASCII in sites) {
         console.log("匹配网站")
-        const site = sites[location.host];
+        const site = sites[hostASCII];
 
         document.addEventListener("keydown", (e) => {
             console.log("keydown 事件", e.key)
