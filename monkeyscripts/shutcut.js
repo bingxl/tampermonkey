@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         快捷键
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  网站快捷键绑定
 // @author       bingxl
 // @match        *://*/*
@@ -21,6 +21,9 @@
             // keyboardEvent.key: selector or [selector] eg: ".root > a" or [".root > a", ".root > .b"]
             "ArrowRight": "footer article div:first-child a",
             "ArrowLeft": "footer article div:last-child a",
+            init() {
+                document.querySelector('.MuiContainer-root').style.marginLeft = '10px'
+            },
         },
         // manga copy
         "bWFuZ2Fjb3B5LmNvbQ==": {
@@ -59,6 +62,7 @@
             }
 
             click(site[e.key])
-        })
+        });
+        site?.init();
     }
 })()
