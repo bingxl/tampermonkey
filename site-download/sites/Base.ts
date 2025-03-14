@@ -26,6 +26,9 @@ export class Base {
     /** 同时获取数据的最大值 (并发量控制) */
     taskMax = 2;
 
+    /** 小说内容中需要过滤的 selector */
+    filters: string[] = [];
+
 
     log: (...infos: any[]) => void;
 
@@ -94,6 +97,14 @@ export class Base {
         return Array.isArray(content) ? content.join('\n') : content
     }
 
+    // 内容过滤器
+    filter(p: Document) {
+        for (let selector of this.filters) {
+            p.querySelector<HTMLElement>(selector)?.remove()
+        }
+
+    }
+
     /**
      * 从DOM 树中提取小说内容
      * @param {string} url 
@@ -105,6 +116,7 @@ export class Base {
         // 将字符串解析为 DOM 树
         let parser = new DOMParser()
         let p = parser.parseFromString(content, "text/html")
+        this.filter(p);
 
         return this.getArticleContent(p)
     }

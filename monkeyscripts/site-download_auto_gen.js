@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         小说下载
 // @namespace    http://tampermonkey.net/
-// @version      2024030416
+// @version      2025031412
 // @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
 // @author       bingxl
 // @homepage     https://github.com/bingxl/tampermonkey
@@ -202,6 +202,7 @@
           this.matchReg = "";
           this.sleepTime = 2;
           this.taskMax = 2;
+          this.filters = [];
           this.keyPath = [];
           this.run = async (e) => {
             e?.preventDefault();
@@ -300,6 +301,11 @@ ${res}`;
           let content = await this.getContent(url);
           return Array.isArray(content) ? content.join("\n") : content;
         }
+        filter(p) {
+          for (let selector of this.filters) {
+            p.querySelector(selector)?.remove();
+          }
+        }
         /**
          * 从DOM 树中提取小说内容
          * @param {string} url 
@@ -309,6 +315,7 @@ ${res}`;
           let content = await this.getArticle(url);
           let parser = new DOMParser();
           let p = parser.parseFromString(content, "text/html");
+          this.filter(p);
           return this.getArticleContent(p);
         }
         /**
@@ -486,6 +493,7 @@ ${res}`;
           this.titles = "body > div.container > div.row.row-section > div > div:nth-child(4) > ul > li > a";
           this.title = "div.row.row-detail > div > h2 > font";
           this.download = "body > div.container > div.row.row-detail > div > div > div.info > div.top > div > p.opt > a.xs-show.btn-read";
+          this.filters = [".content font", ".content .chapterPages"];
         }
         static {
           this.host = ["https://www.langrenxiaoshuo.com/html/*/"];
@@ -495,6 +503,19 @@ ${res}`;
         }
         static {
           this.siteName = "狼人小说";
+        }
+        async pages(url) {
+          let html = await this.getArticle(url);
+          let parser = new DOMParser();
+          let p = parser.parseFromString(html, "text/html");
+          let subPageUrls = Array.from(p.querySelectorAll(".chapterPages a")).map((a) => a.href);
+          this.filter(p);
+          let content = [await this.getArticleContent(p)];
+          for (let url2 of subPageUrls) {
+            content.push(await this.getContent(url2));
+            console.log("已处理" + url2);
+          }
+          return Array.isArray(content) ? content.join("\n") : content;
         }
         async getArticle(url) {
           return await fetch(url).then((res) => res.arrayBuffer()).then((res) => {
