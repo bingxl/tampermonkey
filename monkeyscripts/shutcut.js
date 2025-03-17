@@ -14,13 +14,14 @@
 (() => {
 
     // 绑定快捷键的网站
+    // key： 网站域名，使用btoa 编码，还原时使用atob
     const sites = {
         // btoa(location.host)
         // 嗨皮漫画
-        "bS5oYXBweW1oLmNvbQ==": {
+        "aGloaW1hbmdhLmNvbQ==": {
             // keyboardEvent.key: selector or [selector] eg: ".root > a" or [".root > a", ".root > .b"]
-            "ArrowRight": "footer article div:first-child a",
-            "ArrowLeft": "footer article div:last-child a",
+            "ArrowRight": "footer article div:nth-child(2) a:nth-child(2)",
+            "ArrowLeft": "footer article div:nth-child(2) a:nth-child(1)",
             init() {
                 document.querySelector('.MuiContainer-root').style.marginLeft = '10px'
             },
