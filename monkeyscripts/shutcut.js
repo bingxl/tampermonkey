@@ -38,6 +38,12 @@
             "ArrowLeft": "ul.menu-bolock-ul > li:nth-child(9) > a",
         },
 
+        // rou man 5
+        "cm91bWFuNS5jb20=": {
+            "ArrowRight": ".my-2 div a:last-child",
+            "ArrowLeft": ".my-2 div a:first-child",
+        },
+
     }
 
     function click(target) {
@@ -64,6 +70,6 @@
 
             click(site[e.key])
         });
-        site?.init();
+        site?.init?.();
     }
 })()
