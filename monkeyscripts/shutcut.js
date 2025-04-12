@@ -15,7 +15,7 @@
 
     // 绑定快捷键的网站
     // key： 网站域名，使用btoa 编码，还原时使用atob
-    const sites = {
+    let sites = {
         // btoa(location.host)
         // 嗨皮漫画
         "aGloaW1hbmdhLmNvbQ==": {
@@ -43,6 +43,23 @@
             "ArrowRight": ".my-2 div a:last-child",
             "ArrowLeft": ".my-2 div a:first-child",
         },
+
+
+    }
+
+    sites[btoa("www.zhihu.com")] = { init: zhihuInit }
+    function zhihuInit() {
+        // 知乎hot 过滤词
+        const filters = ["原神", "星穹铁道", "绝区零"]
+        Array.from(document.querySelectorAll('section.HotItem'))
+            ?.forEach(v => {
+                let txt = v.innerText;
+                for (key of filters) {
+                    if (txt.includes(key)) {
+                        v.remove(); return
+                    }
+                }
+            })
 
     }
 
