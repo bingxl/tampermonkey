@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         快捷键
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.4.1
 // @description  网站快捷键绑定
 // @author       bingxl
 // @match        *://*/*
@@ -54,7 +54,7 @@
         Array.from(document.querySelectorAll('section.HotItem'))
             ?.forEach(v => {
                 let txt = v.innerText;
-                for (key of filters) {
+                for (let key of filters) {
                     if (txt.includes(key)) {
                         v.remove(); return
                     }
