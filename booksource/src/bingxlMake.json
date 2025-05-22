@@ -134,7 +134,7 @@
     },
     "ruleContent": {
       "content": "#content div@html##<!--script.*|sjwzl.*",
-      "nextContentUrl": ".chapterPages@a@href"
+      "nextContentUrl": ".chapterPages>span ~ a@href"
     },
     "ruleExplore": {
       "author": "dt.0@tag.span@text",
