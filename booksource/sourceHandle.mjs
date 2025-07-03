@@ -3,6 +3,55 @@ import fs from "node:fs";
 import path from "node:path";
 
 const __dirname = import.meta.dirname
+const fromInternet = path.join(__dirname, "src", "fromInternet.json");
+const bingxlMake = path.join(__dirname, "src", "bingxlMake.json");
+
+const targetAll = path.join(__dirname, "target", "all.json");
+const targetFiltered = path.join(__dirname, "target", "filtered.json");
+
+/**
+ * 合并两个JSON文件，基于bookSourceUrl去重，保留bingxlMake中的结果
+ */
+async function mergeSourceFiles() {
+    try {
+        // 使用异步方式读取文件
+        const [fromInternetData, bingxlMakeData] = await Promise.all([
+            fs.promises.readFile(fromInternet, 'utf8'),
+            fs.promises.readFile(bingxlMake, 'utf8')
+        ]);
+
+        // 解析JSON数据
+        const fromInternetJson = JSON.parse(fromInternetData);
+        const bingxlMakeJson = JSON.parse(bingxlMakeData);
+
+        // 创建Map用于存储合并结果（使用bookSourceUrl作为键）
+        const mergedMap = new Map();
+
+        // 首先添加fromInternet的所有条目
+        fromInternetJson.forEach(item => {
+            if (item.bookSourceUrl) {
+                mergedMap.set(item.bookSourceUrl, item);
+            }
+        });
+
+        // 然后用bingxlMake的条目覆盖相同bookSourceUrl的条目
+        bingxlMakeJson.forEach(item => {
+            if (item.bookSourceUrl) {
+                mergedMap.set(item.bookSourceUrl, item);
+            }
+        });
+
+        // 将Map转换回数组并返回
+        let sources = Array.from(mergedMap.values())
+        await writeSource(sources, targetAll);
+        console.log(`合并完成, 共 ${sources.length} 条书源`);
+
+    } catch (error) {
+        console.error('合并书源文件时出错:', error);
+        throw error; // 重新抛出错误以便调用者处理
+    }
+}
+
 
 /**
  * 从给定地址获取书源 (本地相对路径/绝对路径/ 网络地址)
@@ -41,10 +90,10 @@ async function getSources(url, key = "", options = undefined) {
  * @returns 
  */
 async function filters({
-    sourceUrl = path.join(__dirname, "./legadoBookSource.json"),
+    sourceUrl = targetAll,
     key = "",
     options = undefined,
-    outputFilename = path.join(__dirname, "./target/filtered-legado.json"),
+    outputFilename = targetFiltered,
     include = /(名著|正版|出版|国外经典)/,
     exclude = /(辣文|高辣|韩漫)/
 } = {}) {
@@ -61,7 +110,7 @@ async function filters({
 
     const filteredResources = sources.filter(source => {
         const { bookSourceName, bookSourceGroup, exploreUrl } = source;
-        if (bookSourceGroup.includes("推荐")) { return true }
+        if (bookSourceGroup?.includes("推荐")) { return true }
 
         const result = bookSourceGroup + bookSourceName + exploreUrl
         return include.test(result) && !exclude.test(result);
@@ -81,7 +130,7 @@ function writeSource(sources, filename) {
 
 
 
-const legadoSourceFile = path.join(__dirname, "./legadoBookSource.json");
+// const legadoSourceFile = fromInternet;;
 
 // 需要从 legado 导入书源时取消下面注释, 并将ip 换为legado提供的ip
 // *********************************************
@@ -94,5 +143,5 @@ const legadoSourceFile = path.join(__dirname, "./legadoBookSource.json");
 //     console.log(typeof res)
 //     writeSource(res, legadoSourceFile);
 // })
-
-filters();
+await mergeSourceFiles();
+await filters();
