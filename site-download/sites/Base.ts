@@ -18,7 +18,7 @@ export class Base {
     charset = 'utf8';
 
     /** @type {string[]} 网站 host */
-    host = [];
+    host: string[] = [];
     /** 书籍目录页面 匹配正则 location.pathname.match() */
     matchReg = '';
     /** 获取内容间隔 单位:ms 短时间有太多次请求时有些网站会采取限制策略, 故设置间隔时间*/
@@ -273,26 +273,26 @@ class Ui {
     initListen(run: Function) {
         this.root = document.querySelector<HTMLElement>('#bingxl-root');
 
-        this.root?.querySelector<HTMLButtonElement>('.download')?.addEventListener('click', e => run(e))
+        this.root?.querySelector<HTMLButtonElement>('.bingxl_download')?.addEventListener('click', e => run(e))
 
-        this.logContainer = this.root?.querySelector<HTMLElement>('.log') ?? null;
+        this.logContainer = this.root?.querySelector<HTMLElement>('.bingxl_log') ?? null;
 
-        this.progressContainer = this.root?.querySelector<HTMLProgressElement>(".progress") ?? null;
+        this.progressContainer = this.root?.querySelector<HTMLProgressElement>(".bingxl_progress") ?? null;
 
         // 清除日志
-        this.root?.querySelector('.clear')?.addEventListener('click', e => {
+        this.root?.querySelector('.bingxl_clear')?.addEventListener('click', e => {
             if (this.logContainer) {
                 this.logContainer.innerHTML = '';
             }
         });
 
-        this.root?.querySelector<HTMLElement>(".toggle")?.addEventListener("click", () => {
-            const text = this.root?.querySelector(".toggle")?.textContent;
+        this.root?.querySelector<HTMLElement>(".bingxl_toggle")?.addEventListener("click", () => {
+            const text = this.root?.querySelector(".bingxl_toggle")?.textContent;
             if (text === "收起") {
-                this.root!.querySelector(".toggle")!.textContent = "展开";
+                this.root!.querySelector(".bingxl_toggle")!.textContent = "展开";
                 this.root!.querySelector(".container")!.classList.add("hidden");
             } else {
-                this.root!.querySelector(".toggle")!.textContent = "收起";
+                this.root!.querySelector(".bingxl_toggle")!.textContent = "收起";
                 this.root!.querySelector(".container")!.classList.remove("hidden");
             }
         })

@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         小说下载
 // @namespace    http://tampermonkey.net/
-// @version      2025031412
+// @version      2025071512
 // @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
 // @author       bingxl
 // @homepage     https://github.com/bingxl/tampermonkey
@@ -15,6 +15,7 @@
 // @match        https://m.wfxs.tw/booklist/*
 // @match        https://www.tianyabooks.com/*/*/
 // @match        https://wx.tianyabooks.com/book/*/
+// @match        https://m.diyibanzhu.me/wap.php
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=06ak.com
 // @grant        none
 // @updateURL    https://raw.githubusercontent.com/bingxl/tampermonkey/main/monkeyscripts/site-download_auto_gen.js
@@ -189,7 +190,7 @@
           window.indexedDB.deleteDatabase(this.dbName);
         }
       };
-      var show_default = '<div id="bingxl-root">\r\n\r\n    <style>\r\n        #bingxl-root {\r\n            position: fixed;\r\n            top: 20px;\r\n            right: 20px;\r\n            background-color: cornsilk;\r\n\r\n        }\r\n\r\n        #bingxl-root .container {\r\n            width: 150px;\r\n        }\r\n\r\n        #bingxl-root .container.hidden {\r\n            width: 0;\r\n            height: 0;\r\n        }\r\n\r\n        header {\r\n            display: flex;\r\n            justify-content: space-around;\r\n        }\r\n\r\n        .log {\r\n            max-height: 250px;\r\n            overflow-y: scroll;\r\n            width: 150px;\r\n            overflow-x: hidden;\r\n        }\r\n    </style>\r\n\r\n\r\n    <section class="toggle">收起</section>\r\n    <div class="container">\r\n        <header class="header"><button class="download">下载</button> <button class="clear">清除日志</button></header>\r\n        <progress value="0" class="progress"></progress>\r\n\r\n        <section>\r\n            <pre class="log">\r\n\r\n        </pre>\r\n        </section>\r\n    </div>\r\n\r\n</div>';
+      var show_default = '<div id="bingxl-root">\r\n\r\n    <style>\r\n        #bingxl-root {\r\n            position: fixed;\r\n            top: 20px;\r\n            right: 20px;\r\n            background-color: cornsilk;\r\n\r\n        }\r\n\r\n        #bingxl-root .container {\r\n            width: 150px;\r\n        }\r\n\r\n        #bingxl-root .container.hidden {\r\n            width: 0;\r\n            height: 0;\r\n        }\r\n\r\n        header {\r\n            display: flex;\r\n            justify-content: space-around;\r\n        }\r\n\r\n        .log {\r\n            max-height: 250px;\r\n            overflow-y: scroll;\r\n            width: 150px;\r\n            overflow-x: hidden;\r\n        }\r\n    </style>\r\n\r\n\r\n    <section class="toggle">收起</section>\r\n    <div class="container">\r\n        <header class="header"><button class="bingxl_download">下载</button> <button class="clear">清除日志</button></header>\r\n        <progress value="0" class="bingxl_progress"></progress>\r\n\r\n        <section>\r\n            <pre class="bingxl_log">\r\n\r\n        </pre>\r\n        </section>\r\n    </div>\r\n\r\n</div>';
       var Base = class {
         // 挂载到文档中的DOM结构 和 时间监听处理
         constructor() {
@@ -301,6 +302,7 @@ ${res}`;
           let content = await this.getContent(url);
           return Array.isArray(content) ? content.join("\n") : content;
         }
+        // 内容过滤器
         filter(p) {
           for (let selector of this.filters) {
             p.querySelector(selector)?.remove();
@@ -388,21 +390,21 @@ ${res}`;
         }
         initListen(run) {
           this.root = document.querySelector("#bingxl-root");
-          this.root?.querySelector(".download")?.addEventListener("click", (e) => run(e));
-          this.logContainer = this.root?.querySelector(".log") ?? null;
-          this.progressContainer = this.root?.querySelector(".progress") ?? null;
-          this.root?.querySelector(".clear")?.addEventListener("click", (e) => {
+          this.root?.querySelector(".bingxl_download")?.addEventListener("click", (e) => run(e));
+          this.logContainer = this.root?.querySelector(".bingxl_log") ?? null;
+          this.progressContainer = this.root?.querySelector(".bingxl_progress") ?? null;
+          this.root?.querySelector(".bingxl_clear")?.addEventListener("click", (e) => {
             if (this.logContainer) {
               this.logContainer.innerHTML = "";
             }
           });
-          this.root?.querySelector(".toggle")?.addEventListener("click", () => {
-            const text = this.root?.querySelector(".toggle")?.textContent;
+          this.root?.querySelector(".bingxl_toggle")?.addEventListener("click", () => {
+            const text = this.root?.querySelector(".bingxl_toggle")?.textContent;
             if (text === "收起") {
-              this.root.querySelector(".toggle").textContent = "展开";
+              this.root.querySelector(".bingxl_toggle").textContent = "展开";
               this.root.querySelector(".container").classList.add("hidden");
             } else {
-              this.root.querySelector(".toggle").textContent = "收起";
+              this.root.querySelector(".bingxl_toggle").textContent = "收起";
               this.root.querySelector(".container").classList.remove("hidden");
             }
           });
@@ -680,6 +682,53 @@ ${res}`;
           return titles;
         }
       };
+      var DiyibanzhuMe = class extends Base {
+        constructor() {
+          super(...arguments);
+          this.tocPageSelector = "";
+          this.titles = ".container div:nth-of-type(7) .list a";
+          this.title = ".container .right h1";
+          this.contentSelector = ".page-content #nr1";
+          this.filters = [".chapterPages", "font"];
+          this.contentNextPage = ".chapterPages span + a";
+          this.matchReg = "/wap.php";
+        }
+        static {
+          this.host = ["https://m.diyibanzhu.me/wap.php"];
+        }
+        /**
+         * 返回章节列表
+         * @returns {Chapter[]}
+         * @TODO  章节分多页时的处理方法
+         */
+        async getTitles() {
+          const titles = Array.from(document.querySelectorAll(this.titles));
+          return titles.map((v) => {
+            return { href: v.href, textContent: v.textContent };
+          });
+        }
+        /**
+        * 从DOM 树中提取小说内容
+        * @param {string} url 
+        * @returns {string} 章节内容
+        */
+        async getContent(url) {
+          if (!url) {
+            return "";
+          }
+          let content = await this.getArticle(url);
+          let parser = new DOMParser();
+          let p = parser.parseFromString(content, "text/html");
+          let nextPage = p.querySelector(this.contentNextPage)?.href ?? "";
+          this.filter(p);
+          let curContent = await this.getArticleContent(p);
+          if (nextPage) {
+            let nextContent = await this.getContent(nextPage);
+            curContent += "\n" + nextContent;
+          }
+          return curContent;
+        }
+      };
       var sites2 = [
         Lang,
         Ak,
@@ -688,7 +737,8 @@ ${res}`;
         Xhszw,
         Wfxs,
         Tianya,
-        TianyaWx
+        TianyaWx,
+        DiyibanzhuMe
       ];
     }
   });

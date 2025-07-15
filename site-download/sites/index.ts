@@ -6,6 +6,7 @@ import { Tianya } from "./Tianya"
 import { TianyaWx } from "./TianyaWx"
 import { Wfxs } from "./Wfxs"
 import { Xhszw } from "./Xhszw"
+import { DiyibanzhuMe } from "./Diyibanzhume"
 
 export const sites: any[] = [
     Lang,
@@ -16,4 +17,5 @@ export const sites: any[] = [
     Wfxs,
     Tianya,
     TianyaWx,
+    DiyibanzhuMe,
 ]
