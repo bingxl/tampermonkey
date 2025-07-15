@@ -18,7 +18,7 @@
 /**
  * @file 入口文件
  */
-import { sites } from "./sites";
+import { sites } from "./sites/index";
 
 
 // 获取当前页面的 host 和 pathname

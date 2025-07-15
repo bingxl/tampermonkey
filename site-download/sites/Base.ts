@@ -3,9 +3,16 @@ import { downloadTextAsFile, gbk2Utf8, sleep } from '../tool/misc';
 import { IDB } from '../tool/idbSample';
 
 // @ts-ignore
-import domStr from '../show.html'
+import domStr from '../show.html.raw' with { type: "text" }
 
 export class Base {
+    // 目录匹配规则
+    static pathMatch: RegExp = /.*/
+    // 主机名
+    static host: string[]
+    // 网站名字，用于生成文档
+    static siteName: string
+
     /** 小说章节的选择器 */
     titles = '';
     /** 小说名选择器 */
@@ -17,8 +24,6 @@ export class Base {
     /**获取章节内容时的字符集 */
     charset = 'utf8';
 
-    /** @type {string[]} 网站 host */
-    host: string[] = [];
     /** 书籍目录页面 匹配正则 location.pathname.match() */
     matchReg = '';
     /** 获取内容间隔 单位:ms 短时间有太多次请求时有些网站会采取限制策略, 故设置间隔时间*/

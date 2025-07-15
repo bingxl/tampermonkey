@@ -1,8 +1,8 @@
-const esbuild = require('esbuild')
-const fs = require('fs');
-const path = require('path');
-const os = require("os");
+import fs from "node:fs"
+import path from "node:path"
+import { sites } from "../sites"
 
+const __dirname = import.meta.dirname
 
 // sites download 项目目录 /sites-download
 const projectRoot = path.join(__dirname, "../")
@@ -31,7 +31,7 @@ async function build() {
         }
 
         const results = sites.map(v => `// @match        ${v.href}`).join('\n');
-        return `// nodejs cmd 生成的文件, 请勿直接编辑此文件
+        return `// build 生成的文件, 请勿直接编辑此文件
 // ==UserScript==
 // @name         小说下载
 // @namespace    http://tampermonkey.net/
@@ -48,21 +48,6 @@ ${results}
 `
     }
 
-    const sitesTmp = path.join(projectRoot, "./sites.js")
-    // 先编译sites, 获取其中的 siteName 和 url
-    esbuild.buildSync({
-        entryPoints: [path.join(projectRoot, './sites/index.ts')],
-        charset: "utf8",
-        target: "esnext",
-        format: "cjs",
-        bundle: true,
-        outfile: sitesTmp,
-        loader: {
-            ".html": 'text'
-        },
-    });
-
-    const { sites } = require(sitesTmp);
     const siteNames = [];
     sites.forEach(site => {
         site.host.forEach(v => {
@@ -83,23 +68,16 @@ ${results}
         }
     })
 
-
-    /** 构建油猴子脚本 */
-    esbuild.buildSync({
-        entryPoints: [path.join(projectRoot, './main.ts')],
-        outfile: path.join(projectRoot, '../monkeyscripts/site-download_auto_gen.js'),
-        bundle: true,
-        charset: "utf8",
-        target: "esnext",
+    await Bun.build({
+        entrypoints: [path.join(projectRoot, './main.ts')],
         format: "iife",
-        banner: { js: getBanner(siteNames) },
-        loader: {
-            ".html": 'text'
-        },
+        banner: getBanner(siteNames),
+        target: 'browser',
+        outdir: path.join(projectRoot, '../monkeyscripts/'),
+        naming: 'site-download_auto_gen.js',
     });
 
-    // 删除辅助生成的文件
-    fs.unlink(sitesTmp, err => { })
+
 }
 
 

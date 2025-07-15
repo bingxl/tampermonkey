@@ -1,6 +1,8 @@
 import { Base } from './Base'
 
 export class DiyibanzhuMe extends Base {
+    static pathmatch = /\/wap.php*/
+    static siteName: string = "第一版主ME"
     static host = ['https://m.diyibanzhu.me/wap.php']
 
     // 目录页中的下一页选择器
