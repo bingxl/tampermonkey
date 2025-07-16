@@ -5,8 +5,8 @@ export class DiyibanzhuMe extends Base {
     static siteName: string = "第一版主ME"
     static host = ['https://m.diyibanzhu.me/wap.php']
 
-    // 目录页中的下一页选择器
-    tocPageSelector = ''
+    // 目录页中的分页选择器
+    tocPageSelector = 'select[name="pagelist"] option'
     titles = '.container div:nth-of-type(7) .list a'
 
     title = '.container .right h1'
@@ -17,13 +17,45 @@ export class DiyibanzhuMe extends Base {
     matchReg: string = "/wap.php"
 
     /**
-     * 返回章节列表
+     * 返回所有章节的链接
+     * @param url 目录链接
      * @returns {Chapter[]}
-     * @TODO  章节分多页时的处理方法
      */
-    async getTitles() {
-        const titles = Array.from(document.querySelectorAll<HTMLAnchorElement>(this.titles))
-        return titles.map(v => { return { href: v.href, textContent: v.textContent } })
+    async getTitles(url = "") {
+
+        type titleT = {
+            href: string
+            textContent: string
+        }
+        const titleSelector = this.titles
+
+        const titlesFromDocument = (dm: Document) => {
+            console.log("in titlesFromDocument", "selector: ", titleSelector)
+            const titles = Array.from(dm?.querySelectorAll<HTMLAnchorElement>(titleSelector))
+            return titles.map(v => { return { href: v.href, textContent: v.textContent ?? "" } })
+        }
+
+        // 有url 参数，只需要处理url 页中的章节
+        if (url) {
+            let domStr = await fetch(url).then(res => res.text())
+            let dm = new DOMParser().parseFromString(domStr, "text/html")
+            return titlesFromDocument(dm)
+        }
+
+        // 没 url 参数，先获取目录分页情况，没有分页则处理浏览器当前所在页面的目录
+        let pages = document.querySelectorAll<HTMLOptionElement>(this.tocPageSelector)
+        if (!pages || pages.length === 0) {
+            return titlesFromDocument(document)
+        }
+
+        let links = Array.from(pages)?.map(v => v.value)
+        let titles: titleT[] = []
+        for (let link of links) {
+            let result = (await this.getTitles(link)) ?? []
+            titles = titles.concat(result)
+        }
+
+        return titles
     }
 
     /**

@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         小说下载
 // @namespace    http://tampermonkey.net/
-// @version      2025071518
+// @version      2025071609
 // @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
 // @author       bingxl
 // @homepage     https://github.com/bingxl/tampermonkey
@@ -23,7 +23,7 @@
 // ==/UserScript==
 
 (() => {
-  // tool/misc.ts
+  // site-download/tool/misc.ts
   function downloadTextAsFile(content, filename) {
     let blob;
     if (typeof content === "string") {
@@ -51,7 +51,7 @@
     return decode.decode(buffer);
   }
 
-  // tool/idbSample.ts
+  // site-download/tool/idbSample.ts
   class IDB {
     dbName;
     storeName;
@@ -135,7 +135,7 @@
     }
   }
 
-  // show.html.raw
+  // site-download/show.html.raw
   var show_html_default = `<div id="bingxl-root">
 
     <style>
@@ -183,7 +183,7 @@
 
 </div>`;
 
-  // sites/Base.ts
+  // site-download/sites/Base.ts
   class Base {
     static pathMatch = /.*/;
     static host;
@@ -193,7 +193,6 @@
     download = "";
     contentSelector = "";
     charset = "utf8";
-    host = [];
     matchReg = "";
     sleepTime = 2;
     taskMax = 2;
@@ -372,7 +371,7 @@ ${res}`;
     };
   }
 
-  // sites/Ak.ts
+  // site-download/sites/Ak.ts
   class Ak extends Base {
     titles = "#ul_all_chapters>li>a";
     title = "body > div.container > section > div.novel_info_main > div > h1";
@@ -393,7 +392,7 @@ ${res}`;
     }
   }
 
-  // sites/Diyibanzhu.ts
+  // site-download/sites/Diyibanzhu.ts
   class Diyibanzhu extends Base {
     titles = "div.ml_content > div.zb > div.ml_list > ul > li > a";
     title = "div.introduce > h1";
@@ -414,7 +413,7 @@ ${res}`;
     }
   }
 
-  // sites/Hotu.ts
+  // site-download/sites/Hotu.ts
   class Hotu extends Base {
     titles = "div.bookdetails-catalog-box > ul > li > a";
     title = "div.bookdetails-left-mainbox > div:nth-child(1) > div > div > h1";
@@ -429,7 +428,7 @@ ${res}`;
     }
   }
 
-  // sites/Lang.ts
+  // site-download/sites/Lang.ts
   class Lang extends Base {
     titles = "body > div.container > div.row.row-section > div > div:nth-child(4) > ul > li > a";
     title = "div.row.row-detail > div > h2 > font";
@@ -463,7 +462,7 @@ ${res}`;
     }
   }
 
-  // sites/Tianya.ts
+  // site-download/sites/Tianya.ts
   class Tianya extends Base {
     titles = ".book dl a";
     title = ".book > h1";
@@ -475,7 +474,7 @@ ${res}`;
     static siteName = "天涯书库";
   }
 
-  // sites/TianyaWx.ts
+  // site-download/sites/TianyaWx.ts
   class TianyaWx extends Tianya {
     contentSelector = "td p";
     static host = ["https://wx.tianyabooks.com/book/*/"];
@@ -483,7 +482,7 @@ ${res}`;
     static siteName = "天涯书库-武侠小说";
   }
 
-  // sites/Wfxs.ts
+  // site-download/sites/Wfxs.ts
   class Wfxs extends Base {
     titles = "#html_box > li > a";
     title = "body > div.h_header.d_header > h2";
@@ -533,7 +532,7 @@ ${res}`;
     }
   }
 
-  // sites/Xhszw.ts
+  // site-download/sites/Xhszw.ts
   class Xhszw extends Base {
     titles = "#list-chapterAll > dd > a";
     title = "div.bookinfo > h1";
@@ -575,23 +574,43 @@ ${res}`;
     }
   }
 
-  // sites/Diyibanzhume.ts
+  // site-download/sites/Diyibanzhume.ts
   class DiyibanzhuMe extends Base {
     static pathmatch = /\/wap.php*/;
     static siteName = "第一版主ME";
     static host = ["https://m.diyibanzhu.me/wap.php"];
-    tocPageSelector = "";
+    tocPageSelector = 'select[name="pagelist"] option';
     titles = ".container div:nth-of-type(7) .list a";
     title = ".container .right h1";
     contentSelector = ".page-content #nr1";
     filters = [".chapterPages", "font"];
     contentNextPage = ".chapterPages span + a";
     matchReg = "/wap.php";
-    async getTitles() {
-      const titles = Array.from(document.querySelectorAll(this.titles));
-      return titles.map((v) => {
-        return { href: v.href, textContent: v.textContent };
-      });
+    async getTitles(url = "") {
+      const titleSelector = this.titles;
+      const titlesFromDocument = (dm) => {
+        console.log("in titlesFromDocument", "selector: ", titleSelector);
+        const titles2 = Array.from(dm?.querySelectorAll(titleSelector));
+        return titles2.map((v) => {
+          return { href: v.href, textContent: v.textContent ?? "" };
+        });
+      };
+      if (url) {
+        let domStr = await fetch(url).then((res) => res.text());
+        let dm = new DOMParser().parseFromString(domStr, "text/html");
+        return titlesFromDocument(dm);
+      }
+      let pages = document.querySelectorAll(this.tocPageSelector);
+      if (!pages || pages.length === 0) {
+        return titlesFromDocument(document);
+      }
+      let links = Array.from(pages)?.map((v) => v.value);
+      let titles = [];
+      for (let link of links) {
+        let result = await this.getTitles(link) ?? [];
+        titles = titles.concat(result);
+      }
+      return titles;
     }
     async getContent(url) {
       if (!url) {
@@ -612,7 +631,7 @@ ${res}`;
     }
   }
 
-  // sites/index.ts
+  // site-download/sites/index.ts
   var sites = [
     Lang,
     Ak,
@@ -625,7 +644,7 @@ ${res}`;
     DiyibanzhuMe
   ];
 
-  // main.ts
+  // site-download/main.ts
   var { host, pathname } = location;
   sites.some((v) => {
     const hosts = v.host.map((h) => new URL(h).host);
