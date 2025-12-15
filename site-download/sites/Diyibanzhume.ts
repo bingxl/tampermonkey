@@ -16,6 +16,11 @@ export class DiyibanzhuMe extends Base {
 
     matchReg: string = "/wap.php"
 
+    /** 获取内容间隔 单位:ms 短时间有太多次请求时有些网站会采取限制策略, 故设置间隔时间*/
+    sleepTime = 500;
+    /** 同时获取数据的最大值 (并发量控制) */
+    taskMax = 2;
+
     /**
      * 返回所有章节的链接
      * @param url 目录链接

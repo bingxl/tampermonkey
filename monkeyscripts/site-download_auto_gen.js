@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         小说下载
 // @namespace    http://tampermonkey.net/
-// @version      2025071609
+// @version      2025072010
 // @description  AK小说, 狼人小说下载, 安装脚本后打开小说目录页面,点击下载
 // @author       bingxl
 // @homepage     https://github.com/bingxl/tampermonkey
@@ -586,6 +586,8 @@ ${res}`;
     filters = [".chapterPages", "font"];
     contentNextPage = ".chapterPages span + a";
     matchReg = "/wap.php";
+    sleepTime = 500;
+    taskMax = 2;
     async getTitles(url = "") {
       const titleSelector = this.titles;
       const titlesFromDocument = (dm) => {
