@@ -4,6 +4,6 @@
 	},
 	"scripts": {
 		"build": "bun site-download/cmd/build.js",
-		"booksource": "bun booksource/sourceHandle.mjs"
+		"booksource": "bun booksource/sourceHandle.js"
 	}
 }
