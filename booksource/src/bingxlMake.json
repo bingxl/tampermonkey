@@ -1208,40 +1208,31 @@
     "weight": 62
   },
   {
-    "bookSourceComment": "// Error: 发现正文失效",
-    "bookSourceGroup": "bingxl,发现正文失效,🍕 图片,🎨 漫画",
+    "bookSourceComment": "",
+    "bookSourceGroup": "bingxl,🍕 图片,🎨 漫画",
     "bookSourceName": "🎨 包子漫画",
     "bookSourceType": 2,
     "bookSourceUrl": "https://cn.bzmgcn.com",
-    "bookUrlPattern": "",
-    "concurrentRate": "",
-    "customOrder": 1094,
+    "customOrder": 884,
     "enabled": true,
     "enabledCookieJar": false,
     "enabledExplore": true,
-    "exploreUrl": "最新上架::/list/new\n中国::/classify?region=cn&page={{page}}\n日本::/classify?region=jp&page={{page}}\n欧美::/classify?region=en&page={{page}}\n连载中::/classify?state=serial&page={{page}}\n已完结::/classify?state=pub&page={{page}}\n都市::/classify?type=dushi&page={{page}}\n冒险::/classify?type=mouxian&page={{page}}\n热血::/classify?type=rexie&page={{page}}\n爱情::/classify?type=aiqing&page={{page}}\n恋爱::/classify?type=lianai&page={{page}}\n耽美::/classify?type=danmei&page={{page}}\n武侠::/classify?type=wuxia&page={{page}}\n格斗::/classify?type=gedou&page={{page}}\n科幻::/classify?type=kehuan&page={{page}}\n魔幻::/classify?type=mohuan&page={{page}}\n侦探::/classify?type=zhentan&page={{page}}\n推理::/classify?type=tuili&page={{page}}\n玄幻::/classify?type=xuanhuan&page={{page}}\n日常::/classify?type=richang&page={{page}}\n生活::/classify?type=shenghuo&page={{page}}\n搞笑::/classify?type=gaoxiao&page={{page}}\n校园::/classify?type=xiaoyuan&page={{page}}\n奇幻::/classify?type=qihuan&page={{page}}\nABCD::/classify?filter=ABCD&page={{page}}\nEFGH::/classify?filter=EFGH&page={{page}}\nIJKL::/classify?filter=IJKL&page={{page}}\nMNOP::/classify?filter=MNOP&page={{page}}\nQRST::/classify?filter=QRST&page={{page}}\nUVW::/classify?filter=UVW&page={{page}}\nXYZ::/classify?filter=XYZ&page={{page}}\n0-9::/classify?filter=0-9&page={{page}}",
-    "lastUpdateTime": 1703191785487,
-    "loginUrl": "",
-    "respondTime": 188075,
+    "exploreUrl": "最新上架::/list/new\n\n中国::/classify?region=cn&page={{page}}\n\n日本::/classify?region=jp&page={{page}}\n\n欧美::/classify?region=en&page={{page}}\n\n连载中::/classify?state=serial&page={{page}}\n\n已完结::/classify?state=pub&page={{page}}\n\n都市::/classify?type=dushi&page={{page}}\n\n冒险::/classify?type=mouxian&page={{page}}\n\n热血::/classify?type=rexie&page={{page}}\n\n爱情::/classify?type=aiqing&page={{page}}\n\n恋爱::/classify?type=lianai&page={{page}}\n\n耽美::/classify?type=danmei&page={{page}}\n\n武侠::/classify?type=wuxia&page={{page}}\n\n格斗::/classify?type=gedou&page={{page}}\n\n科幻::/classify?type=kehuan&page={{page}}\n\n魔幻::/classify?type=mohuan&page={{page}}\n\n侦探::/classify?type=zhentan&page={{page}}\n\n推理::/classify?type=tuili&page={{page}}\n\n玄幻::/classify?type=xuanhuan&page={{page}}\n\n日常::/classify?type=richang&page={{page}}\n\n生活::/classify?type=shenghuo&page={{page}}\n\n搞笑::/classify?type=gaoxiao&page={{page}}\n\n校园::/classify?type=xiaoyuan&page={{page}}\n\n奇幻::/classify?type=qihuan&page={{page}}\n\nABCD::/classify?filter=ABCD&page={{page}}\n\nEFGH::/classify?filter=EFGH&page={{page}}\n\nIJKL::/classify?filter=IJKL&page={{page}}\n\nMNOP::/classify?filter=MNOP&page={{page}}\n\nQRST::/classify?filter=QRST&page={{page}}\n\nUVW::/classify?filter=UVW&page={{page}}\n\nXYZ::/classify?filter=XYZ&page={{page}}\n\n0-9::/classify?filter=0-9&page={{page}}\n",
+    "lastUpdateTime": 1765667112854,
+    "respondTime": 12254,
     "ruleBookInfo": {
       "author": "h2.comics-detail__author@text",
-      "coverUrl": "",
-      "init": "",
       "intro": "p.comics-detail__desc@text",
       "kind": ".supporting-text div:first-child@text&&.tag-list span@text##状态：",
       "lastChapter": "class.comics-chapters__item.0@text||.supporting-text@span.-1@a@text",
       "name": "h1.comics-detail__title@text"
     },
     "ruleContent": {
-      "content": ".comic-contain@img@src@js:\nheaders={\"headers\":{\"Referer\":baseUrl}};\nresult.split(\"\\n\").map(x=>'<img src=\\\"'+x+','+JSON.stringify(headers)+'\\\">').join(\"\\n\")",
+      "content": ".comic-contain@.comic-contain__item@data-src@js:\njava.log(result);\nheaders={\"headers\":{\"Referer\":baseUrl}};\nresult.split(\"\\n\").map(x=>{\n      let processedUrl = x.replace(\"/w640/\", \"/\");\n  const regex = /^(https?:\\/\\/)?([^/\\s:]+)(:\\d+)?/;\n          const match = processedUrl.match(regex);\n          if (match && match[2]) {\n            const domain = match[2];\n            processedUrl = processedUrl.replace(domain, \"as.baozimh.com\");\n          }\nreturn '<img src=\\\"'+processedUrl +','+JSON.stringify(headers)+'\\\">'\n}).join(\"\\n\")",
       "imageStyle": "FULL",
-      "nextContentUrl": "@css:a:contains(下一页)@href",
-      "webJs": ""
+      "nextContentUrl": "@css:a:contains(下一页)@href"
     },
-    "ruleExplore": {
-      "bookList": ""
-    },
-    "ruleReview": {},
+    "ruleExplore": {},
     "ruleSearch": {
       "author": ".tags@text",
       "bookList": ".comics-card",
@@ -1253,7 +1244,7 @@
     "ruleToc": {
       "chapterList": "<js>\nif(result.match(/章节目录/)){\njava.getElements(\"id.chapter-items@class.comics-chapters@a&&id.chapters_other_list@class.comics-chapters@a\")\n}else\n{\njava.getElements(\"class.comics-chapters||.supporting-text@span.-1\")\n}\n</js>",
       "chapterName": "a@text||span@text||text",
-      "chapterUrl": "tag.a@href||href"
+      "chapterUrl": "tag.a@href<js>\nconst queryString = `${result}`.split('?')[1]; // 获取 ? 后面的查询部分\n  const params = {};\n  const pairs = queryString.split('&'); // 按 & 分割键值对\n  pairs.forEach(pair => {\n    const [key, value] = pair.split('='); // 按 = 分割键和值\n    if (key) {\n      params[key] = value ? decodeURIComponent(value) : ''; // 解码特殊字符（若有）\n    }\n  });\n\nlet chapterUrl = `https://appcn.baozimh.com/baozimhapp/comic/chapter/${params .comic_id}/${params .section_slot}_${params .chapter_slot}.html`\nchapterUrl\n</js>\n"
     },
     "searchUrl": "/search?q={{key}}",
     "weight": 0
