@@ -1320,5 +1320,51 @@
     "searchUrl": "https://www.icanxs.com/so/{{key}}/",
     "exploreUrl": "玄幻::https://www.icanxs.com/qihuan/33-{{page}}.html\n武侠::https://www.icanxs.com/wuxia/33-{{page}}.html\n都市::https://www.icanxs.com/dushi/33-{{page}}.html\n历史::https://www.icanxs.com/lishi/33-{{page}}.html\n游戏::https://www.icanxs.com/youx/i33-{{page}}.html\n科幻::https://www.icanxs.com/kehuan/33-{{page}}.html",
     "bookSourceGroup": "🍕 文字,bingxl"
+  },
+  {
+    "bookSourceGroup": "源仓库",
+    "bookSourceName": "18mh",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://www.18mh.net",
+    "customOrder": 167,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "exploreUrl": "全部小说::/novel/all?page={{page}}\n热门小说::/novel/common?type=hot&page={{page}}\n最新更新::/novel/common?type=newest&page={{page}}\n都市激情::/novel/all?theme=1&page={{page}}\n校园春色::/novel/all?theme=2&page={{page}}\n乡村爱情::/novel/all?theme=3&page={{page}}\n系统异能::/novel/all?theme=4&page={{page}}\n家庭乱伦::/novel/all?theme=5&page={{page}}\n穿越重生::/novel/all?theme=6&page={{page}}\n经典武侠::/novel/all?theme=7&page={{page}}\n同人改编::/novel/all?theme=8&page={{page}}\n科学幻想::/novel/all?theme=9&page={{page}}\n东方玄幻::/novel/all?theme=10&page={{page}}\n娱乐明星::/novel/all?theme=11&page={{page}}\n历史架空::/novel/all?theme=12&page={{page}}\n西方魔幻::/novel/all?theme=13&page={{page}}\n贤者小说::/novel/all?theme=14&page={{page}}",
+    "header": "{\n\"User-Agent\":\"Mozilla/5.0 (Linux; Android 9) Mobile Safari/537.36\",\"referer\":\"{{baseUrl}}\",\n}",
+    "lastUpdateTime": 1769008771951,
+    "respondTime": 1031,
+    "ruleBookInfo": {
+      "author": ".shortinfo.0@text",
+      "coverUrl": ".poster@img.0@src",
+      "intro": ".desc@text",
+      "kind": ".shortinfo.1@text",
+      "lastChapter": ".newestChapter@a@text",
+      "name": ".dx-title h2@text"
+    },
+    "ruleContent": {
+      "content": ".article@html"
+    },
+    "ruleExplore": {
+      "bookList": ".dx-novel-list li",
+      "name": "h3@text",
+      "bookUrl": "a.0@href",
+      "author": "span@texxt"
+    },
+    "ruleSearch": {
+      "author": ".underline.0@text",
+      "bookList": ".novel-card",
+      "bookUrl": "a.0@href",
+      "coverUrl": ".poster@img.0@src",
+      "name": ".dx-title@textNodes"
+    },
+    "ruleToc": {
+      "chapterList": ".menu-list a",
+      "chapterName": "text",
+      "chapterUrl": "href"
+    },
+    "searchUrl": "/novel/all?key_word={{key}}&page={{page}}",
+    "weight": 0,
+    "bookSourceComment": "bingxl;18"
   }
 ]
