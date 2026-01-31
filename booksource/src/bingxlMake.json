@@ -1213,7 +1213,7 @@
     "bookSourceName": "🎨 包子漫画",
     "bookSourceType": 2,
     "bookSourceUrl": "https://cn.bzmgcn.com",
-    "customOrder": 884,
+    "customOrder": 892,
     "enabled": true,
     "enabledCookieJar": false,
     "enabledExplore": true,
@@ -1228,7 +1228,7 @@
       "name": "h1.comics-detail__title@text"
     },
     "ruleContent": {
-      "content": ".comic-contain@.comic-contain__item@data-src@js:\njava.log(result);\nheaders={\"headers\":{\"Referer\":baseUrl}};\nresult.split(\"\\n\").map(x=>{\n      let processedUrl = x.replace(\"/w640/\", \"/\");\n  const regex = /^(https?:\\/\\/)?([^/\\s:]+)(:\\d+)?/;\n          const match = processedUrl.match(regex);\n          if (match && match[2]) {\n            const domain = match[2];\n            processedUrl = processedUrl.replace(domain, \"as.baozimh.com\");\n          }\nreturn '<img src=\\\"'+processedUrl +','+JSON.stringify(headers)+'\\\">'\n}).join(\"\\n\")",
+      "content": ".comic-contain@.comic-contain__item@data-src@js:\njava.log(result);\nheaders={\"headers\":{\"Referer\":baseUrl}};\nresult.split(\"\\n\").map(imgUrl=>{\n     \n          // 提取域名并替换\n          const match = imgUrl.match(/^(https?:\\/\\/)?([^/\\s:]+)(:\\d+)?(\\/[a-z]comic\\/.*)/);\n         if (match) {\n            const domain = match[2];\n            imgUrl = `${match[1]}${domain}${match[4]}`;\n}\nreturn '<img src=\\\"'+imgUrl+','+JSON.stringify(headers)+'\\\">'\n}).join(\"\\n\")",
       "imageStyle": "FULL",
       "nextContentUrl": "@css:a:contains(下一页)@href"
     },
