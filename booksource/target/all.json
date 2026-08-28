@@ -326,7 +326,7 @@
       "name": ".top h2@text"
     },
     "ruleContent": {
-      "content": "#content div@html##<!--script.*|sjwzl.*",
+      "content": "#content div@html@js:\nresult = result.replace(/<font[^>]*>[\\s\\S]*?<\\/font>/gi, '')\n  .replace(/<center[^>]*>[\\s\\S]*?<\\/center>/gi, '')\n  .replace(/<!--script[\\s\\S]*?-->/gi, '')\n  .replace(/\\n\\s*\\n/g, '\\n')\n  .trim();\n\nresult;",
       "nextContentUrl": ".chapterPages>span ~ a@href"
     },
     "ruleExplore": {
