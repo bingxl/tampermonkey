@@ -1459,5 +1459,35 @@
     },
     "searchUrl": "/search?query={{key}}",
     "weight": 0
-  }
+  },
+  {
+    "bookSourceName": "t66y",
+    "bookSourceGroup": "🍕 图片,🎨 漫画,bingxl",
+    "bookSourceType": 0,
+    "bookSourceUrl": "https://t66y.com/thread0806.php",
+    "customOrder": 0,
+    "enabled": true,
+    "enabledCookieJar": true,
+    "enabledExplore": true,
+    "exploreUrl": "現代奇幻::https://t66y.com/thread0806.php?fid=20&type=1&page={{page}},\n古典武俠::https://t66y.com/thread0806.php?fid=20&type=2&page={{page}},\n另類禁忌::https://t66y.com/thread0806.php?fid=20&type=3&page={{page}},\n性愛技巧::https://t66y.com/thread0806.php?fid=20&type=4&page={{page}},\n笑話連篇::https://t66y.com/thread0806.php?fid=20&type=5&page={{page}},\n有声小说::https://t66y.com/thread0806.php?fid=20&type=6&page={{page}},\n其他交流::https://t66y.com/thread0806.php?fid=20&type=12&page={{page}},\n所有主題::https://t66y.com/thread0806.php?fid=20&page={{page}},\n精華主題::https://t66y.com/thread0806.php?fid=20&search=digest&page={{page}},\n今日主題(6)::https://t66y.com/thread0806.php?fid=20&search=today&page={{page}}",
+    "lastUpdateTime": 0,
+    "respondTime": 180000,
+    "ruleBookInfo": {},
+    "ruleContent": {
+        "content": "div.tpc_content@html",
+        "nextContentUrl": "div.pages a:matchesOwn(^\\d+$)@href\n"
+    },
+    "ruleExplore": {
+        "bookList": "#tbody > tr > td.tal >h3 >a",
+        "bookUrl": "href##(\\d+)\\.html##/read.php?tid=$1&toread=2###\n",
+        "name": "text"
+    },
+    "ruleSearch": {},
+    "ruleToc": {
+        "chapterList": "body",
+        "chapterName": "@js:book.name",
+        "chapterUrl": "href"
+    },
+    "weight": 0
+}
 ]
